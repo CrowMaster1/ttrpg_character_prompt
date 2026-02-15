@@ -1,0 +1,5 @@
+[
+    {"name": "Peasant's Outfit", "qualifiers": ["linen tunic", "coarse wool trousers", "straw hat", "rope belt", "low shoes"]},
+    {"name": "Laborer's Garb", "qualifiers": ["wool shirt", "heavy leather apron with tool loops", "rolled sleeves", "work breeches", "sturdy boots"]},
+    {"name": "Sailor's Attire", "qualifiers": ["loose shirt", "knit cap or bandana", "sailor boots", "oilskin short cloak", "rope belt with marlinspike"]}
+]

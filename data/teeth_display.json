@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Showing Teeth",
+    "description": "Visible teeth, natural smile or expression",
+    "qualifiers": ["showing teeth", "teeth visible", "toothy smile", "bared teeth", "tooth display"]
+  },
+  {
+    "name": "Fangs",
+    "description": "Prominent fangs or sharp canines",
+    "qualifiers": ["prominent fangs", "sharp fangs", "vampire fangs", "elongated canines", "fang display"]
+  },
+  {
+    "name": "Sharp Teeth",
+    "description": "Row of sharp, pointed teeth",
+    "qualifiers": ["sharp teeth", "pointed teeth", "serrated teeth", "razor-sharp teeth", "predatory teeth"]
+  },
+  {
+    "name": "Grillz",
+    "description": "Gold or silver decorative tooth covers",
+    "qualifiers": ["gold teeth", "diamond grillz", "blinged teeth", "metal tooth covers", "jeweled teeth"]
+  },
+  {
+    "name": "Gap Tooth",
+    "description": "Distinctive gap between front teeth",
+    "qualifiers": ["gap tooth", "diastema", "tooth gap", "spaced teeth", "gapped smile"]
+  },
+  {
+    "name": "Crooked Teeth",
+    "description": "Uneven or misaligned teeth",
+    "qualifiers": ["crooked teeth", "misaligned teeth", "uneven teeth", "imperfect teeth", "jagged smile"]
+  },
+  {
+    "name": "Missing Tooth",
+    "description": "Visible gap from missing tooth",
+    "qualifiers": ["missing tooth", "tooth gap", "gap in teeth", "incomplete smile", "lost tooth"]
+  },
+  {
+    "name": "Tusks",
+    "description": "Orcish or boar-like tusks",
+    "qualifiers": ["prominent tusks", "orcish tusks", "lower fangs", "jutting tusks", "boar tusks"]
+  }
+]

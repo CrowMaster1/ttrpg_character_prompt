@@ -1,0 +1,16 @@
+[
+  {"name": "Flat-Shaded Animation", "description": "bold outlines with solid color fills, anime-inspired aesthetic", "qualifiers": ["cel-shaded rendering", "cartoon outline style", "flat color blocks", "animation aesthetic", "bold ink lines"]},
+  {"name": "Brushwork Visible", "description": "visible paint strokes suggesting hand-crafted artwork", "qualifiers": ["painterly rendering", "brushstroke texture", "artistic hand", "impasto effect", "manual technique evident"]},
+  {"name": "Photographic Realism", "description": "indistinguishable from high-quality photograph", "qualifiers": ["photorealistic detail", "camera-like accuracy", "true-to-life rendering", "photograph quality", "reality-matching"]},
+  {"name": "Artistic Interpretation", "description": "reality filtered through creative artistic vision", "qualifiers": ["stylized rendering", "design emphasis", "creative exaggeration", "artistic liberty", "non-literal interpretation"]},
+  {"name": "Draft-Like Lines", "description": "rough pencil sketch aesthetic with visible construction", "qualifiers": ["sketch rendering", "pencil drawing style", "rough draft look", "gestural lines", "unfinished charm"]},
+  {"name": "Geometric Precision", "description": "clean mathematical curves and perfect lines", "qualifiers": ["vector art style", "geometric clarity", "scalable graphics", "digital precision", "mathematical forms"]},
+  {"name": "Computer-Generated 3D", "description": "digital three-dimensional modeling aesthetic", "qualifiers": ["3D render style", "CG appearance", "modeled geometry", "digital sculpture", "synthetic realism"]},
+  {"name": "Sculptural Medium", "description": "appears crafted from clay or modeling material", "qualifiers": ["claymation aesthetic", "stop-motion look", "tactile sculpture", "handcrafted appearance", "physical medium"]},
+  {"name": "Technical Wireframe", "description": "structure revealed through transparent geometric mesh", "qualifiers": ["wireframe rendering", "technical diagram", "blueprint aesthetic", "structural lines", "transparent construction"]},
+  {"name": "Shadow Profile", "description": "subject reduced to dramatic backlit silhouette", "qualifiers": ["silhouette rendering", "shadow art", "contre-jour extreme", "profile darkness", "shape-only display"]},
+  {"name": "Overlaid Exposure", "description": "multiple images blended transparently together", "qualifiers": ["double exposure effect", "transparent overlay", "merged images", "ghostly combination", "dreamlike blend"]},
+  {"name": "Digital Corruption", "description": "intentional digital errors creating artistic effect", "qualifiers": ["glitch art style", "databend aesthetic", "digital artifact", "corruption art", "technological breakdown"]},
+  {"name": "Iridescent Shimmer", "description": "rainbow-shifting holographic appearance", "qualifiers": ["holographic rendering", "prismatic effect", "rainbow shimmer", "futuristic projection", "multi-spectral glow"]},
+  {"name": "Tessellated Pattern", "description": "image constructed from small repeating tiles", "qualifiers": ["mosaic rendering", "tiled construction", "tessellation art", "fragment assembly", "geometric pieces"]}
+]

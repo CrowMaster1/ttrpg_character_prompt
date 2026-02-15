@@ -1,0 +1,7 @@
+[
+    {"name": "Horns", "qualifiers": ["majestic", "curled", "demonic", "small", "broken"]},
+    {"name": "Claws", "qualifiers": ["sharp", "long", "retractable", "bone", "obsidian"]},
+    {"name": "Tail", "qualifiers": ["prehensile", "long", "spiked", "tufted", "lashing"]},
+    {"name": "Scaly Skin", "qualifiers": ["iridescent", "thick", "bony", "colorful", "slimy"]},
+    {"name": "Wings", "qualifiers": ["leathery", "bat-like", "feathered", "tattered", "membranous"]}
+]

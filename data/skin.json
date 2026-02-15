@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "grotesque skin",
+        "qualifiers": ["unnatural", "waxy", "pustuled", "discolored", "sickly"]
+    },
+    "2": {
+        "name": "rough skin",
+        "qualifiers": ["weathered", "leathery", "sun-burnt", "wrinkled", "coarse"]
+    },
+    "3": {
+        "name": "average skin",
+        "qualifiers": ["natural", "healthy", "normal", "unblemished", "tanned"]
+    },
+    "4": {
+        "name": "clear skin",
+        "qualifiers": ["smooth", "even-toned", "vibrant", "glowing", "radiant"]
+    },
+    "5": {
+        "name": "flawless skin",
+        "qualifiers": ["luminous", "porcelain-like", "sun-kissed", "dewy", "perfect"]
+    }
+}

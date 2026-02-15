@@ -1,0 +1,19 @@
+[
+    {"name": "S-Curve Posture", "qualifiers": ["confident", "graceful", "inviting", "subtle", "exaggerated"]},
+    {"name": "Hourglass Figure", "qualifiers": ["dramatic", "classic", "natural", "slender", "full"]},
+    {"name": "Arching Back", "qualifiers": ["subtle", "dramatic", "graceful", "inviting", "sensual"]},
+    {"name": "V-Shaped Torso", "qualifiers": ["powerful", "broad-shouldered", "athletic", "defined", "imposing"]},
+    {"name": "Open Posture", "qualifiers": ["relaxed", "confident", "easy", "inviting", "un-guarded"]},
+    {"name": "Rolled-Up Sleeves", "qualifiers": ["casually", "carefully", "exposing forearms", "showing muscle", "work-ready"]},
+    {"name": "Knowing Gaze", "qualifiers": ["confident", "mysterious", "inviting", "challenging", "smoldering"]},
+    {"name": "Touching Hair", "qualifiers": ["gently", "thoughtfully", "nervously", "flirtatiously", "absent-mindedly"]},
+    {"name": "Hand on Hip", "qualifiers": ["casually", "firmly", "confidently", "sassily", "impatiently"]},
+    {"name": "Head Tilted", "qualifiers": ["curiously", "invitingly", "questioningly", "playfully", "shyly"]},
+    {"name": "Parted Lips", "qualifiers": ["softly", "invitingly", "in surprise", "in anticipation", "breathlessly"]},
+    {"name": "Deep V-cut Neckline", "qualifiers": ["daring", "subtle", "plunging", "laced", "modest"]},
+    {"name": "Laced Bodice/Tunic", "qualifiers": ["tightly", "loosely", "partially", "decoratively", "functionally"]},
+    {"name": "Off-the-Shoulder", "qualifiers": ["casually", "elegantly", "carelessly", "intentionally", "playfully"]},
+    {"name": "Sheer Fabric", "qualifiers": ["translucent", "delicate", "artfully placed", "revealing", "subtle"]},
+    {"name": "Figure-Hugging Fit", "qualifiers": ["clinging", "tight", "tailored", "body-conscious", "form-fitting"]},
+    {"name": "High Leg Slit", "qualifiers": ["daring", "thigh-high", "subtle", "elegant", "functional"]}
+]

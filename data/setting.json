@@ -1,0 +1,93 @@
+[
+  {
+    "name": "High Fantasy",
+    "description": "Medieval fantasy world with magic, mythical creatures, and epic quests. Classic D&D/Tolkien aesthetic with castles, dragons, enchanted forests, and heroic adventurers.",
+    "prompt_fragment": "high fantasy setting, medieval fantasy world, magical realm, castles and kingdoms, mythical creatures, enchanted landscape, heroic fantasy aesthetic, D&D inspired world",
+    "tags": ["fantasy", "medieval", "magical", "default"],
+    "isDefault": true
+  },
+  {
+    "name": "Medieval Historical",
+    "description": "Realistic medieval Europe without magic. Authentic period details - muddy streets, realistic armor, historical architecture, common folk and nobility. Grounded in historical accuracy.",
+    "prompt_fragment": "medieval historical setting, realistic medieval period, historical accuracy, authentic medieval details, period-appropriate clothing and architecture, no magic, grounded realism",
+    "tags": ["medieval", "historical", "realistic"]
+  },
+  {
+    "name": "Dark Fantasy",
+    "description": "Grim medieval world where magic is dangerous and monsters are real. Dark forests, cursed lands, gothic architecture, and constant threat. Warhammer Fantasy/Witcher aesthetic - gritty and ominous.",
+    "prompt_fragment": "dark fantasy setting, grim medieval world, dangerous magic, cursed lands, gothic atmosphere, ominous landscape, grimdark fantasy, Witcher-inspired world",
+    "tags": ["fantasy", "dark", "gritty", "medieval"]
+  },
+  {
+    "name": "Arabian Nights",
+    "description": "Exotic Middle Eastern fantasy with djinn, flying carpets, and desert kingdoms. Vibrant markets, ornate palaces, vast deserts, and mystical oases. Tales of 1001 Nights aesthetic.",
+    "prompt_fragment": "Arabian fantasy setting, Middle Eastern inspired, desert kingdoms, ornate palaces, exotic markets, mystical magic, Tales of 1001 Nights, djinn and sorcery",
+    "tags": ["fantasy", "Arabian", "exotic", "desert"]
+  },
+  {
+    "name": "East Asian Fantasy",
+    "description": "Inspired by Chinese wuxia, Japanese folklore, and Asian mythology. Ancient temples, martial arts, spirits and demons, rice fields and mountain monasteries. Crouching Tiger/Spirited Away aesthetic.",
+    "prompt_fragment": "East Asian fantasy setting, wuxia inspired, ancient Asian temples, martial arts world, spirits and yokai, traditional Asian architecture, mystical Eastern aesthetic",
+    "tags": ["fantasy", "Asian", "wuxia", "mystical"]
+  },
+  {
+    "name": "Age of Sail",
+    "description": "17th-18th century nautical adventure. Tall ships, pirates, colonial ports, and oceanic exploration. Swashbuckling action on the high seas with naval battles and tropical islands.",
+    "prompt_fragment": "Age of Sail setting, 17th-18th century nautical, tall ships and pirates, colonial era, oceanic adventure, naval warfare, Caribbean seas, swashbuckling aesthetic",
+    "tags": ["historical", "nautical", "pirates", "adventure"]
+  },
+  {
+    "name": "Wild West",
+    "description": "American frontier 1860s-1880s. Cowboys, outlaws, dusty frontier towns, saloons, and vast prairies. Six-shooters, stagecoaches, and the untamed wilderness of the Old West.",
+    "prompt_fragment": "Wild West setting, American frontier, Old West aesthetic, cowboys and outlaws, dusty frontier towns, prairie landscape, western saloons, 1860s-1880s period",
+    "tags": ["historical", "western", "frontier", "cowboys"]
+  },
+  {
+    "name": "Steampunk Victorian",
+    "description": "Victorian era with advanced steam technology. Brass machinery, airships, clockwork devices, and industrial revolution aesthetics. Victorian fashion meets retro-futuristic invention.",
+    "prompt_fragment": "steampunk setting, Victorian era technology, brass and copper machinery, steam-powered devices, clockwork mechanisms, airships and dirigibles, retro-futuristic Victorian",
+    "tags": ["fantasy", "Victorian", "steampunk", "industrial"]
+  },
+  {
+    "name": "Cyberpunk Dystopia",
+    "description": "Near-future urban dystopia dominated by mega-corporations. Neon-lit streets, cybernetic augmentations, hacking, and high-tech crime. Blade Runner aesthetic - high tech meets low life.",
+    "prompt_fragment": "cyberpunk setting, dystopian near-future, neon-lit megacity, corporate dystopia, cybernetic technology, high-tech urban decay, Blade Runner inspired world",
+    "tags": ["sci-fi", "cyberpunk", "dystopian", "urban"]
+  },
+  {
+    "name": "Space Opera",
+    "description": "Far-future galactic civilization with faster-than-light travel, alien species, and cosmic conflicts. Star Wars/Star Trek aesthetic - advanced technology, space stations, and interstellar adventure.",
+    "prompt_fragment": "space opera setting, galactic civilization, far-future sci-fi, alien worlds, advanced technology, space stations and starships, interstellar scale, cosmic adventure",
+    "tags": ["sci-fi", "space", "futuristic", "galactic"]
+  },
+  {
+    "name": "Post-Apocalyptic",
+    "description": "Civilization collapsed - ruins of the old world and desperate survivors. Wasteland, scavenged equipment, makeshift communities. Fallout/Mad Max aesthetic - decay, survival, and harsh conditions.",
+    "prompt_fragment": "post-apocalyptic setting, collapsed civilization, wasteland ruins, desperate survivors, scavenged equipment, harsh survival world, decay and desolation",
+    "tags": ["sci-fi", "apocalyptic", "wasteland", "survival"]
+  },
+  {
+    "name": "Modern Day",
+    "description": "Contemporary 21st century setting. Modern cities, current technology, everyday life. Realistic urban and suburban environments with contemporary fashion and vehicles.",
+    "prompt_fragment": "modern contemporary setting, 21st century, current day, modern city, contemporary technology, realistic urban environment, everyday modern life",
+    "tags": ["modern", "contemporary", "realistic", "urban"]
+  },
+  {
+    "name": "Gothic Horror",
+    "description": "Victorian gothic with vampires, haunted mansions, and dark mysteries. Fog-shrouded streets, candlelit chambers, ancient curses. Dracula/Penny Dreadful aesthetic - aristocratic horror and decadence.",
+    "prompt_fragment": "gothic horror setting, Victorian gothic, haunted atmosphere, vampire aesthetic, dark mansions, fog and shadows, aristocratic horror, Dracula-inspired world",
+    "tags": ["horror", "Victorian", "gothic", "supernatural"]
+  },
+  {
+    "name": "Lovecraftian 1920s",
+    "description": "1920s-1930s period with cosmic horror lurking beneath normalcy. Jazz age meets eldritch terror - investigators uncovering sanity-shattering truths. Sepia-toned dread and period detail.",
+    "prompt_fragment": "1920s Lovecraftian setting, cosmic horror period, Jazz Age aesthetic, eldritch investigation, 1920s-1930s period details, sanity-threatening mysteries, pulp horror atmosphere",
+    "tags": ["horror", "1920s", "Lovecraft", "period"]
+  },
+  {
+    "name": "Prehistoric Primal",
+    "description": "Stone Age with primitive tribes, megafauna, and untamed wilderness. Cave dwellers, tribal warfare, mammoths and saber-toothed predators. Raw survival in an age before civilization.",
+    "prompt_fragment": "prehistoric setting, Stone Age era, primitive tribes, megafauna creatures, untamed wilderness, primal survival, cave dweller aesthetic, ancient prehistory",
+    "tags": ["historical", "prehistoric", "primitive", "survival"]
+  }
+]

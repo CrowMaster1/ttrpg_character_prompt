@@ -1,0 +1,6 @@
+[
+    {"name": "Simple Linen Tunic", "qualifiers": ["common", "worn", "earth-toned"]},
+    {"name": "Embroidered Silk Tunic", "qualifiers": ["noble", "fine", "colorful"]},
+    {"name": "Rugged Leather Tunic", "qualifiers": ["adventurer's", "durable", "weathered"]},
+    {"name": "Ceremonial Velvet Tunic", "qualifiers": ["courtier's", "rich", "ornate"]}
+]

@@ -1,0 +1,10 @@
+[
+  {"name": "Thirds Composition", "description": "subject positioned at intersection of imaginary grid lines", "qualifiers": ["rule of thirds", "balanced asymmetry", "professional framing", "offset positioning", "dynamic placement"]},
+  {"name": "Centered Symmetry", "description": "subject perfectly centered with mirrored balance", "qualifiers": ["symmetrical composition", "formal centering", "balanced portrait", "frontal equilibrium", "mirror balance"]},
+  {"name": "Isolation Framing", "description": "subject surrounded by empty space for dramatic effect", "qualifiers": ["negative space emphasis", "minimalist framing", "isolation composition", "sparse surroundings", "solitary placement"]},
+  {"name": "Portal Framing", "description": "subject viewed through doorway, window, or natural frame", "qualifiers": ["frame within frame", "doorway composition", "window framing", "arch perspective", "contained subject"]},
+  {"name": "Directional Lines", "description": "scene elements guide viewer's eye toward subject", "qualifiers": ["leading lines composition", "eye-guiding paths", "directional flow", "perspective convergence", "visual guidance"]},
+  {"name": "Diagonal Energy", "description": "angled composition creating dynamic tension", "qualifiers": ["diagonal composition", "dynamic angles", "energetic slant", "action-implying tilt", "movement suggestion"]},
+  {"name": "Layered Depth", "description": "foreground elements frame subject creating dimensionality", "qualifiers": ["foreground interest", "depth layering", "dimensional framing", "multi-plane composition", "spatial complexity"]},
+  {"name": "Edge Darkening", "description": "frame edges gradually darkened to focus attention center", "qualifiers": ["vignette effect", "spotlight framing", "edge shadow", "centered illumination", "natural focus guide"]}
+]

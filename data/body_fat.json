@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "very lean",
+        "qualifiers": ["gaunt", "emaciated", "bony", "skeletal", "raw-boned"]
+    },
+    "2": {
+        "name": "lean",
+        "qualifiers": ["trim", "spare", "slight", "thin", "underweight"]
+    },
+    "3": {
+        "name": "average weight",
+        "qualifiers": ["medium frame", "healthy weight", "proportionate", "natural build", "well-fed"]
+    },
+    "4": {
+        "name": "full",
+        "qualifiers": ["plush", "full-figured", "rounded", "chubby", "stout"]
+    },
+    "5": {
+        "name": "heavy",
+        "qualifiers": ["portly", "obese", "corpulent", "fleshy", "rotund"]
+    }
+}

@@ -1,0 +1,15 @@
+[
+    {"name": "Elven Verdant", "qualifiers": ["leaf-shaped", "vines", "natural", "organic"]},
+    {"name": "Dwarven Forge", "qualifiers": ["runic", "geometric", "heavy", "stone"]},
+    {"name": "Infernal", "qualifiers": ["spiked", "demonic", "obsidian", "fire-scorched"]},
+    {"name": "Celestial", "qualifiers": ["sun-kissed", "holy", "angelic", "radiant"]},
+    {"name": "Druidic Wilds", "qualifiers": ["antlered", "pelt-covered", "wild", "untamed"]},
+    {"name": "Necromancer", "qualifiers": ["bone-adorned", "shadowy", "skull-motif", "dark"]},
+    {"name": "Pirate/Mariner", "qualifiers": ["barnacle-encrusted", "salt-stained", "oceanic", "sea-worn"]},
+    {"name": "Arcane Clockwork", "qualifiers": ["gear-driven", "intricate", "steampunk", "mechanical"]},
+    {"name": "Nomadic Steppe", "qualifiers": ["leather-wrapped", "tribal", "wind-swept", "hardened"]},
+    {"name": "Desert Caliphate", "qualifiers": ["scimitar-curved", "sand-worn", "golden", "sun-bleached"]},
+    {"name": "Arctic Tundra", "qualifiers": ["frost-rimed", "fur-lined", "icy", "winter-themed"]},
+    {"name": "Feudal Court", "qualifiers": ["heraldic", "noble", "ceremonial", "gilded"]},
+    {"name": "Ravenkeep Gothic", "qualifiers": ["gothic", "dark", "shadowy", "vampiric"]}
+]

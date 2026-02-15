@@ -1,0 +1,9 @@
+[
+    {"name": "Shield", "description": "a round wooden shield with a steel boss"},
+    {"name": "Shortsword", "description": "a parrying shortsword, held in a reverse grip"},
+    {"name": "Dagger", "description": "a concealed parrying dagger"},
+    {"name": "Torch", "description": "a flaming, smoking torch"},
+    {"name": "Spellbook", "description": "an ancient, leather-bound spellbook covered in runes"},
+    {"name": "Orb", "description": "a glowing crystal orb, held as a wizard's focus"},
+    {"name": "Buckler", "description": "a small, domed buckler strapped to the forearm"}
+]

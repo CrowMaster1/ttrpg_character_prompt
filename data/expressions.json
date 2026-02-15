@@ -1,0 +1,20 @@
+[
+  {"name": "Smirking", "description": "confident, knowing smirk with slight lip curl", "qualifiers": ["cocky", "knowing", "sly", "confident", "superior"]},
+  {"name": "Snarling", "description": "aggressive snarl showing teeth", "qualifiers": ["aggressive", "threatening", "baring teeth", "feral", "hostile"]},
+  {"name": "Laughing", "description": "genuine laughter and joy", "qualifiers": ["joyous", "hearty", "maniacal", "amused", "mirthful"]},
+  {"name": "Crying", "description": "tears streaming down face", "qualifiers": ["tears streaming", "sobbing", "weeping", "anguished", "heartbroken"]},
+  {"name": "Grimacing", "description": "face twisted in pain or disgust", "qualifiers": ["pained", "disgusted", "strained", "suffering", "wincing"]},
+  {"name": "Scowling", "description": "angry frown and furrowed brow", "qualifiers": ["angry", "displeased", "frowning", "disapproving", "stern"]},
+  {"name": "Surprised", "description": "wide-eyed shock or amazement", "qualifiers": ["shocked", "amazed", "startled", "wide-eyed", "astonished"]},
+  {"name": "Contemplative", "description": "thoughtful, deep in thought", "qualifiers": ["thoughtful", "pondering", "reflective", "meditative", "deep in thought"]},
+  {"name": "Sneering", "description": "contemptuous curl of lip", "qualifiers": ["contemptuous", "mocking", "disdainful", "scornful", "derisive"]},
+  {"name": "Smiling Warmly", "description": "genuine, friendly smile", "qualifiers": ["genuine", "kind", "friendly", "welcoming", "open"]},
+  {"name": "Blank Expression", "description": "emotionless, neutral face", "qualifiers": ["emotionless", "neutral", "unreadable", "stoic", "impassive"]},
+  {"name": "Fearful", "description": "obvious fear and terror", "qualifiers": ["terrified", "panicked", "anxious", "worried", "scared"]},
+  {"name": "Seductive", "description": "sultry, inviting expression", "qualifiers": ["sultry", "inviting", "alluring", "tempting", "come-hither"]},
+  {"name": "Menacing", "description": "threatening, intimidating glare", "qualifiers": ["threatening", "intimidating", "ominous", "dangerous", "looming"]},
+  {"name": "Exhausted", "description": "completely drained and weary", "qualifiers": ["drained", "spent", "weary", "fatigued", "depleted"]},
+  {"name": "Determined", "description": "resolute, focused expression", "qualifiers": ["resolute", "focused", "unwavering", "steadfast", "firm"]},
+  {"name": "Mischievous", "description": "playful, troublemaking grin", "qualifiers": ["playful", "impish", "roguish", "devilish", "cheeky"]},
+  {"name": "Disgusted", "description": "revulsion and distaste", "qualifiers": ["revolted", "repulsed", "nauseated", "sickened", "appalled"]}
+]

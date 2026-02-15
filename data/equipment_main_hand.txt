@@ -1,0 +1,16 @@
+Longsword
+Shortsword
+Scimitar
+Dagger
+Mace
+Warhammer
+Battleaxe
+Greataxe
+Greatsword
+Spear
+Glaive
+Halberd
+Hand Crossbow
+Staff
+Wand
+Holy Symbol

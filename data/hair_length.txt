@@ -1,0 +1,8 @@
+Bald
+Very Short
+Short
+Shoulder-Length
+Long
+Very Long
+Waist-Length
+Floor-Length

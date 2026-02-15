@@ -1,0 +1,55 @@
+# Dependencies
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Build output
+dist
+
+# Development files
+.git
+.gitignore
+.claude
+.env
+.env.local
+.env.development
+.env.test
+.env.production
+
+# Documentation (not needed in container)
+*.md
+!README.md
+
+# Old folders
+_old_python_app
+AGENT_REPORTS
+prompt-generator-electron
+electron
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Tests
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+vitest.config.ts
+
+# CI/CD
+.github
+.gitlab-ci.yml
+
+# Misc
+coverage
+.cache

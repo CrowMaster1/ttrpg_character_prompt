@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "broken",
+        "qualifiers": ["rusty", "tattered", "torn", "damaged", "ruined"]
+    },
+    "2": {
+        "name": "poor",
+        "qualifiers": ["patched", "worn", "faded", "second-hand", "cheap"]
+    },
+    "3": {
+        "name": "normal",
+        "qualifiers": ["serviceable", "standard", "well-used", "common", "ordinary"]
+    },
+    "4": {
+        "name": "fine",
+        "qualifiers": ["well-kept", "decorated", "ornate", "high-quality", "superior"]
+    },
+    "5": {
+        "name": "masterwork",
+        "qualifiers": ["gleaming", "luxurious", "immaculate", "exquisite", "perfect"]
+    }
+}

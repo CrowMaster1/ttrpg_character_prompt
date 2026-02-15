@@ -1,0 +1,15 @@
+[
+    {"name": "Longsword", "description": "a longsword with a cruciform hilt and an etched blade, in a slim scabbard sheathed on the left hip"},
+    {"name": "Shortsword", "description": "a shortsword with a ring-pommel in a compact scabbard"},
+    {"name": "Greatsword", "description": "a greatsword with an oversized hilt, carried in a back scabbard with cross-straps"},
+    {"name": "Dagger", "description": "a dagger with a curved blade, concealed in a belt sheath"},
+    {"name": "Mace", "description": "a brutal, flanged mace hanging from a belt hook"},
+    {"name": "Warhammer", "description": "a powerful, dwarven-made warhammer with a square head"},
+    {"name": "Battleaxe", "description": "a vicious, bearded battleaxe"},
+    {"name": "Spear", "description": "a simple spear with a long haft and a leaf-shaped head"},
+    {"name": "Staff", "description": "a gnarled wooden staff with a crystal topper, carved with runes"},
+    {"name": "Longbow", "description": "a powerful, elven-made yew longbow with horn nocks"},
+    {"name": "Rapier", "description": "an elegant duelist's rapier with an ornate cup-hilt"},
+    {"name": "Scimitar", "description": "an exotic, curved scimitar with a crescent guard"},
+    {"name": "Falchion", "description": "a brutal, forward-weighted falchion"}
+]

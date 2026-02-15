@@ -1,0 +1,9 @@
+[
+    {"name": "Backpack", "description": "a well-stocked adventurer's backpack with a bedroll tied to the top"},
+    {"name": "Longbow", "description": "a yew longbow slung over the shoulder"},
+    {"name": "Quiver", "description": "a leather quiver full of arrows, with the fletchings visible"},
+    {"name": "Greatsword", "description": "a massive greatsword slung across the back"},
+    {"name": "Spear", "description": "a long spear slung over the shoulder"},
+    {"name": "Lute", "description": "a well-loved, ornate lute slung over the back"},
+    {"name": "Drum", "description": "a tribal drum slung over the back"}
+]

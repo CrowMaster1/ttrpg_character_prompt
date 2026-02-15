@@ -1,0 +1,6 @@
+[
+  {"name": "Shallow Focus", "description": "subject sharp, background beautifully blurred with bokeh", "qualifiers": ["background blur", "bokeh effect", "portrait lens aesthetic", "f/1.8 aperture", "subject isolation"]},
+  {"name": "Deep Focus", "description": "everything from foreground to background in sharp clarity", "qualifiers": ["total clarity", "landscape depth", "f/16 aperture", "complete sharpness", "full-scene detail"]},
+  {"name": "Selective Focus Shift", "description": "focus transitions between foreground and background elements", "qualifiers": ["rack focus transition", "shifting clarity", "pulled focus effect", "dynamic depth change", "attention-guiding blur"]},
+  {"name": "Miniature Effect Blur", "description": "tilt-shift style making scene appear toy-like", "qualifiers": ["toy camera aesthetic", "selective plane blur", "diorama effect", "artificial miniaturization", "stylized unreality"]}
+]

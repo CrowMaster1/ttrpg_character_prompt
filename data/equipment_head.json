@@ -1,0 +1,13 @@
+[
+    {"name": "Leather Hood", "description": "a simple, worn leather hood"},
+    {"name": "Chain Coif", "description": "a riveted chainmail coif covering the neck and shoulders"},
+    {"name": "Steel Helmet", "description": "a battle-dented steel helmet with a visor"},
+    {"name": "Ornate Circlet", "description": "a delicate, elven-made silver circlet with a single jewel"},
+    {"name": "Wide-brim Hat", "description": "a weathered, wide-brimmed leather hat with a feather"},
+    {"name": "Simple Cap", "description": "a common wool cap"},
+    {"name": "Bandana", "description": "a red bandana tied around the forehead"},
+    {"name": "Feathered Cavalier Hat", "description": "a dashing cavalier hat with a sweeping brim and a large plume"},
+    {"name": "Straw Hat", "description": "a simple, sun-worn straw hat"},
+    {"name": "Veil", "description": "a sheer, pinned veil"},
+    {"name": "Turban", "description": "a layered cloth turban with a jeweled brooch"}
+]

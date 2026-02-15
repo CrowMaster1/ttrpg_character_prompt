@@ -1,0 +1,102 @@
+[
+  {
+    "name": "Slouched Posture",
+    "description": "Poor posture with hunched shoulders",
+    "qualifiers": ["hunched shoulders", "slouching", "poor posture", "bent spine", "stooped"]
+  },
+  {
+    "name": "Rotting Teeth",
+    "description": "Decayed, blackened teeth",
+    "qualifiers": ["rotting teeth", "blackened teeth", "decayed teeth", "missing teeth", "rotten smile"]
+  },
+  {
+    "name": "Balding",
+    "description": "Receding hairline or bald spots",
+    "qualifiers": ["receding hairline", "male pattern baldness", "thinning hair", "bald spot", "balding crown"]
+  },
+  {
+    "name": "Patchy Hair",
+    "description": "Uneven hair growth with bald patches",
+    "qualifiers": ["patchy hair", "bald patches", "uneven hair", "sparse hair", "tufted hair"]
+  },
+  {
+    "name": "Greasy Hair",
+    "description": "Oily, unwashed hair",
+    "qualifiers": ["greasy hair", "oily hair", "unwashed hair", "lank hair", "slicked with grease"]
+  },
+  {
+    "name": "Unkempt Appearance",
+    "description": "Generally disheveled and dirty",
+    "qualifiers": ["unkempt", "disheveled", "slovenly", "scruffy", "grimy appearance"]
+  },
+  {
+    "name": "Bloodshot Eyes",
+    "description": "Red, tired-looking eyes",
+    "qualifiers": ["bloodshot eyes", "red-rimmed eyes", "tired eyes", "bleary eyes", "veiny eyes"]
+  },
+  {
+    "name": "Sunken Eyes",
+    "description": "Deep-set eyes with dark circles",
+    "qualifiers": ["sunken eyes", "hollow eyes", "dark circles", "gaunt eye sockets", "deep-set eyes"]
+  },
+  {
+    "name": "Sallow Complexion",
+    "description": "Unhealthy, yellowish skin tone",
+    "qualifiers": ["sallow skin", "jaundiced", "sickly pallor", "unhealthy complexion", "waxen skin"]
+  },
+  {
+    "name": "Bloated Face",
+    "description": "Puffy, swollen facial features",
+    "qualifiers": ["bloated face", "puffy features", "swollen face", "distended features", "edematous"]
+  },
+  {
+    "name": "Protruding Belly",
+    "description": "Large, distended stomach",
+    "qualifiers": ["pot belly", "beer gut", "distended stomach", "protruding abdomen", "bulging belly"]
+  },
+  {
+    "name": "Crooked Nose",
+    "description": "Bent or misshapen nose",
+    "qualifiers": ["crooked nose", "broken nose", "bent nose", "misshapen nose", "twisted nose"]
+  },
+  {
+    "name": "Warts",
+    "description": "Visible skin warts or growths",
+    "qualifiers": ["facial warts", "skin warts", "warty growths", "bumpy skin", "wartlike protrusions"]
+  },
+  {
+    "name": "Excessive Sweating",
+    "description": "Visibly perspiring, damp skin",
+    "qualifiers": ["sweaty", "perspiring heavily", "damp with sweat", "glistening with sweat", "dripping sweat"]
+  },
+  {
+    "name": "Dirty Fingernails",
+    "description": "Grimy, unkempt nails",
+    "qualifiers": ["dirty fingernails", "grimy nails", "blackened nails", "filthy hands", "crusted nails"]
+  },
+  {
+    "name": "Crooked Teeth",
+    "description": "Severely misaligned teeth",
+    "qualifiers": ["severely crooked teeth", "twisted teeth", "jumbled teeth", "chaotic dentition", "snaggletooth"]
+  },
+  {
+    "name": "Thin Lips",
+    "description": "Very narrow, barely visible lips",
+    "qualifiers": ["thin lips", "barely visible lips", "pursed mouth", "narrow lips", "lipless"]
+  },
+  {
+    "name": "Jowls",
+    "description": "Sagging lower face and neck",
+    "qualifiers": ["sagging jowls", "drooping cheeks", "hanging jowls", "loose facial skin", "bulldog jowls"]
+  },
+  {
+    "name": "Dandruff",
+    "description": "Visible flakes on scalp and shoulders",
+    "qualifiers": ["dandruff flakes", "flaky scalp", "white flakes", "shoulder dusting", "scaly scalp"]
+  },
+  {
+    "name": "Stained Teeth",
+    "description": "Yellowed, discolored teeth",
+    "qualifiers": ["yellow teeth", "stained teeth", "tobacco-stained", "discolored teeth", "brown-tinged teeth"]
+  }
+]

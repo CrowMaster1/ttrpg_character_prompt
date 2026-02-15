@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Sheer Fabric",
+    "description": "Translucent, see-through material",
+    "qualifiers": ["sheer fabric", "translucent clothing", "see-through material", "gossamer fabric", "transparent garment"]
+  },
+  {
+    "name": "Tight Fit",
+    "description": "Form-fitting, body-hugging clothing",
+    "qualifiers": ["skin-tight clothing", "body-hugging fit", "form-fitting garment", "tight outfit", "clingy fabric"]
+  },
+  {
+    "name": "Low Cut",
+    "description": "Plunging neckline showing cleavage",
+    "qualifiers": ["low-cut neckline", "plunging neckline", "deep V-neck", "revealing chest", "cleavage display"]
+  },
+  {
+    "name": "High Slit",
+    "description": "Side slit revealing leg",
+    "qualifiers": ["thigh-high slit", "leg slit", "revealing slit", "split skirt", "exposed leg"]
+  },
+  {
+    "name": "Backless",
+    "description": "Open back design",
+    "qualifiers": ["backless design", "exposed back", "open back", "bare back", "revealing back"]
+  },
+  {
+    "name": "Midriff Showing",
+    "description": "Cropped or cut to show stomach",
+    "qualifiers": ["exposed midriff", "bare stomach", "crop top", "belly showing", "navel visible"]
+  },
+  {
+    "name": "Lace Details",
+    "description": "Decorative lace elements",
+    "qualifiers": ["lace trim", "lace details", "delicate lace", "ornate lace", "lace accents"]
+  },
+  {
+    "name": "Leather",
+    "description": "Tight leather material",
+    "qualifiers": ["black leather", "tight leather", "leather outfit", "glossy leather", "form-fitting leather"]
+  },
+  {
+    "name": "Latex/Rubber",
+    "description": "Shiny latex or rubber material",
+    "qualifiers": ["latex clothing", "rubber outfit", "glossy latex", "tight rubber", "shiny material"]
+  },
+  {
+    "name": "Fishnets",
+    "description": "Fishnet stockings or bodysuit",
+    "qualifiers": ["fishnet stockings", "fishnet bodysuit", "mesh stockings", "net pattern", "fishnet tights"]
+  },
+  {
+    "name": "Corset",
+    "description": "Structured corset piece",
+    "qualifiers": ["tight corset", "laced corset", "waist-cinching corset", "Victorian corset", "boned corset"]
+  },
+  {
+    "name": "Lingerie Style",
+    "description": "Lingerie-inspired clothing",
+    "qualifiers": ["lingerie-style outfit", "bra-like top", "intimate apparel", "bedroom fashion", "delicate undergarments"]
+  }
+]

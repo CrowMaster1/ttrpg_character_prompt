@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "neglected hair",
+        "qualifiers": ["mangy", "greasy", "tangled", "matted", "unkempt"]
+    },
+    "2": {
+        "name": "wild hair",
+        "qualifiers": ["unruly", "untamed", "windswept", "messy", "disheveled"]
+    },
+    "3": {
+        "name": "simple hair",
+        "qualifiers": ["practical", "no-nonsense", "plain", "neat", "clean"]
+    },
+    "4": {
+        "name": "stylish hair",
+        "qualifiers": ["coiffed", "elegant", "fashionable", "intricate", "perfectly placed"]
+    },
+    "5": {
+        "name": "glorious hair",
+        "qualifiers": ["alluring", "celestial", "shimmering", "voluminous", "lustrous"]
+    }
+}

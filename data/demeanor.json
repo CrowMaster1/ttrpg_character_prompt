@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "repulsive demeanor",
+        "qualifiers": ["unsettling", "off-putting", "creepy", "disturbing", "unnerving"]
+    },
+    "2": {
+        "name": "awkward demeanor",
+        "qualifiers": ["nervous", "shifty", "uncomfortable", "withdrawn", "timid"]
+    },
+    "3": {
+        "name": "neutral demeanor",
+        "qualifiers": ["composed", "steady", "at ease", "relaxed", "collected"]
+    },
+    "4": {
+        "name": "charming demeanor",
+        "qualifiers": ["warm", "engaging", "likable", "charismatic", "inviting"]
+    },
+    "5": {
+        "name": "captivating demeanor",
+        "qualifiers": ["magnetic", "commanding", "mesmerizing", "inspiring", "irresistible"]
+    }
+}

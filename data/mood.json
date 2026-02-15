@@ -1,0 +1,17 @@
+[
+  {"name": "Ominous", "description": "dark, foreboding atmosphere", "qualifiers": ["foreboding", "threatening", "dark", "menacing", "sinister"]},
+  {"name": "Heroic", "description": "triumphant, inspiring mood", "qualifiers": ["triumphant", "inspiring", "epic", "legendary", "noble"]},
+  {"name": "Mysterious", "description": "enigmatic, secretive atmosphere", "qualifiers": ["enigmatic", "secretive", "hidden", "cryptic", "shadowy"]},
+  {"name": "Melancholic", "description": "sad, wistful mood", "qualifiers": ["sad", "wistful", "somber", "mournful", "sorrowful"]},
+  {"name": "Whimsical", "description": "playful, fantastical atmosphere", "qualifiers": ["playful", "fantastical", "dreamlike", "quirky", "fanciful"]},
+  {"name": "Tense", "description": "suspenseful, anxious mood", "qualifiers": ["suspenseful", "anxious", "nervous", "edge-of-seat", "uneasy"]},
+  {"name": "Peaceful", "description": "serene, tranquil atmosphere", "qualifiers": ["serene", "tranquil", "calm", "restful", "harmonious"]},
+  {"name": "Chaotic", "description": "frenzied, wild mood", "qualifiers": ["frenzied", "wild", "turbulent", "disordered", "manic"]},
+  {"name": "Romantic", "description": "passionate, intimate atmosphere", "qualifiers": ["passionate", "intimate", "loving", "tender", "sensual"]},
+  {"name": "Horrific", "description": "terrifying, nightmarish mood", "qualifiers": ["terrifying", "nightmarish", "grotesque", "disturbing", "dreadful"]},
+  {"name": "Triumphant", "description": "victorious, glorious atmosphere", "qualifiers": ["victorious", "glorious", "celebratory", "conquering", "winning"]},
+  {"name": "Nostalgic", "description": "reminiscent, sentimental mood", "qualifiers": ["reminiscent", "wistful", "sentimental", "bygone", "remembered"]},
+  {"name": "Oppressive", "description": "stifling, heavy atmosphere", "qualifiers": ["stifling", "heavy", "crushing", "suffocating", "overwhelming"]},
+  {"name": "Ethereal", "description": "otherworldly, ghostly mood", "qualifiers": ["otherworldly", "ghostly", "transcendent", "celestial", "heavenly"]},
+  {"name": "Gritty", "description": "harsh, realistic atmosphere", "qualifiers": ["harsh", "realistic", "raw", "brutal", "unvarnished"]}
+]
