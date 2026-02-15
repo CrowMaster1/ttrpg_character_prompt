@@ -1,0 +1,8 @@
+[
+    {"name": "Deep V-cut Neckline", "qualifiers": ["daring", "subtle", "plunging", "laced", "modest"]},
+    {"name": "Laced Bodice/Tunic", "qualifiers": ["tightly", "loosely", "partially", "decoratively", "functionally"]},
+    {"name": "Off-the-Shoulder", "qualifiers": ["casually", "elegantly", "carelessly", "intentionally", "playfully"]},
+    {"name": "Sheer Fabric", "qualifiers": ["translucent", "delicate", "artfully placed", "revealing", "subtle"]},
+    {"name": "Figure-Hugging Fit", "qualifiers": ["clinging", "tight", "tailored", "body-conscious", "form-fitting"]},
+    {"name": "High Leg Slit", "qualifiers": ["daring", "thigh-high", "subtle", "elegant", "functional"]}
+]

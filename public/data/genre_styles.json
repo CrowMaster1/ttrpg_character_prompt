@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Heroic Fantasy Illustration",
+    "description": "Epic fantasy art in the tradition of classic RPG sourcebooks - vibrant colors, dramatic heroic poses, magical energy effects, medieval armor and weapons gleaming with detail. Think Boris Vallejo meets Larry Elmore.",
+    "prompt_fragment": "heroic fantasy illustration, dramatic lighting, vibrant saturated colors, epic scale, medieval fantasy armor, glowing magical effects, highly detailed weapons and equipment, adventurer's composition, D&D sourcebook art style",
+    "tags": ["fantasy", "D&D", "heroic", "colorful"]
+  },
+  {
+    "name": "Dark Fantasy Grimoire",
+    "description": "Gritty low-fantasy aesthetic with muted earth tones, weathered textures, and ominous atmosphere. Characters appear battle-worn and realistic rather than idealized. Medieval grime, blood, and mortality emphasized. Warhammer Fantasy meets Darkest Dungeon.",
+    "prompt_fragment": "dark fantasy art, gritty realism, muted color palette, weathered textures, ominous atmosphere, battle-scarred details, medieval grime, mortality emphasized, low-fantasy aesthetic, grimdark illustration",
+    "tags": ["fantasy", "dark", "gritty", "realistic"]
+  },
+  {
+    "name": "Cosmic Horror Investigator",
+    "description": "1920s-1930s period aesthetic with film noir lighting, sepia tones, and creeping wrongness. Emphasizes human fragility against incomprehensible entities. Vintage photography meets eldritch unease - subtle wrongness in proportions, unsettling geometry, creeping shadows. Lovecraftian dread atmosphere.",
+    "prompt_fragment": "cosmic horror art, 1920s aesthetic, film noir lighting, sepia tone vintage, eldritch atmosphere, unsettling geometry, creeping shadows, subtle wrongness, human fragility emphasized, Lovecraftian dread, investigator period clothing",
+    "tags": ["horror", "1920s", "Lovecraft", "noir"]
+  },
+  {
+    "name": "Gothic Horror Cathedral",
+    "description": "Victorian gothic atmosphere with dramatic chiaroscuro, ornate baroque details, religious imagery corrupted. Velvet darkness punctuated by candlelight, ancient stone, and creeping decay. Combines Vampire: The Masquerade aesthetics with gothic literature illustrations.",
+    "prompt_fragment": "gothic horror art, Victorian era aesthetic, dramatic chiaroscuro lighting, ornate baroque details, religious imagery, velvet darkness, candlelit atmosphere, ancient stone textures, creeping decay, vampire aesthetic",
+    "tags": ["horror", "gothic", "Victorian", "vampire"]
+  },
+  {
+    "name": "Cyberpunk Neon Streets",
+    "description": "High-tech dystopian future with vibrant neon colors against dark urban decay. Rain-slicked streets reflecting holographic advertisements, cybernetic augmentations, and corporate megastructures. Blade Runner meets Ghost in the Shell - technological saturation with human grit.",
+    "prompt_fragment": "cyberpunk art, neon lighting, dystopian future, rain-slicked streets, holographic displays, cybernetic augmentations, urban decay, corporate megastructures, high-tech low-life aesthetic, futuristic noir",
+    "tags": ["cyberpunk", "sci-fi", "neon", "dystopian"]
+  },
+  {
+    "name": "Grimdark Warfare Chronicle",
+    "description": "Grim darkness of eternal war - heavily armored warriors in baroque power armor, gothic architecture, skulls as decoration, religious fanaticism meets sci-fi technology. Warhammer 40K aesthetic: everything oversized, over-decorated, and ominously gothic with rich golds and deep reds against gunmetal.",
+    "prompt_fragment": "grimdark art, Warhammer 40K aesthetic, baroque power armor, gothic architecture, skull decoration, religious iconography, oversized weapons, golden embellishment, gunmetal palette, eternal war atmosphere, grim darkness",
+    "tags": ["sci-fi", "Warhammer", "gothic", "militaristic"]
+  },
+  {
+    "name": "Post-Apocalyptic Wasteland",
+    "description": "Civilization's ruins under harsh sun - scavenged equipment, makeshift armor from pre-war materials, dust and decay. Fallout meets Mad Max: desperate survivors, rusted metal, faded colors, and the patina of nuclear aftermath. Weathered, sun-bleached, and jury-rigged.",
+    "prompt_fragment": "post-apocalyptic art, wasteland aesthetic, scavenged equipment, makeshift armor, rusted metal textures, faded colors, dust and decay, harsh sunlight, survivor desperation, nuclear aftermath, weathered details",
+    "tags": ["post-apocalyptic", "wasteland", "survival", "ruined"]
+  },
+  {
+    "name": "Oil Portrait Masterwork",
+    "description": "Classical oil painting technique with rich impasto, visible brushwork, and masterful chiaroscuro. Renaissance to Baroque period aesthetics - deep shadows, luminous highlights, realistic flesh tones, and technical virtuosity. Rembrandt meets Caravaggio: dramatic lighting revealing character.",
+    "prompt_fragment": "oil painting portrait, classical technique, visible brushwork, impasto texture, chiaroscuro lighting, Renaissance style, baroque drama, luminous highlights, realistic flesh tones, old master quality, museum piece aesthetic",
+    "tags": ["oil painting", "classical", "portrait", "fine art"]
+  },
+  {
+    "name": "Impressionist Brush Study",
+    "description": "Loose visible brushstrokes capturing light and atmosphere over detail. Soft focus with vibrant color theory - Monet's light experiments meets Renoir's figure work. Emphasis on overall impression and luminous color rather than precise rendering. Painterly and atmospheric.",
+    "prompt_fragment": "impressionist painting, loose brushwork, visible brush strokes, atmospheric lighting, vibrant color theory, soft focus, luminous quality, light and color emphasis, painterly technique, plein air aesthetic",
+    "tags": ["impressionism", "painterly", "atmospheric", "colorful"]
+  },
+  {
+    "name": "Ink Engraving Antique",
+    "description": "Black and white cross-hatching and stippling technique from medieval woodcuts to Victorian engravings. Fine linear detail, dramatic contrast, antique book illustration aesthetic. Dürer meets Doré: intricate line work building tone through density.",
+    "prompt_fragment": "engraving art, cross-hatching technique, stippling detail, black and white, linear precision, antique book illustration, woodcut aesthetic, medieval engraving, dramatic contrast, intricate line work",
+    "tags": ["engraving", "black and white", "antique", "detailed"]
+  },
+  {
+    "name": "Watercolor Sketch Loose",
+    "description": "Transparent washes with white paper showing through, soft edge bleeding, and spontaneous flow. Delicate and airy with visible water effects - blooms, granulation, and happy accidents. Combines drawing's immediacy with painting's luminosity.",
+    "prompt_fragment": "watercolor painting, transparent washes, soft edge bleeding, white paper luminosity, spontaneous flow, delicate technique, visible water effects, airy quality, sketch-like immediacy, artistic looseness",
+    "tags": ["watercolor", "delicate", "loose", "transparent"]
+  },
+  {
+    "name": "Art Nouveau Decorative",
+    "description": "Flowing organic lines, elaborate decorative borders, stylized natural forms, and elegant figures. Alphonse Mucha's theatrical posters meet Gustav Klimt's ornamental patterns. Curves dominate, with nature motifs and beautiful typography integration.",
+    "prompt_fragment": "art nouveau style, flowing organic lines, decorative borders, stylized natural forms, elegant composition, Mucha-inspired, ornamental patterns, curved lines, nature motifs, theatrical aesthetic",
+    "tags": ["art nouveau", "decorative", "elegant", "ornate"]
+  },
+  {
+    "name": "Manga Panel Sequential",
+    "description": "Japanese comic book aesthetics with dramatic speed lines, exaggerated expressions, screen tone effects, and dynamic action composition. Black and white with bold inks - combines Western comic influence with distinctly Japanese visual storytelling conventions.",
+    "prompt_fragment": "manga art style, dramatic speed lines, exaggerated expressions, screen tone shading, dynamic composition, bold ink work, Japanese comic aesthetic, sequential art, action emphasis, graphic novel style",
+    "tags": ["manga", "Japanese", "comic", "dynamic"]
+  },
+  {
+    "name": "Stained Glass Cathedral",
+    "description": "Colored glass segment aesthetic with bold lead lines separating vibrant translucent colors. Light passes through creating luminous glow - medieval cathedral window meets art glass craft. Geometric composition with religious or narrative subject matter.",
+    "prompt_fragment": "stained glass art, colored glass segments, bold lead lines, translucent colors, luminous backlight, cathedral window aesthetic, geometric composition, vibrant glow, medieval craft, light transmission",
+    "tags": ["stained glass", "luminous", "geometric", "medieval"]
+  },
+  {
+    "name": "Propaganda Poster Bold",
+    "description": "Simplified forms with limited bold colors, strong diagonals, and commanding compositions. Socialist realism meets WWII war bonds - simplified heroic figures, dramatic perspective, and powerful graphic impact. Authoritative and instantly readable.",
+    "prompt_fragment": "propaganda poster style, limited color palette, simplified forms, bold graphics, commanding composition, dramatic angles, heroic figures, strong diagonal lines, authoritative aesthetic, graphic impact",
+    "tags": ["poster", "graphic", "bold", "propaganda"]
+  }
+]

@@ -1,0 +1,8 @@
+Shield
+Shortsword
+Scimitar
+Dagger
+Torch
+Lantern
+Spellbook
+Orb

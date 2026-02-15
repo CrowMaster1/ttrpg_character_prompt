@@ -1,0 +1,69 @@
+{
+  "1": {
+    "name": "filthy",
+    "qualifiers": [
+      "caked with dirt",
+      "unwashed",
+      "matted hair",
+      "grimy skin",
+      "reeking",
+      "covered in filth",
+      "stained clothing",
+      "spilled food on clothes",
+      "vomit-stained",
+      "beer-soaked"
+    ]
+  },
+  "2": {
+    "name": "unkempt",
+    "qualifiers": [
+      "messy",
+      "disheveled",
+      "rumpled clothes",
+      "dusty",
+      "neglected appearance",
+      "uncombed hair",
+      "wrinkled clothing",
+      "slightly dirty"
+    ]
+  },
+  "3": {
+    "name": "average",
+    "qualifiers": [
+      "normal",
+      "clean",
+      "casual",
+      "plain",
+      "everyday appearance",
+      "adequately groomed",
+      "presentable",
+      "nothing special"
+    ]
+  },
+  "4": {
+    "name": "well-groomed",
+    "qualifiers": [
+      "neat",
+      "tidy",
+      "clean and pressed",
+      "refined",
+      "polished appearance",
+      "carefully maintained",
+      "crisp clothing",
+      "manicured"
+    ]
+  },
+  "5": {
+    "name": "immaculate",
+    "qualifiers": [
+      "pristine",
+      "spotless",
+      "meticulous",
+      "dapper",
+      "perfumed",
+      "flawlessly groomed",
+      "impeccably dressed",
+      "not a hair out of place"
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "1": {
+    "name": "Suggestive Attire",
+    "options": [
+      {"name": "Garment Partially Unfastened", "qualifiers": ["loose buttons", "undone laces", "casual dishevelment", "relaxed fasteners", "open collar"]},
+      {"name": "One Shoulder Bare", "qualifiers": ["fallen strap", "off-shoulder style", "casual slip", "deliberate drape", "asymmetric neckline"]},
+      {"name": "Form-Fitting Garments", "qualifiers": ["body-conforming", "tightly tailored", "curve-accentuating", "second-skin fit", "anatomically molded"]},
+      {"name": "Abbreviated Hem", "qualifiers": ["thigh-revealing", "scandalously short", "daringly high", "leg-exposing", "provocatively brief"]},
+      {"name": "Rain-Soaked Attire", "qualifiers": ["moisture-clung", "transparently wet", "water-darkened", "clinging damp", "soaked-through"]},
+      {"name": "Battle-Torn Garments", "qualifiers": ["combat-shredded", "strategically ripped", "conflict-damaged", "artfully torn", "exposure through tears"]}
+    ]
+  },
+  "2": {
+    "name": "Mature Exposure",
+    "options": [
+      {"name": "State of Undress", "qualifiers": ["partially disrobed", "mid-removal", "incomplete attire", "changing garments", "half-clothed"]},
+      {"name": "Minimal Coverage", "qualifiers": ["barely concealed", "scant fabric", "strategic draping", "minimal garments", "dangerously revealing"]},
+      {"name": "Translucent Fabric", "qualifiers": ["sheer material", "see-through weave", "gossamer thin", "revealing silhouette", "transparent gauze"]},
+      {"name": "Intimate Garments Visible", "qualifiers": ["underclothes showing", "lingerie exposed", "private attire revealed", "bedroom wear visible", "intimate layers"]},
+      {"name": "Sheet-Draped Figure", "qualifiers": ["bedsheet wrapped", "post-encounter covering", "improvised modesty", "fabric-swathed", "loosely shrouded"]}
+    ]
+  },
+  "3": {
+    "name": "Explicit Nudity",
+    "options": [
+      {"name": "Bare Chest", "qualifiers": ["topless", "upper body unclothed", "chest exposed", "shirtless figure", "décolletage revealed"]},
+      {"name": "Unclothed Form", "qualifiers": ["completely bare", "natural state", "without garments", "fully exposed", "artistic nude"]},
+      {"name": "Artfully Obscured", "qualifiers": ["hand-covered", "hair-veiled", "object-blocked", "shadow-concealed", "strategically hidden"]},
+      {"name": "Selective Exposure", "qualifiers": ["partially revealed", "chosen display", "deliberate showing", "focused nudity", "targeted unveiling"]}
+    ]
+  }
+}

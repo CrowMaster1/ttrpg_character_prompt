@@ -1,0 +1,113 @@
+[
+  {
+    "name": "Stocky",
+    "description": "short and muscular build",
+    "qualifiers": [
+      "compact and powerful",
+      "barrel-chested",
+      "thick-set",
+      "sturdy build",
+      "squat frame"
+    ]
+  },
+  {
+    "name": "Lean",
+    "description": "thin and wiry build",
+    "qualifiers": [
+      "slender",
+      "wiry",
+      "lanky",
+      "slim build",
+      "narrow frame"
+    ]
+  },
+  {
+    "name": "Athletic",
+    "description": "balanced, fit proportions",
+    "qualifiers": [
+      "athletic build",
+      "proportioned",
+      "V-shaped torso",
+      "fit frame",
+      "runner's build"
+    ]
+  },
+  {
+    "name": "Heavyset",
+    "description": "large, solid build",
+    "qualifiers": [
+      "broad and solid",
+      "substantial build",
+      "sturdy frame",
+      "thick-bodied",
+      "powerfully built"
+    ]
+  },
+  {
+    "name": "Pear-Shaped",
+    "description": "wider at hips and thighs",
+    "qualifiers": [
+      "full hips",
+      "ample thighs",
+      "narrow shoulders",
+      "bottom-heavy",
+      "curvy lower body"
+    ]
+  },
+  {
+    "name": "Apple-Shaped",
+    "description": "rounder midsection",
+    "qualifiers": [
+      "round belly",
+      "thick waist",
+      "lean limbs",
+      "barrel-chested",
+      "top-heavy"
+    ]
+  },
+  {
+    "name": "Hourglass",
+    "description": "balanced curves",
+    "qualifiers": [
+      "curved",
+      "balanced proportions",
+      "defined waist",
+      "full bust and hips",
+      "classic curves"
+    ]
+  },
+  {
+    "name": "Rectangle",
+    "description": "straight, even build",
+    "qualifiers": [
+      "straight-hipped",
+      "even width",
+      "athletic",
+      "no defined waist",
+      "uniform build"
+    ]
+  },
+  {
+    "name": "Inverted Triangle",
+    "description": "broad shoulders, narrow hips",
+    "qualifiers": [
+      "broad-shouldered",
+      "narrow hips",
+      "swimmer's build",
+      "wide upper body",
+      "powerful shoulders"
+    ]
+  },
+  {
+    "name": "Strongman",
+    "description": "massively thick and powerful",
+    "qualifiers": [
+      "barrel-like torso",
+      "powerlifter build",
+      "thickly muscled",
+      "massive core",
+      "strongman physique",
+      "formidable bulk"
+    ]
+  }
+]

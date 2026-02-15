@@ -1,0 +1,5 @@
+[
+    {"name": "Traveling Merchant", "qualifiers": ["layered coat with hidden pockets", "ledger satchel", "money belt", "sturdy boots", "felt hat"]},
+    {"name": "Market Stall Merchant", "qualifiers": ["clean tunic with apron", "coin counter pouch", "short cloak", "cap", "fingerless gloves"]},
+    {"name": "High Court Merchant", "qualifiers": ["silk coat with fur collar", "jeweled sash", "fine shoes", "cane (worn strap)", "signet pendant"]}
+]

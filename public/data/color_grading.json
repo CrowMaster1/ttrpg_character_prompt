@@ -1,0 +1,17 @@
+[
+  {"name": "Cinematic (Teal & Orange)", "description": "Hollywood-style color grading with teal shadows and orange highlights", "qualifiers": ["cinematic", "blockbuster", "film-like", "professional", "Hollywood"]},
+  {"name": "Desaturated", "description": "muted, washed-out colors", "qualifiers": ["muted colors", "washed out", "faded", "low saturation", "subdued"]},
+  {"name": "Oversaturated", "description": "vibrant, intense colors", "qualifiers": ["vibrant", "vivid", "intense colors", "poppy", "hyper-colored"]},
+  {"name": "Monochromatic", "description": "single color palette", "qualifiers": ["single color", "monotone", "unified palette", "limited spectrum", "themed"]},
+  {"name": "Warm Palette", "description": "reds, oranges, yellows dominate", "qualifiers": ["warm tones", "cozy", "inviting", "passionate", "energetic"]},
+  {"name": "Cool Palette", "description": "blues, greens, purples dominate", "qualifiers": ["cool tones", "calm", "serene", "melancholic", "distant"]},
+  {"name": "Earthy Tones", "description": "natural browns, greens, tans", "qualifiers": ["natural", "organic", "grounded", "rustic", "earth colors"]},
+  {"name": "Pastel Colors", "description": "soft, gentle pale colors", "qualifiers": ["soft", "gentle", "pale", "dreamy", "delicate"]},
+  {"name": "High Contrast", "description": "dramatic blacks and whites", "qualifiers": ["dramatic", "stark", "bold", "punchy", "intense"]},
+  {"name": "Low Contrast", "description": "soft, hazy appearance", "qualifiers": ["soft", "hazy", "muted", "gentle", "atmospheric"]},
+  {"name": "Sepia Tone", "description": "vintage brownish tint", "qualifiers": ["vintage", "aged", "historical", "nostalgic", "antique"]},
+  {"name": "Black & White", "description": "no color, grayscale only", "qualifiers": ["monochrome", "noir", "classic", "dramatic", "timeless"]},
+  {"name": "Neon Colors", "description": "bright fluorescent cyberpunk palette", "qualifiers": ["cyberpunk", "fluorescent", "glowing", "electric", "futuristic"]},
+  {"name": "Golden Hour", "description": "warm sunset/sunrise tones", "qualifiers": ["golden", "amber", "warm glow", "magic hour", "sunset"]},
+  {"name": "Bleach Bypass", "description": "desaturated with high contrast", "qualifiers": ["gritty", "metallic", "harsh", "dramatic", "washed"]}
+]

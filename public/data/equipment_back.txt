@@ -1,0 +1,9 @@
+Backpack
+Longbow
+Shortbow
+Crossbow
+Quiver
+Bedroll
+Greatsword
+Greataxe
+Spear

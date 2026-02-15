@@ -1,0 +1,8 @@
+[
+    {"name": "clean-shaven", "qualifiers": ["smooth", "no mustache", "bare upper lip"]},
+    {"name": "pencil mustache", "qualifiers": ["thin", "neatly trimmed", "classic", "dapper"]},
+    {"name": "chevron mustache", "qualifiers": ["thick", "full", "covering the top lip", "well-groomed"]},
+    {"name": "handlebar mustache", "qualifiers": ["long", "curled", "waxed", "stylish", "old-fashioned"]},
+    {"name": "horseshoe mustache", "qualifiers": ["thick", "full", "extending down the sides of the mouth", "biker-style"]},
+    {"name": "walrus mustache", "qualifiers": ["thick", "bushy", "covering the mouth", "drooping"]}
+]

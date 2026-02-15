@@ -1,0 +1,10 @@
+Clear skies
+Overcast
+Light rain
+Heavy rain
+Misty
+Foggy
+Snowing lightly
+Blizzard
+Windy
+Stormy

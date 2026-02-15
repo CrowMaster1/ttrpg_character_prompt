@@ -1,0 +1,57 @@
+{
+  "1": {
+    "name": "soft/undefined",
+    "qualifiers": [
+      "no visible definition",
+      "smooth musculature",
+      "underdeveloped",
+      "soft appearance",
+      "lacking muscle tone",
+      "hidden muscle structure"
+    ]
+  },
+  "2": {
+    "name": "lightly defined",
+    "qualifiers": [
+      "hint of definition",
+      "light muscle tone",
+      "visible structure when flexed",
+      "slight definition",
+      "toned but not cut",
+      "naturally toned"
+    ]
+  },
+  "3": {
+    "name": "clearly defined",
+    "qualifiers": [
+      "visible muscle groups",
+      "athletic definition",
+      "toned appearance",
+      "muscle separation visible",
+      "well-defined",
+      "fit physique"
+    ]
+  },
+  "4": {
+    "name": "heavily defined",
+    "qualifiers": [
+      "prominent muscle striations",
+      "competition-ready",
+      "extreme definition",
+      "vascular",
+      "shredded",
+      "deeply cut"
+    ]
+  },
+  "5": {
+    "name": "extreme vascularity",
+    "qualifiers": [
+      "bodybuilder-level striations",
+      "paper-thin skin over muscle",
+      "competition-stage definition",
+      "hyper-vascular",
+      "grotesquely defined",
+      "every fiber visible"
+    ]
+  }
+}

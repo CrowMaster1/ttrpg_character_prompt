@@ -1,0 +1,7 @@
+[
+    {"name": "very tall", "qualifiers": ["towering", "lanky", "gangly", "statuesque", "giant"]},
+    {"name": "tall", "qualifiers": ["lofty", "rangy", "long-limbed", "strapping", "leggy"]},
+    {"name": "average height", "qualifiers": ["medium", "unremarkable", "normal", "common", "standard"]},
+    {"name": "short", "qualifiers": ["stout", "compact", "stocky", "sturdy", "diminutive"]},
+    {"name": "very short", "qualifiers": ["petite", "tiny", "small", "elfin", "dwarfish"]}
+]

@@ -1,0 +1,62 @@
+[
+  {
+    "name": "Confident Hip Stance",
+    "description": "Hand on hip, weight shifted to one side",
+    "qualifiers": ["hand on hip", "hip cocked", "confident stance", "sassy pose", "weight shifted"]
+  },
+  {
+    "name": "Over the Shoulder Look",
+    "description": "Looking back over shoulder seductively",
+    "qualifiers": ["over shoulder glance", "looking back", "sultry backward look", "shoulder peek", "coy glance"]
+  },
+  {
+    "name": "Arched Back",
+    "description": "Back arched emphasizing curves",
+    "qualifiers": ["arched back", "curved spine", "back bend", "elongated pose", "stretching backward"]
+  },
+  {
+    "name": "Leaning Forward",
+    "description": "Leaning in with emphasis on upper body",
+    "qualifiers": ["leaning forward", "bent over", "forward lean", "tilted forward", "hunched alluringly"]
+  },
+  {
+    "name": "Reclining Seductively",
+    "description": "Lying back in alluring position",
+    "qualifiers": ["reclining pose", "lying back", "lounging seductively", "reclined position", "sprawled alluringly"]
+  },
+  {
+    "name": "Stretching Arms Up",
+    "description": "Arms raised overhead, body elongated",
+    "qualifiers": ["arms stretched up", "reaching overhead", "arms above head", "upward stretch", "elongated body"]
+  },
+  {
+    "name": "Kneeling Pose",
+    "description": "On knees in alluring position",
+    "qualifiers": ["kneeling", "on knees", "kneeling position", "knelt down", "submissive kneel"]
+  },
+  {
+    "name": "Sitting with Crossed Legs",
+    "description": "Seated with legs elegantly crossed",
+    "qualifiers": ["crossed legs", "legs crossed", "elegant sitting", "seated pose", "sophisticated cross"]
+  },
+  {
+    "name": "Touching Hair",
+    "description": "Hand running through or playing with hair",
+    "qualifiers": ["hand in hair", "touching hair", "hair play", "fingers through hair", "stroking hair"]
+  },
+  {
+    "name": "Hand on Thigh",
+    "description": "Hand resting on or touching thigh",
+    "qualifiers": ["hand on thigh", "touching thigh", "thigh caress", "leg touch", "hand on leg"]
+  },
+  {
+    "name": "Biting Lip",
+    "description": "Teeth on lower lip in suggestive manner",
+    "qualifiers": ["biting lip", "lip bite", "teeth on lip", "nervous lip bite", "sultry lip bite"]
+  },
+  {
+    "name": "Laying on Stomach",
+    "description": "Prone position looking up",
+    "qualifiers": ["laying on stomach", "prone position", "belly down", "lying face down", "stomach pose"]
+  }
+]

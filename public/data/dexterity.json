@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "clumsy bearing",
+        "qualifiers": ["stiff posture", "awkward stance", "ungainly bearing", "lumbering gait", "heavy-footed"]
+    },
+    "2": {
+        "name": "stiff bearing",
+        "qualifiers": ["rigid posture", "careful movements", "deliberate steps", "steady but slow", "cautious stance"]
+    },
+    "3": {
+        "name": "natural bearing",
+        "qualifiers": ["balanced stance", "relaxed posture", "natural movement", "steady footing", "comfortable bearing"]
+    },
+    "4": {
+        "name": "agile bearing",
+        "qualifiers": ["light-footed", "graceful stance", "quick reflexes", "poised bearing", "nimble movement"]
+    },
+    "5": {
+        "name": "catlike bearing",
+        "qualifiers": ["cat-like grace", "dancer's poise", "fluid motion", "predatory elegance", "effortless agility"]
+    }
+}

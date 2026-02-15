@@ -1,0 +1,16 @@
+[
+    {"name": "Bare Chest", "description": "a bare chest"},
+    {"name": "Simple Tunic", "description": "a simple, earth-toned linen tunic, belted at the waist"},
+    {"name": "Traveler's Clothes", "description": "durable, layered traveler's clothes with a road-worn cloak"},
+    {"name": "Fine Clothes", "description": "fine, embroidered silk clothes in a noble's style"},
+    {"name": "Leather Jerkin", "description": "a sleeveless, studded leather jerkin worn over a simple tunic"},
+    {"name": "Chainmail Shirt", "description": "a long-sleeved, riveted chainmail shirt"},
+    {"name": "Steel Breastplate", "description": "a polished steel breastplate with engraved pauldrons"},
+    {"name": "Ornate Robes", "description": "ornate, hooded wizard's robes embroidered with arcane symbols"},
+    {"name": "Doublet", "description": "a fitted doublet with slashed sleeves, in a courtier's style"},
+    {"name": "Gambeson", "description": "a quilted, padded gambeson worn under armor"},
+    {"name": "Poet Shirt", "description": "a romantic, ruffled poet shirt"},
+    {"name": "Vest", "description": "a fitted, embroidered brocade vest"},
+    {"name": "Blouse", "description": "a gathered blouse with lace cuffs"},
+    {"name": "Bodice", "description": "a laced bodice worn over a chemise"}
+]

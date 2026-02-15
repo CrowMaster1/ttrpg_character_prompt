@@ -1,0 +1,671 @@
+{
+  "tabs": [
+    {
+      "id": "core_concept",
+      "title": "⭐ Character Basics",
+      "controls": [
+        "race",
+        "gender",
+        "age",
+        "attractiveness",
+        "height",
+        "muscle",
+        "muscle_definition",
+        "body_fat",
+        "body_shape",
+        "dexterity",
+        "intelligence"
+      ]
+    },
+    {
+      "id": "style_scene",
+      "title": "🎨 Style & Scene",
+      "controls": [
+        "setting",
+        "aesthetic",
+        "genre_style",
+        "rendering_style",
+        "color_grading",
+        "style_pack",
+        "scene",
+        "mood",
+        "weather"
+      ]
+    },
+    {
+      "id": "camera_composition",
+      "title": "📷 Camera & Composition",
+      "controls": [
+        "camera_angle",
+        "camera_position",
+        "framing",
+        "depth_of_field",
+        "lighting",
+        "shadows",
+        "looking_direction"
+      ]
+    },
+    {
+      "id": "physical_details",
+      "title": "👤 Physical Features",
+      "controls": [
+        "skin",
+        "grooming",
+        "facial_features",
+        "expressions",
+        "demeanor",
+        "hair_style",
+        "hair_color",
+        "beard",
+        "mustache",
+        "pose"
+      ]
+    },
+    {
+      "id": "equipment",
+      "title": "⚔️ Equipment & Gear",
+      "controls": [
+        "detailed_descriptions",
+        "gear_quality",
+        "head",
+        "chest",
+        "legs",
+        "hands",
+        "feet",
+        "main_hand",
+        "off_hand",
+        "back"
+      ]
+    },
+    {
+      "id": "outfits",
+      "title": "👗 Outfits",
+      "controls": [
+        "outfit_adventurer",
+        "outfit_bard",
+        "outfit_burgher",
+        "outfit_cleric",
+        "outfit_common",
+        "outfit_court",
+        "outfit_druid",
+        "outfit_fighter",
+        "outfit_merchant",
+        "outfit_monk",
+        "outfit_paladin",
+        "outfit_ranger",
+        "outfit_rogue",
+        "outfit_wizard",
+        "outfit_barbarian"
+      ]
+    },
+    {
+      "id": "features",
+      "title": "Features",
+      "controls": [
+        "monstrous_features",
+        "afflictions",
+        "uncharming_traits",
+        "teeth_display",
+        "allure_feminine",
+        "allure_masculine",
+        "alluring_poses",
+        "clothing_modifiers",
+        "allure_clothing",
+        "nsfw_clothing_states",
+        "nsfw_poses",
+        "nsfw_camera_angles"
+      ]
+    },
+    {
+      "id": "free_text",
+      "title": "📝 Free Text",
+      "controls": []
+    }
+  ],
+  "controls": {
+    "setting": {
+      "ui_type": "simple_combo",
+      "label": "World Setting",
+      "data_source": "setting.json",
+      "prompt_template": "{prompt_fragment}",
+      "default_value": "High Fantasy"
+    },
+    "aesthetic": {
+      "ui_type": "simple_combo",
+      "label": "Overall Aesthetic",
+      "data_source": "aesthetic.json",
+      "prompt_template": "{prompt_fragment}"
+    },
+    "genre_style": {
+      "ui_type": "simple_combo",
+      "label": "Genre Style",
+      "data_source": "genre_styles.json",
+      "add_none": true,
+      "prompt_template": "{prompt_fragment}"
+    },
+    "rendering_style": {
+      "ui_type": "simple_combo",
+      "label": "Rendering Style",
+      "data_source": "rendering_style.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "color_grading": {
+      "ui_type": "simple_combo",
+      "label": "Color Grading",
+      "data_source": "color_grading.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "style_pack": {
+      "ui_type": "simple_combo",
+      "label": "Style Pack",
+      "data_source": "style_packs.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "mood": {
+      "ui_type": "simple_combo",
+      "label": "Mood & Atmosphere",
+      "data_source": "mood.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "attractiveness": {
+      "ui_type": "level_group",
+      "label": "Overall Attractiveness",
+      "data_source": "attractiveness.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "race": {
+      "ui_type": "simple_combo",
+      "label": "Race",
+      "data_source": "race.txt",
+      "prompt_template": "a {value}"
+    },
+    "gender": {
+      "ui_type": "simple_combo",
+      "label": "Gender",
+      "data_source": "gender.txt",
+      "prompt_template": "{value}"
+    },
+    "age": {
+      "ui_type": "level_group",
+      "label": "Age",
+      "data_source": "age.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "age_level": {
+      "ui_type": "level_group",
+      "label": "Age Level",
+      "data_source": "age.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "age_indicators": {
+      "ui_type": "button_group",
+      "label": "Age Indicators",
+      "data_source": "age_indicators.txt",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "anatomy_style": {
+      "ui_type": "button_group",
+      "label": "Anatomy & Proportions",
+      "data_source": "anatomy_style.txt",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "adult_clothing": {
+      "ui_type": "checkbox_group",
+      "label": "Adult Clothing",
+      "data_source": "adult_clothing.txt",
+      "prompt_template": "{value}"
+    },
+    "provocative_poses": {
+      "ui_type": "button_group",
+      "label": "Provocative Poses",
+      "data_source": "provocative_poses.txt",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "alluring_demeanor": {
+      "ui_type": "button_group",
+      "label": "Alluring Demeanor",
+      "data_source": "alluring_demeanor.txt",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "mature_atmosphere": {
+      "ui_type": "button_group",
+      "label": "Mature Atmosphere",
+      "data_source": "mature_atmosphere.txt",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "wealth_indicator": {
+      "ui_type": "simple_combo",
+      "label": "Wealth Indicator",
+      "prompt_template": "{value}"
+    },
+    "skin": {
+      "ui_type": "level_group",
+      "label": "Skin & Complexion",
+      "data_source": "skin.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "facial_features": {
+      "ui_type": "simple_combo",
+      "label": "Distinctive Facial Features",
+      "data_source": "facial_features.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "expressions": {
+      "ui_type": "simple_combo",
+      "label": "Facial Expression",
+      "data_source": "expressions.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "hair_style": {
+      "ui_type": "simple_combo",
+      "label": "Hair Style",
+      "data_source": "hair_style.txt",
+      "add_none": true,
+      "prompt_template": "{value} hair"
+    },
+    "hair_length": {
+      "ui_type": "simple_combo",
+      "label": "Hair Length",
+      "data_source": "hair_length.txt",
+      "add_none": true,
+      "prompt_template": "{value} hair"
+    },
+    "hair_color": {
+      "ui_type": "simple_combo",
+      "label": "Hair Color",
+      "data_source": "hair_color.txt",
+      "add_none": true,
+      "prompt_template": "{value} hair"
+    },
+    "beard_type": {
+      "ui_type": "simple_combo",
+      "label": "Facial Hair",
+      "data_source": "beard_type.txt",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "mustache": {
+      "ui_type": "simple_combo",
+      "label": "Mustache",
+      "data_source": "mustache.json",
+      "add_none": true,
+      "prompt_template": "with a {value} mustache"
+    },
+    "height": {
+      "ui_type": "simple_combo",
+      "label": "Height",
+      "data_source": "height.json",
+      "add_none": true,
+      "prompt_template": "a person of {value}"
+    },
+    "demeanor": {
+      "ui_type": "level_group",
+      "label": "Demeanor",
+      "data_source": "demeanor.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "muscle": {
+      "ui_type": "level_group",
+      "label": "Muscle / Strength",
+      "data_source": "muscle.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "body_fat": {
+      "ui_type": "level_group",
+      "label": "Body Fat / Softness",
+      "data_source": "body_fat.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "pose": {
+      "ui_type": "simple_combo",
+      "label": "Action/Pose",
+      "data_source": "pose.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "detailed_descriptions": {
+      "ui_type": "checkbox",
+      "label": "Use Detailed Equipment Descriptions"
+    },
+    "gear_quality": {
+      "ui_type": "level_group",
+      "label": "Gear Quality",
+      "data_source": "gear_quality.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "head": {
+      "ui_type": "simple_combo",
+      "label": "Head",
+      "data_source": "equipment_head.json",
+      "add_none": true
+    },
+    "chest": {
+      "ui_type": "simple_combo",
+      "label": "Chest",
+      "data_source": "equipment_chest.json",
+      "add_none": true,
+      "sub_options": {
+        "Tunic": "tunic_types.json",
+        "Dress": "dress_types.json"
+      }
+    },
+    "legs": {
+      "ui_type": "simple_combo",
+      "label": "Legs",
+      "data_source": "equipment_legs.json",
+      "add_none": true
+    },
+    "hands": {
+      "ui_type": "simple_combo",
+      "label": "Hands",
+      "data_source": "equipment_hands.json",
+      "add_none": true
+    },
+    "feet": {
+      "ui_type": "simple_combo",
+      "label": "Feet",
+      "data_source": "equipment_feet.json",
+      "add_none": true
+    },
+    "main_hand": {
+      "ui_type": "simple_combo",
+      "label": "Main Hand",
+      "data_source": "equipment_main_hand.json",
+      "add_none": true
+    },
+    "off_hand": {
+      "ui_type": "simple_combo",
+      "label": "Off Hand",
+      "data_source": "equipment_off_hand.json",
+      "add_none": true
+    },
+    "back": {
+      "ui_type": "simple_combo",
+      "label": "Back",
+      "data_source": "equipment_back.json",
+      "add_none": true
+    },
+    "outfit_adventurer": {
+      "ui_type": "simple_combo",
+      "label": "Adventurer",
+      "data_source": "outfits_adventurer.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_bard": {
+      "ui_type": "simple_combo",
+      "label": "Bard",
+      "data_source": "outfits_bard.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_burgher": {
+      "ui_type": "simple_combo",
+      "label": "Burgher",
+      "data_source": "outfits_burgher.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_cleric": {
+      "ui_type": "simple_combo",
+      "label": "Cleric",
+      "data_source": "outfits_cleric.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_common": {
+      "ui_type": "simple_combo",
+      "label": "Common",
+      "data_source": "outfits_common.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_court": {
+      "ui_type": "simple_combo",
+      "label": "Court",
+      "data_source": "outfits_court.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_druid": {
+      "ui_type": "simple_combo",
+      "label": "Druid",
+      "data_source": "outfits_druid.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_fighter": {
+      "ui_type": "simple_combo",
+      "label": "Fighter",
+      "data_source": "outfits_fighter.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_merchant": {
+      "ui_type": "simple_combo",
+      "label": "Merchant",
+      "data_source": "outfits_merchant.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_monk": {
+      "ui_type": "simple_combo",
+      "label": "Monk",
+      "data_source": "outfits_monk.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_paladin": {
+      "ui_type": "simple_combo",
+      "label": "Paladin",
+      "data_source": "outfits_paladin.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_ranger": {
+      "ui_type": "simple_combo",
+      "label": "Ranger",
+      "data_source": "outfits_ranger.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_rogue": {
+      "ui_type": "simple_combo",
+      "label": "Rogue",
+      "data_source": "outfits_rogue.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_wizard": {
+      "ui_type": "simple_combo",
+      "label": "Wizard",
+      "data_source": "outfits_wizard.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "outfit_barbarian": {
+      "ui_type": "simple_combo",
+      "label": "Barbarian",
+      "data_source": "outfits_barbarian.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "monstrous_features": {
+      "ui_type": "checkbox_group",
+      "label": "Monstrous Features",
+      "data_source": "traits_monstrous.json",
+      "prompt_template": "({qualifier} {name}:1.1)"
+    },
+    "afflictions": {
+      "ui_type": "checkbox_group",
+      "label": "Afflictions",
+      "data_source": "traits_afflictions.json",
+      "prompt_template": "({qualifier} {name}:1.2)"
+    },
+    "uncharming_traits": {
+      "ui_type": "checkbox_group",
+      "label": "Uncharming Traits",
+      "data_source": "uncharming_traits.json",
+      "prompt_template": "({qualifier} {name}:1.3)"
+    },
+    "teeth_display": {
+      "ui_type": "checkbox_group",
+      "label": "Teeth & Mouth Features",
+      "data_source": "teeth_display.json",
+      "prompt_template": "({qualifier} {name}:1.3)"
+    },
+    "alluring_poses": {
+      "ui_type": "checkbox_group",
+      "label": "Alluring Poses",
+      "data_source": "alluring_poses.json",
+      "prompt_template": "({qualifier} {name}:1.2)"
+    },
+    "clothing_modifiers": {
+      "ui_type": "checkbox_group",
+      "label": "Clothing Modifiers",
+      "data_source": "clothing_modifiers.json",
+      "prompt_template": "({qualifier} {name}:1.3)"
+    },
+    "allure_feminine": {
+      "ui_type": "checkbox_group",
+      "label": "Alluring Traits (Feminine)",
+      "data_source": "traits_allure_feminine.json",
+      "prompt_template": "({qualifier} {name}:1.2)"
+    },
+    "allure_masculine": {
+      "ui_type": "checkbox_group",
+      "label": "Alluring Traits (Masculine)",
+      "data_source": "traits_allure_masculine.json",
+      "prompt_template": "({qualifier} {name}:1.2)"
+    },
+    "allure_clothing": {
+      "ui_type": "checkbox_group",
+      "label": "Alluring Clothing Details",
+      "data_source": "traits_allure_clothing.json",
+      "prompt_template": "({qualifier} {name}:1.2)"
+    },
+    "nsfw_clothing_states": {
+      "ui_type": "level_group",
+      "label": "Clothing State (Explicit)",
+      "data_source": "nsfw_clothing_states.json",
+      "prompt_template": "({qualifier}:1.4)"
+    },
+    "nsfw_poses": {
+      "ui_type": "level_group",
+      "label": "Explicit Poses",
+      "data_source": "nsfw_poses.json",
+      "prompt_template": "({qualifier}:1.4)"
+    },
+    "nsfw_camera_angles": {
+      "ui_type": "level_group",
+      "label": "Suggestive Camera Angles",
+      "data_source": "nsfw_camera_angles.json",
+      "prompt_template": "({qualifier}:1.3)"
+    },
+    "scene": {
+      "ui_type": "simple_combo",
+      "label": "Scene",
+      "data_source": "scene.txt",
+      "add_none": true,
+      "prompt_template": "in a {value}"
+    },
+    "camera_angle": {
+      "ui_type": "simple_combo",
+      "label": "Camera Angle",
+      "data_source": "camera_angle.txt",
+      "add_none": true,
+      "prompt_template": "from a {value}"
+    },
+    "camera_position": {
+      "ui_type": "simple_combo",
+      "label": "Camera Position",
+      "data_source": "camera_position.txt",
+      "add_none": true,
+      "prompt_template": "a {value}"
+    },
+    "framing": {
+      "ui_type": "simple_combo",
+      "label": "Composition Framing",
+      "data_source": "framing.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "depth_of_field": {
+      "ui_type": "simple_combo",
+      "label": "Depth of Field",
+      "data_source": "depth_of_field.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "looking_direction": {
+      "ui_type": "simple_combo",
+      "label": "Looking Direction",
+      "data_source": "looking_direction.txt",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "lighting": {
+      "ui_type": "simple_combo",
+      "label": "Lighting",
+      "data_source": "lighting.json",
+      "add_none": true,
+      "prompt_template": "with {value}"
+    },
+    "shadows": {
+      "ui_type": "simple_combo",
+      "label": "Shadows",
+      "data_source": "shadows.json",
+      "add_none": true,
+      "prompt_template": "with {value}"
+    },
+    "weather": {
+      "ui_type": "simple_combo",
+      "label": "Weather",
+      "data_source": "weather.txt",
+      "add_none": true,
+      "prompt_template": "in {value}"
+    },
+    "grooming": {
+      "ui_type": "level_group",
+      "label": "Grooming & Cleanliness",
+      "data_source": "grooming.json",
+      "prompt_template": "{qualifier} appearance"
+    },
+    "muscle_definition": {
+      "ui_type": "level_group",
+      "label": "Muscle Definition",
+      "data_source": "muscle_definition.json",
+      "prompt_template": "{qualifier} musculature"
+    },
+    "body_shape": {
+      "ui_type": "simple_combo",
+      "label": "Body Shape / Build",
+      "data_source": "body_shape.json",
+      "add_none": true,
+      "prompt_template": "{value}"
+    },
+    "dexterity": {
+      "ui_type": "level_group",
+      "label": "Dexterity / Agility",
+      "data_source": "dexterity.json",
+      "prompt_template": "{qualifier} {name}"
+    },
+    "intelligence": {
+      "ui_type": "level_group",
+      "label": "Intelligence / Perception",
+      "data_source": "intelligence.json",
+      "prompt_template": "{qualifier} {name}"
+    }
+  }
+}

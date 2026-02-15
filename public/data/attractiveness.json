@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "hideous",
+        "qualifiers": ["grotesque features", "repulsive face", "deeply ugly", "malformed face", "terrifying visage", "hideously ugly"]
+    },
+    "2": {
+        "name": "unpleasant",
+        "qualifiers": ["homely", "coarse", "hard-featured", "unattractive", "unappealing", "ill-favored"]
+    },
+    "3": {
+        "name": "average-looking",
+        "qualifiers": ["plain-faced", "typical features", "unexceptional looks", "nondescript appearance", "forgettable features"]
+    },
+    "4": {
+        "name": "attractive",
+        "qualifiers": ["beautiful", "handsome", "harmonious", "charming", "lovely", "striking"]
+    },
+    "5": {
+        "name": "stunning",
+        "qualifiers": ["godly beauty", "supermodel looks", "flawless appearance", "perfect symmetry", "breathtaking beauty", "alluring presence"]
+    }
+}

@@ -1,0 +1,6 @@
+[
+    {"name": "Simple Peasant Dress", "qualifiers": ["homespun", "patched", "modest"]},
+    {"name": "Elegant Court Gown", "qualifiers": ["silk", "laced bodice", "layered skirt"]},
+    {"name": "Practical Traveler's Dress", "qualifiers": ["durable", "belted", "with pockets"]},
+    {"name": "Ceremonial Robes", "qualifiers": ["embroidered", "hooded", "flowing sleeves"]}
+]

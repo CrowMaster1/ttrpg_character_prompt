@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "dull-eyed",
+        "qualifiers": ["vacant stare", "slack expression", "dim eyes", "confused look", "bewildered gaze"]
+    },
+    "2": {
+        "name": "unfocused gaze",
+        "qualifiers": ["distant eyes", "simple expression", "unfocused look", "distracted gaze", "glazed eyes"]
+    },
+    "3": {
+        "name": "alert expression",
+        "qualifiers": ["attentive gaze", "clear-eyed", "focused look", "aware expression", "watchful eyes"]
+    },
+    "4": {
+        "name": "sharp-eyed",
+        "qualifiers": ["sharp gaze", "calculating look", "keen eyes", "analytical expression", "perceptive stare"]
+    },
+    "5": {
+        "name": "piercing intellect",
+        "qualifiers": ["penetrating gaze", "knowing expression", "brilliant eyes", "visionary intensity", "sagacious look"]
+    }
+}

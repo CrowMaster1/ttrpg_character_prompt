@@ -1,0 +1,21 @@
+{
+  "1": {
+    "name": "Suggestive Angles",
+    "options": [
+      {"name": "Low Upward Perspective", "description": "camera below subject looking up", "qualifiers": ["beneath viewpoint", "upward gaze angle", "ground-level shot", "revealing low angle", "underneath perspective"]},
+      {"name": "Chest-Focused Framing", "description": "upper body emphasis shot", "qualifiers": ["décolletage focus", "bust-centered", "cleavage emphasis", "frontal upper angle", "torso-focused"]},
+      {"name": "Posterior View", "description": "from behind perspective", "qualifiers": ["rear angle", "backside view", "over-shoulder reverse", "behind perspective", "posterior framing"]},
+      {"name": "Leg-Emphasizing Low Shot", "description": "angle to elongate and highlight legs", "qualifiers": ["limb-lengthening", "gam-focused", "leg-accentuating", "lower extremity emphasis", "height-enhancing angle"]},
+      {"name": "Side Silhouette Profile", "description": "profile showing body curves", "qualifiers": ["lateral outline", "curve-revealing side", "silhouette emphasis", "contour display", "shape-showing angle"]}
+    ]
+  },
+  "2": {
+    "name": "Mature Angles",
+    "options": [
+      {"name": "Intimate Lower Angle", "description": "provocative upward viewpoint", "qualifiers": ["between-limbs perspective", "vulnerable angle", "explicit low shot", "intimate upward view", "provocative beneath-angle"]},
+      {"name": "Above Bed Perspective", "description": "looking down on bedroom scene", "qualifiers": ["overhead intimate shot", "downward bedroom angle", "above-mattress view", "vulnerable overhead", "bird's eye intimate"]},
+      {"name": "First-Person Intimate View", "description": "POV from participant perspective", "qualifiers": ["participant viewpoint", "immersive POV", "subjective angle", "first-person intimate", "experiential perspective"]},
+      {"name": "Extreme Intimate Close", "description": "very close detail shots", "qualifiers": ["macro intimacy", "extreme detail focus", "body-part close-up", "sensual proximity", "intimate magnification"]}
+    ]
+  }
+}

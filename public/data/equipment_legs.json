@@ -1,0 +1,10 @@
+[
+    {"name": "Loincloth", "description": "a simple, tattered leather loincloth"},
+    {"name": "Simple Trousers", "description": "simple, earth-toned wool trousers tucked into boots"},
+    {"name": "Leather Breeches", "description": "durable, tight-fitting leather breeches"},
+    {"name": "Chainmail Chausses", "description": "riveted chainmail chausses worn under plate armor"},
+    {"name": "Steel Greaves", "description": "articulated, battle-dented steel greaves"},
+    {"name": "Flowing Skirt", "description": "a long, layered peasant-style skirt"},
+    {"name": "Kilt", "description": "a pleated tartan kilt"},
+    {"name": "Hose", "description": "fitted, colorful courtier's hose"}
+]

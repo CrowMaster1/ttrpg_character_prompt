@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "minimal muscle",
+        "qualifiers": ["slender", "fine-boned", "delicate", "narrow-shouldered", "willowy"]
+    },
+    "2": {
+        "name": "lightly toned",
+        "qualifiers": ["lean", "wiry", "trim", "ropey", "taut"]
+    },
+    "3": {
+        "name": "medium build",
+        "qualifiers": ["healthy build", "sturdy", "able-bodied", "solidly built", "well-proportioned"]
+    },
+    "4": {
+        "name": "athletic",
+        "qualifiers": ["well-defined", "broad-shouldered", "powerful", "solid", "sculpted"]
+    },
+    "5": {
+        "name": "bodybuilder",
+        "qualifiers": ["massive", "herculean", "hulking", "burly", "powerfully built"]
+    }
+}

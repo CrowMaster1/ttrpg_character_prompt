@@ -1,0 +1,100 @@
+.compact-stat-slider {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: monospace;
+  color: var(--gray-900);
+  width: 28px;
+  flex-shrink: 0;
+}
+
+.stat-dots {
+  display: flex;
+  gap: 3px;
+  flex-shrink: 0;
+}
+
+.stat-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--gray-300);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  /* Larger click target */
+  position: relative;
+}
+
+.stat-dot::before {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+}
+
+.stat-dot.active {
+  background: var(--blue-600);
+}
+
+.stat-dot:hover {
+  background: var(--blue-600);
+  opacity: 0.8;
+}
+
+.stat-value {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-600);
+  width: 12px;
+  flex-shrink: 0;
+}
+
+.stat-warning {
+  font-size: 12px;
+  color: var(--warning);
+  flex-shrink: 0;
+}
+
+.stat-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  background: var(--gray-100);
+  border: 1px solid var(--gray-300);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.15s;
+  flex-shrink: 0;
+  color: var(--gray-700);
+}
+
+.stat-arrow:hover:not(:disabled) {
+  background: var(--gray-200);
+  border-color: var(--gray-400);
+  color: var(--gray-900);
+}
+
+.stat-arrow:active:not(:disabled) {
+  background: var(--gray-300);
+  transform: scale(0.95);
+}
+
+.stat-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}

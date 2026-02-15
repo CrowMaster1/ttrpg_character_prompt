@@ -1,0 +1,22 @@
+{
+    "1": {
+        "name": "young adult",
+        "qualifiers": ["early 20s", "unlined face", "youthful energy", "fresh-faced", "clear eyes"]
+    },
+    "2": {
+        "name": "adult",
+        "qualifiers": ["late 20s to early 30s", "settled features", "slight maturity in face", "a few faint lines", "mature gaze"]
+    },
+    "3": {
+        "name": "middle-aged",
+        "qualifiers": ["late 30s to early 50s", "crow's feet", "graying temples", "weathered hands", "set jaw"]
+    },
+    "4": {
+        "name": "old",
+        "qualifiers": ["late 50s to 70s", "deep wrinkles", "fully gray hair", "age-spotted hands", "age spots"]
+    },
+    "5": {
+        "name": "venerable",
+        "qualifiers": ["80s or older", "translucent skin", "deeply weathered face", "cloudy eyes", "gnarled fingers"]
+    }
+}

@@ -1,0 +1,11 @@
+[
+    {"name": "Missing Arm", "qualifiers": ["scarred stump", "mechanical prosthetic", "ghostly limb", "bandaged", "atrophied"]},
+    {"name": "Missing Leg", "qualifiers": ["wooden peg leg", "scarred stump", "crude prosthetic", "bandaged stump", "crutches"]},
+    {"name": "Missing Eye", "qualifiers": ["puckered scar", "eyepatch", "glowing orb", "milky white", "empty socket"]},
+    {"name": "Missing Ear", "qualifiers": ["scarred hole", "bandaged side", "ragged stump", "cauterized wound", "tattered remnant"]},
+    {"name": "Diseased Skin", "qualifiers": ["weeping sores", "discolored patches", "sickly", "pale", "blotchy"]},
+    {"name": "Boils", "qualifiers": ["pus-filled boils", "festering boils", "painful boils", "inflamed pustules", "swollen boils"]},
+    {"name": "Acne", "qualifiers": ["severe acne", "scarred acne", "inflamed acne", "cystic acne", "pockmarked skin"]},
+    {"name": "Angry Red Scars", "qualifiers": ["jagged", "raised", "faded", "across the face", "on the arms"]},
+    {"name": "Severe Burns", "qualifiers": ["puckered", "shiny", "melted", "disfiguring", "painful-looking"]}
+]

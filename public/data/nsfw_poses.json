@@ -1,0 +1,34 @@
+{
+  "1": {
+    "name": "Suggestive Poses",
+    "options": [
+      {"name": "Spine Arched Gracefully", "description": "back curved to emphasize figure", "qualifiers": ["sensually arched", "curve-enhancing", "flexibility displayed", "body-conscious", "alluring stretch"]},
+      {"name": "Coy Glance Backward", "description": "looking over shoulder invitingly", "qualifiers": ["flirtatious backward glance", "teasing over-shoulder look", "inviting rear view", "coquettish peek", "seductive turn"]},
+      {"name": "Reclined Enticingly", "description": "lounging in alluring manner", "qualifiers": ["seductively sprawled", "bedroom lounge", "invitingly positioned", "suggestive recline", "provocative rest"]},
+      {"name": "Crossed Limbs Display", "description": "legs crossed to draw attention", "qualifiers": ["provocatively crossed", "elegantly entwined", "attention-drawing position", "deliberate leg display", "calculated cross"]},
+      {"name": "Confident Hip Stance", "description": "hand on hip in assertive pose", "qualifiers": ["sassy positioning", "provocative stance", "model-like pose", "assertive display", "defiant posture"]},
+      {"name": "Classic Pin-Up Position", "description": "vintage allure pose", "qualifiers": ["retro sensuality", "1940s flirtation", "vintage cheesecake", "nostalgic allure", "classic tease"]},
+      {"name": "Moisture-Clad Stance", "description": "wet clothing emphasized pose", "qualifiers": ["rain-soaked display", "drenched emphasis", "wet reveal", "moisture-enhanced", "soaked presentation"]}
+    ]
+  },
+  "2": {
+    "name": "Mature Poses",
+    "options": [
+      {"name": "Bed-Positioned Figure", "description": "intimate bedroom positioning", "qualifiers": ["bedroom scene", "mattress repose", "intimate setting", "boudoir position", "sensual rest"]},
+      {"name": "Astride Position", "description": "straddling pose showing dominance", "qualifiers": ["provocative straddle", "dominant mount", "assertive positioning", "controlling stance", "superior angle"]},
+      {"name": "Submissive Kneel", "description": "kneeling in vulnerable position", "qualifiers": ["yielding posture", "deferential kneel", "vulnerable display", "intimate submission", "exposed positioning"]},
+      {"name": "Forward Bend Display", "description": "bending to reveal form", "qualifiers": ["provocative lean", "revealing bend", "teasing angle", "calculated stoop", "alluring crouch"]},
+      {"name": "Spread Limb Position", "description": "open leg positioning", "qualifiers": ["provocatively open", "inviting spread", "vulnerable exposure", "intimate reveal", "deliberate opening"]},
+      {"name": "Wall-Pressed Position", "description": "pinned against surface", "qualifiers": ["dominant press", "trapped positioning", "wall-bound", "aggressive intimacy", "passionate pin"]}
+    ]
+  },
+  "3": {
+    "name": "Explicit Poses",
+    "options": [
+      {"name": "Unclothed Intimate Position", "description": "explicit sexual positioning", "qualifiers": ["XXX pose", "adult content stance", "pornographic position", "explicit display", "mature-only"]},
+      {"name": "Extreme Exposure Spread", "description": "maximally revealing position", "qualifiers": ["explicit spread", "full reveal", "extreme exposure", "adult positioning", "pornographic display"]},
+      {"name": "Self-Pleasure Position", "description": "intimate self-touching", "qualifiers": ["masturbatory pose", "self-intimacy", "solo pleasure", "private act", "self-exploration"]},
+      {"name": "Post-Coital Rest", "description": "aftermath of intimacy", "qualifiers": ["after-sex dishevelment", "satisfied repose", "post-encounter sprawl", "intimate aftermath", "pleasure-spent"]}
+    ]
+  }
+}

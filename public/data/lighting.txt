@@ -1,0 +1,9 @@
+Soft Ambient
+Studio Lighting
+Overcast Daylight
+Chiaroscuro (dramatic light and shadow)
+Volumetric Lighting
+God Rays
+Dramatic Rim Lighting
+Sinister Backlighting
+Golden Hour Glow

@@ -1,0 +1,113 @@
+{
+  "quick_start": [
+    {
+      "name": "Elf Wizard",
+      "description": "Classic elven spellcaster with mystical appearance",
+      "selections": {
+        "race": "Elf",
+        "gender": "Female",
+        "age": {"level": 2, "qualifier": "youthful"},
+        "hair_color": "Silver",
+        "outfit_wizard": "Arcane Robes",
+        "main_hand": "Ornate Staff",
+        "pose": "Casting a Spell"
+      }
+    },
+    {
+      "name": "Dwarf Fighter",
+      "description": "Sturdy warrior with heavy armor and battle axe",
+      "selections": {
+        "race": "Dwarf",
+        "gender": "Male",
+        "age": {"level": 3, "qualifier": "mature"},
+        "beard": "Long Braided Beard",
+        "outfit_fighter": "Heavy Plate Armor",
+        "main_hand": "Battle Axe",
+        "pose": "Dynamic Combat Stance"
+      }
+    },
+    {
+      "name": "Human Rogue",
+      "description": "Stealthy thief with dark clothing and daggers",
+      "selections": {
+        "race": "Human",
+        "gender": "Female",
+        "age": {"level": 2, "qualifier": "young"},
+        "hair_color": "Black",
+        "outfit_rogue": "Dark Leathers",
+        "main_hand": "Dagger",
+        "off_hand": "Dagger",
+        "pose": "Crouching in Shadows"
+      }
+    },
+    {
+      "name": "Tiefling Warlock",
+      "description": "Demonic heritage spellcaster with dark powers",
+      "selections": {
+        "race": "Tiefling",
+        "gender": "Male",
+        "age": {"level": 2, "qualifier": "young"},
+        "hair_color": "Black",
+        "outfit_wizard": "Dark Robes",
+        "pose": "Hands Crackling with Magic"
+      }
+    },
+    {
+      "name": "Half-Orc Barbarian",
+      "description": "Fierce warrior with minimal armor and great weapon",
+      "selections": {
+        "race": "Half-Orc",
+        "gender": "Male",
+        "age": {"level": 3, "qualifier": "battle-hardened"},
+        "muscle": {"level": 5, "qualifier": "massive"},
+        "outfit_barbarian": "Tribal Furs",
+        "main_hand": "Greataxe",
+        "pose": "Power Strike Overhead"
+      }
+    },
+    {
+      "name": "Halfling Bard",
+      "description": "Cheerful entertainer with musical instrument",
+      "selections": {
+        "race": "Halfling",
+        "gender": "Female",
+        "age": {"level": 2, "qualifier": "youthful"},
+        "outfit_bard": "Colorful Performance Attire",
+        "pose": "Playing Musical Instrument"
+      }
+    }
+  ],
+  "portrait_styles": [
+    {
+      "name": "Heroic Portrait",
+      "description": "Epic hero shot with dramatic lighting",
+      "selections": {
+        "camera_angle": "Low Angle (Heroic)",
+        "camera_position": "Portrait Shot",
+        "lighting": "Dramatic Lighting",
+        "mood": "Heroic",
+        "pose": "Standing Resolutely"
+      }
+    },
+    {
+      "name": "Mysterious Character",
+      "description": "Shadowy, enigmatic character portrait",
+      "selections": {
+        "lighting": "Low Key Lighting",
+        "mood": "Mysterious",
+        "shadows": "Heavy Shadows",
+        "pose": "Quiet Contemplation"
+      }
+    },
+    {
+      "name": "Battle Ready",
+      "description": "Character prepared for combat",
+      "selections": {
+        "pose": "Dynamic Combat Stance",
+        "camera_angle": "Low Angle (Heroic)",
+        "lighting": "Dramatic Lighting",
+        "mood": "Tense"
+      }
+    }
+  ]
+}

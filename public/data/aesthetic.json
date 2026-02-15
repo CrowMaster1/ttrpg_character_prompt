@@ -1,0 +1,117 @@
+[
+  {
+    "name": "Painterly Portrait",
+    "prompt_fragment": "Painterly, semi-realistic fantasy portrait, 1080p, sharp focus, studio lighting",
+    "description": "A clean, modern, photorealistic style. Excellent for showing fine details and realistic textures."
+  },
+  {
+    "name": "Classic Fantasy (Pen & Ink)",
+    "prompt_fragment": "A pen-and-ink illustration in the style of a classic RPG rulebook, black and white, detailed cross-hatching, 1080p",
+    "description": "A black and white, old-school fantasy style. Excellent for creating a vintage, hand-drawn look."
+  },
+  {
+    "name": "Monochrome High-Detail",
+    "prompt_fragment": "monochrome style, detailed line art, realistic textures, shadow play, glibatree prompt, high-detail, character-focused",
+    "description": "A detailed, black and white style with a focus on textures and shadows."
+  },
+  {
+    "name": "Modern Fantasy (Vibrant)",
+    "prompt_fragment": "A vibrant, digital illustration in the style of modern fantasy art, with clean lines and a bright, saturated color palette, 1080p",
+    "description": "A colorful, high-fantasy style. Tends to make characters look more heroic and idealized."
+  },
+  {
+    "name": "Grimdark Fantasy (Gritty)",
+    "prompt_fragment": "A gritty, digital illustration in the style of grimdark fantasy, with rough textures and a muted, desaturated color palette, 1080p",
+    "description": "A dark, gritty, low-fantasy style. Tends to make characters look more weathered and gaunt."
+  },
+  {
+    "name": "Classic Fantasy (Oil Painting)",
+    "prompt_fragment": "A heroic fantasy oil painting in the style of a 90s book cover, with dramatic, high-contrast lighting and an intense action pose, 1080p",
+    "description": "A classic, painterly style with a focus on dramatic lighting and action. Strongly enhances muscle and heroic charisma."
+  },
+  {
+    "name": "Cinematic Concept Art",
+    "prompt_fragment": "A detailed fantasy illustration in the style of cinematic concept art, with magical effects and rich, cinematic colors, 1080p",
+    "description": "A realistic, cinematic style. Excellent for creating a sense of drama and atmosphere."
+  },
+  {
+    "name": "Ethereal Watercolor",
+    "prompt_fragment": "An intricate fantasy illustration with wispy ink lines and watercolor washes, in an ethereal style, 1080p",
+    "description": "A soft, delicate, and magical style. De-emphasizes physical stats in favor of mood and grace."
+  },
+  {
+    "name": "Somber Charcoal Sketch",
+    "prompt_fragment": "An expressive charcoal sketch on textured paper, with loose and energetic strokes, in a somber and desolate style, 1080p",
+    "description": "A loose, expressive, and moody style. Excellent for conveying a sense of sadness or isolation."
+  },
+  {
+    "name": "Stylized Painterly",
+    "prompt_fragment": "A stylized, vibrant illustration with slightly exaggerated proportions and painterly textures, 1080p",
+    "description": "A stylized, artistic style with a focus on color and texture. Stats are conveyed through exaggeration."
+  },
+  {
+    "name": "Baroque Oil Painting",
+    "prompt_fragment": "A baroque oil painting in the style of Rembrandt, with rich textures and dramatic, high-contrast lighting, 1080p",
+    "description": "A classic, painterly style with a focus on dramatic lighting and rich textures. Excellent for creating a sense of history and drama."
+  },
+  {
+    "name": "Miniature Figurine",
+    "prompt_fragment": "A photograph of a highly detailed, painted miniature figurine on a diorama base, with a shallow depth of field, 1080p",
+    "description": "A fun, unique style that makes the character look like a tabletop miniature."
+  },
+  {
+    "name": "Ukiyo-e Woodblock Print",
+    "prompt_fragment": "A Japanese ukiyo-e woodblock print, with bold outlines, flat areas of color, and a focus on pattern and texture, 1080p",
+    "description": "A classic, stylized Japanese art style. Excellent for creating a unique and historical look."
+  },
+  {
+    "name": "Ink Sketch",
+    "prompt_fragment": "Drawn in ink sketch style, intricate cross-hatching, black and white",
+    "description": "A classic, hand-drawn ink sketch style."
+  },
+  {
+    "name": "Charcoal Sketch",
+    "prompt_fragment": "detailed charcoal sketch, rough strokes",
+    "description": "A rough, expressive charcoal sketch style."
+  },
+  {
+    "name": "Watercolor",
+    "prompt_fragment": "watercolor style, soft greens and blues, delicate brushwork",
+    "description": "A soft, delicate watercolor style."
+  },
+  {
+    "name": "Renaissance Oil Painting",
+    "prompt_fragment": "painted in the style of a Renaissance oil painting, soft brush strokes",
+    "description": "A classic, painterly Renaissance style."
+  },
+  {
+    "name": "Bold Clean Inks",
+    "prompt_fragment": "bold clean inks, dynamic cross-hatching, saturated limited palette with teal/blue background vs warm skin, subtle halftone texture",
+    "description": "A high-contrast, graphic novel style with a limited color palette."
+  },
+  {
+    "name": "Graphic-Novel Cel-Shade",
+    "prompt_fragment": "Graphic-Novel Cel-Shade, saturated accent limited to 1–2 hues; negative: painterly texture, gradients everywhere, photoreal skin, noisy background",
+    "description": "A clean, cel-shaded style with a focus on saturated accent colors."
+  },
+  {
+    "name": "Cinematic Fantasy Ink-Wash",
+    "prompt_fragment": "Cinematic fantasy,Ink-Wash: graded ink, negative space mist, brush calligraphy pane",
+    "description": "A cinematic, ink-wash style with a focus on atmosphere and negative space."
+  },
+  {
+    "name": "Isometric Diorama",
+    "prompt_fragment": "Isometric diorama: orthographic/isometric view, charachter focused",
+    "description": "A stylized, isometric view, similar to a video game or diorama."
+  },
+  {
+    "name": "Photorealistic Portrait",
+    "prompt_fragment": "A photorealistic portrait, 1080p, sharp focus, studio lighting",
+    "description": "A clean, modern, photorealistic style. Excellent for showing fine details and realistic textures."
+  },
+  {
+    "name": "Black and White Outline",
+    "prompt_fragment": "black and white outline, two tone style, line art, character-focused, black and white only",
+    "description": "A clean, two-tone, black and white line art style. Excellent for creating a minimalist, graphic novel look."
+  }
+]
