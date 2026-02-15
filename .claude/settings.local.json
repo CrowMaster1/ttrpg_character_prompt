@@ -6,7 +6,8 @@
       "Bash(chmod:*)",
       "Bash(npm run build:github:*)",
       "Bash(git add:*)",
-      "Bash(npm run deploy:github:*)"
+      "Bash(npm run deploy:github:*)",
+      "Bash(\"src/styles/components.css\":*)"
     ]
   }
 }

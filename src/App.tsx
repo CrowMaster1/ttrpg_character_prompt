@@ -1,8 +1,9 @@
 import { useState, useCallback, useRef } from 'react';
-import { Copy } from 'lucide-react';
+import { Copy, HelpCircle } from 'lucide-react';
 import { TweakPanel, type TweakPanelHandle } from './components/TweakPanel';
 import { OllamaPanel } from './components/OllamaPanel';
 import { StatsSidebarPanel } from './components/StatsSidebarPanel';
+import { FreeModelGuide } from './components/FreeModelGuide';
 import { useStore } from './store/useStore';
 import { useDataLoader } from './hooks/useDataLoader';
 import { usePromptGenerator } from './hooks/usePromptGenerator';
@@ -15,6 +16,7 @@ import './components/controls/compact-stat-slider.css';
 function App() {
   const [copiedPositive, setCopiedPositive] = useState(false);
   const [copiedNegative, setCopiedNegative] = useState(false);
+  const [showFreeModelGuide, setShowFreeModelGuide] = useState(false);
   const tweakPanelRef = useRef<TweakPanelHandle>(null);
 
   const {
@@ -160,7 +162,17 @@ function App() {
         <div className="prompt-panel">
             {/* Model Selection */}
             <div className="panel-section model-section">
-              <label>AI Model</label>
+              <div className="model-header">
+                <label>AI Model</label>
+                <button
+                  className="help-button"
+                  onClick={() => setShowFreeModelGuide(!showFreeModelGuide)}
+                  title="Free online AI generators guide"
+                >
+                  <HelpCircle size={16} />
+                  <span>Free Models</span>
+                </button>
+              </div>
               <select value={targetModel} onChange={(e) => setTargetModel(e.target.value as any)}>
                 <option value="FLUX">FLUX (Natural Language)</option>
                 <option value="Pony">Pony Diffusion (Tags)</option>
@@ -169,6 +181,13 @@ function App() {
                 <option value="Illustrious">Illustrious (Booru)</option>
                 <option value="Juggernaut">Juggernaut (SDXL-based)</option>
               </select>
+
+              {/* Free Model Guide - Collapsible */}
+              {showFreeModelGuide && (
+                <div className="free-model-guide-container">
+                  <FreeModelGuide />
+                </div>
+              )}
             </div>
 
             {/* Positive Prompt */}
