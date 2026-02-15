@@ -5,7 +5,8 @@
       "Bash(npm install:*)",
       "Bash(chmod:*)",
       "Bash(npm run build:github:*)",
-      "Bash(git add:*)"
+      "Bash(git add:*)",
+      "Bash(npm run deploy:github:*)"
     ]
   }
 }

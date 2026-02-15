@@ -7,7 +7,9 @@ export function cn(...inputs: ClassValue[]) {
 
 export async function loadDataFile(fileName: string): Promise<any> {
   try {
-    const response = await fetch(`/data/${fileName}`);
+    // Use Vite's base URL to support GitHub Pages deployment
+    const basePath = import.meta.env.BASE_URL || '/';
+    const response = await fetch(`${basePath}data/${fileName}`);
     if (!response.ok) {
       throw new Error(`Failed to load ${fileName}`);
     }

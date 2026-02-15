@@ -17,7 +17,13 @@ export function useDataLoader() {
       setIsLoading(true);
       setError(null);
 
-      const config: ControlsConfig = await loadDataFile('../controls.json');
+      // Load controls.json from public folder (use Vite's base URL)
+      const basePath = import.meta.env.BASE_URL || '/';
+      const response = await fetch(`${basePath}controls.json`);
+      if (!response.ok) {
+        throw new Error('Failed to load controls.json');
+      }
+      const config: ControlsConfig = await response.json();
       if (!config) {
         throw new Error('Failed to load controls.json');
       }
