@@ -91,7 +91,8 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
   useEffect(() => {
     const detected = detectContradictions(selections, sliders);
     setContradictions(detected);
-  }, [selections, sliders, setContradictions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selections, sliders]); // Don't include setContradictions - it's stable from Zustand
 
   // Handle slider changes (forwarded from parent via sidebar)
   useEffect(() => {
