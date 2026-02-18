@@ -38,7 +38,7 @@ export function OllamaInfoBanner() {
             }
           }
         }
-      } catch (error) {
+      } catch {
         if (mounted) {
           setIsOllamaRunning(false);
           setIsChecking(false);

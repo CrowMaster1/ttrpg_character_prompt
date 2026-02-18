@@ -3,24 +3,26 @@ import { CollapsibleComboBox } from './CollapsibleComboBox';
 import { ButtonGroup } from './ButtonGroup';
 import type { DataOption } from '../../types';
 
+interface Context {
+  gender?: string;
+  race?: string;
+  age?: number;
+  appearance?: number;
+  wealth?: number;
+  strength?: number;
+}
+
 interface ContextualControlProps {
   label: string;
   value: string | string[];
   options: DataOption[];
-  onChange: (value: any) => void;
+  onChange: (value: string | string[]) => void;
   multiSelect?: boolean;
   addNone?: boolean;
   useButtonGroup?: boolean;
   defaultExpanded?: boolean;
   expanded?: boolean; // Controlled expansion from parent
-  context?: {
-    gender?: string;
-    race?: string;
-    age?: number;
-    appearance?: number;
-    wealth?: number;
-    strength?: number;
-  };
+  context?: Context;
 }
 
 export function ContextualControl({
@@ -80,7 +82,7 @@ export function ContextualControl({
 
 function filterOptionsByContext(
   options: DataOption[],
-  context: any,
+  context: Context,
   controlLabel: string
 ): DataOption[] {
   if (!options || options.length === 0) return [];

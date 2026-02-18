@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ChevronRight, ChevronDown, Lock } from 'lucide-react';
 import { Label } from '../ui/label';
 import { Select } from '../ui/select';
@@ -29,50 +29,52 @@ export function LevelGroup({
   onHoverInfo,
   onClearInfo
 }: LevelGroupProps) {
-  const [selectedLevel, setSelectedLevel] = useState(value?.level || 0);
-  const [selectedQualifier, setSelectedQualifier] = useState(value?.qualifier || '');
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [localIsExpanded, setLocalIsExpanded] = useState(defaultExpanded);
 
-  // Sync with controlled expansion prop
-  useEffect(() => {
-    if (expanded !== undefined) {
-      setIsExpanded(expanded);
-    }
-  }, [expanded]);
+  // Use controlled expanded prop if provided, otherwise use local state
+  const isExpanded = expanded !== undefined ? expanded : localIsExpanded;
 
-  useEffect(() => {
-    if (selectedLevel === 0) {
-      onChange(null);
-    } else {
-      onChange({ level: selectedLevel, qualifier: selectedQualifier });
-    }
-  }, [selectedLevel, selectedQualifier]);
+  const selectedLevel = value?.level || 0;
+  const selectedQualifier = value?.qualifier || '';
 
   const levels = Object.keys(data).filter(k => k !== '0');
   const currentLevelData = selectedLevel > 0 ? data[selectedLevel.toString()] : null;
 
   // Handle both LevelGroupData and NSFWLevelData formats
-  const qualifiers = currentLevelData
+  const qualifiers: string[] = currentLevelData
     ? 'qualifiers' in currentLevelData
-      ? currentLevelData.qualifiers
+      ? (currentLevelData as { qualifiers: string[] }).qualifiers
       : 'options' in currentLevelData
-      ? currentLevelData.options.map(opt => opt.name)
+      ? (currentLevelData as { options: Array<{ name: string }> }).options.map((opt: { name: string }) => opt.name)
       : []
     : [];
 
   // Get description for current level
   const levelDescription = currentLevelData && 'description' in currentLevelData
-    ? String(currentLevelData.description || '')
+    ? String((currentLevelData as { description?: string }).description || '')
     : '';
 
-  // Set first qualifier when level changes
-  useEffect(() => {
-    if (selectedLevel > 0 && qualifiers.length > 0 && !selectedQualifier) {
-      setSelectedQualifier(qualifiers[0]);
-    } else if (selectedLevel === 0) {
-      setSelectedQualifier('');
+  const handleLevelChange = (level: number) => {
+    if (level === 0) {
+      onChange(null);
+    } else {
+      // Find default qualifier for this level
+      const newLevelData = data[level.toString()];
+      const newQualifiers: string[] = newLevelData
+        ? 'qualifiers' in newLevelData
+          ? (newLevelData as { qualifiers: string[] }).qualifiers
+          : 'options' in newLevelData
+          ? (newLevelData as { options: Array<{ name: string }> }).options.map((opt: { name: string }) => opt.name)
+          : []
+        : [];
+      const defaultQual = newQualifiers.length > 0 ? newQualifiers[0] : '';
+      onChange({ level, qualifier: defaultQual });
     }
-  }, [selectedLevel, qualifiers.length]);
+  };
+
+  const handleQualifierChange = (qualifier: string) => {
+    onChange({ level: selectedLevel, qualifier });
+  };
 
   // Get display text for collapsed state
   const getDisplayText = () => {
@@ -106,7 +108,7 @@ export function LevelGroup({
         <div className="flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => setSelectedLevel(0)}
+            onClick={() => handleLevelChange(0)}
             className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
               selectedLevel === 0
                 ? 'bg-primary text-primary-foreground shadow-md scale-105'
@@ -123,7 +125,7 @@ export function LevelGroup({
               <button
                 key={level}
                 type="button"
-                onClick={() => setSelectedLevel(parseInt(level))}
+                onClick={() => handleLevelChange(parseInt(level))}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all capitalize ${
                   selectedLevel === parseInt(level)
                     ? 'bg-primary text-primary-foreground shadow-md scale-105'
@@ -143,7 +145,7 @@ export function LevelGroup({
             <Label className="text-sm text-muted-foreground">Variation:</Label>
             <Select
               value={selectedQualifier}
-              onChange={(e) => setSelectedQualifier(e.target.value)}
+              onChange={(e) => handleQualifierChange(e.target.value)}
               className="bg-background"
             >
               {qualifiers.map((qualifier) => (
@@ -159,7 +161,7 @@ export function LevelGroup({
   }
 
   const handleHeaderClick = () => {
-    setIsExpanded(!isExpanded);
+    setLocalIsExpanded(!localIsExpanded);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -216,7 +218,7 @@ export function LevelGroup({
         <div className="flex flex-wrap gap-2 mb-3">
           <button
             type="button"
-            onClick={() => setSelectedLevel(0)}
+            onClick={() => handleLevelChange(0)}
             className={`px-3 py-2 rounded-lg text-sm font-medium transition-all ${
               selectedLevel === 0
                 ? 'bg-primary text-primary-foreground shadow-md scale-105'
@@ -233,7 +235,7 @@ export function LevelGroup({
               <button
                 key={level}
                 type="button"
-                onClick={() => setSelectedLevel(parseInt(level))}
+                onClick={() => handleLevelChange(parseInt(level))}
                 className={`px-3 py-2 rounded-lg text-sm font-medium transition-all capitalize ${
                   selectedLevel === parseInt(level)
                     ? 'bg-primary text-primary-foreground shadow-md scale-105'
@@ -253,7 +255,7 @@ export function LevelGroup({
             <Label className="text-sm text-muted-foreground">Variation:</Label>
             <Select
               value={selectedQualifier}
-              onChange={(e) => setSelectedQualifier(e.target.value)}
+              onChange={(e) => handleQualifierChange(e.target.value)}
               className="bg-background"
             >
               {qualifiers.map((qualifier) => (

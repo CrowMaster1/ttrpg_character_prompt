@@ -3,7 +3,7 @@
  * Based on PromptArchitect Design Document Section 9.2
  */
 
-import type { Model, Selections } from '../../types';
+import type { Model } from '../../types';
 
 /** Stat levels from sliders (1-5 scale) */
 export interface StatLevels {

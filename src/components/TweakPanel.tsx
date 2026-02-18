@@ -16,13 +16,14 @@ import type { EquipmentSlot } from '../services/equipmentPresets';
 
 interface TweakPanelProps {
   controlsConfig: ControlsConfig;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataCache: Record<string, any>;
   selections: Selections;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onSelectionChange: (controlId: string, value: any) => void;
   onResetAll?: () => void;
   sliders: SimpleSelections;
   onSliderChange: (sliderId: keyof SimpleSelections, value: number) => void;
-  sliderWarnings: Record<string, string>;
 }
 
 export interface TweakPanelHandle {
@@ -37,7 +38,6 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
   onResetAll,
   sliders,
   onSliderChange,
-  sliderWarnings,
 }, ref) => {
   const [activeTab, setActiveTab] = useState('character_basics');
   const [equipmentSlots, setEquipmentSlots] = useState<EquipmentSlot>({});
@@ -88,11 +88,10 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
     }
   }), []);
 
-  // Detect contradictions whenever selections or sliders change
   useEffect(() => {
     const detected = detectContradictions(selections, sliders);
     setContradictions(detected);
-  }, [selections, sliders]);
+  }, [selections, sliders, setContradictions]);
 
   // Handle slider changes (forwarded from parent via sidebar)
   useEffect(() => {
@@ -118,9 +117,10 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
         }
       }
     });
-  }, [sliders, dataCache, overrides]);
+  }, [sliders, dataCache, overrides, selections, onSelectionChange]);
 
   // Handle manual control changes (mark as override)
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleManualChange = (controlId: string, value: any) => {
     addOverride(controlId);
     onSelectionChange(controlId, value);
@@ -222,7 +222,7 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
     const config: ControlConfig = controlsConfig.controls[controlId];
     if (!config) return null;
 
-    const data = dataCache[controlId];
+    const data = dataCache[controlId] as any;
     const isOverridden = overrides.has(controlId);
     const isExpanded = expandedControl === controlId;
 
@@ -232,7 +232,7 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
         <LevelGroup
           key={controlId}
           label={config.label}
-          value={selections[controlId] || null}
+          value={(selections[controlId] as any) || null}
           data={data || {}}
           onChange={(value) => handleManualChange(controlId, value)}
           collapsible={true}
@@ -249,7 +249,7 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
         <CollapsibleCheckboxGroup
           key={controlId}
           label={config.label}
-          value={selections[controlId] || []}
+          value={(selections[controlId] as any) || []}
           options={data || []}
           onChange={(value) => handleManualChange(controlId, value)}
           defaultExpanded={isExpanded}
@@ -265,7 +265,7 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
         <CollapsibleComboBox
           key={controlId}
           label={config.label}
-          value={selections[controlId] || ''}
+          value={(selections[controlId] as any) || ''}
           options={data}
           onChange={(value) => handleManualChange(controlId, value)}
           defaultExpanded={isExpanded}
@@ -282,7 +282,7 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
       <ContextualControl
         key={controlId}
         label={config.label}
-        value={selections[controlId] || ''}
+        value={(selections[controlId] as any) || ''}
         options={data || []}
         onChange={(value) => handleManualChange(controlId, value)}
         multiSelect={false}

@@ -7,7 +7,10 @@
       "Bash(npm run build:github:*)",
       "Bash(git add:*)",
       "Bash(npm run deploy:github:*)",
-      "Bash(\"src/styles/components.css\":*)"
+      "Bash(\"src/styles/components.css\":*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run test:run:*)",
+      "Bash(npx tsc:*)"
     ]
   }
 }

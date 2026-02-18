@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Download, Trash2, RefreshCw, Settings, Sparkles, AlertCircle, CheckCircle } from 'lucide-react';
 import {
   loadOllamaConfig,
@@ -46,23 +46,7 @@ export function OllamaPanel({ prompt, onPromptCleaned, targetModel }: OllamaPane
   const [cleaning, setCleaning] = useState(false);
   const [cleanedPrompt, setCleanedPrompt] = useState('');
 
-  // Load config on mount
-  useEffect(() => {
-    const config = loadOllamaConfig();
-    setHost(config.host);
-    setModels(config.models);
-    setSelectedModel(config.selectedModel);
-    if (config.host) {
-      refreshModels(config.host);
-    }
-  }, []);
-
-  // Save config when it changes
-  useEffect(() => {
-    saveOllamaConfig({ host, models, selectedModel });
-  }, [host, models, selectedModel]);
-
-  const refreshModels = async (hostUrl: string = host) => {
+  const refreshModels = useCallback(async (hostUrl: string = host) => {
     setLoading(true);
     setError('');
     try {
@@ -73,12 +57,29 @@ export function OllamaPanel({ prompt, onPromptCleaned, targetModel }: OllamaPane
       }
       setSuccess('Models loaded successfully');
       setTimeout(() => setSuccess(''), 3000);
-    } catch (err: any) {
-      setError(err.message || 'Failed to connect to Ollama');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to connect to Ollama';
+      setError(message);
     } finally {
       setLoading(false);
     }
-  };
+  }, [host, selectedModel]);
+
+  // Load config on mount
+  useEffect(() => {
+    const config = loadOllamaConfig();
+    setHost(config.host);
+    setModels(config.models);
+    setSelectedModel(config.selectedModel);
+    if (config.host) {
+      refreshModels(config.host);
+    }
+  }, [refreshModels]);
+
+  // Save config when it changes
+  useEffect(() => {
+    saveOllamaConfig({ host, models, selectedModel });
+  }, [host, models, selectedModel]);
 
   const handlePullModel = async (modelName: string) => {
     setPulling(modelName);
@@ -91,8 +92,9 @@ export function OllamaPanel({ prompt, onPromptCleaned, targetModel }: OllamaPane
       await refreshModels();
       setSuccess(`Model ${modelName} downloaded successfully`);
       setTimeout(() => setSuccess(''), 3000);
-    } catch (err: any) {
-      setError(err.message || 'Failed to download model');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to download model';
+      setError(message);
     } finally {
       setPulling(null);
       setPullProgress('');
@@ -108,8 +110,9 @@ export function OllamaPanel({ prompt, onPromptCleaned, targetModel }: OllamaPane
       await refreshModels();
       setSuccess(`Model ${modelName} deleted`);
       setTimeout(() => setSuccess(''), 3000);
-    } catch (err: any) {
-      setError(err.message || 'Failed to delete model');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to delete model';
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -132,8 +135,9 @@ export function OllamaPanel({ prompt, onPromptCleaned, targetModel }: OllamaPane
       const cleaned = await cleanPrompt(prompt, selectedModel, host, targetModel, currentTokens);
       setCleanedPrompt(cleaned);
       setSuccess('Prompt optimized for ' + (targetModel || 'target model'));
-    } catch (err: any) {
-      setError(err.message || 'Failed to clean prompt');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : 'Failed to clean prompt';
+      setError(message);
     } finally {
       setCleaning(false);
     }

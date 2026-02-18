@@ -2,14 +2,13 @@ import React from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface CompactStatSliderProps {
-  id: string;
   label: string; // 3-letter abbreviation (STR, DEX, etc.)
   value: number; // 1-5
   onChange: (value: number) => void;
   warning?: string;
 }
 
-export function CompactStatSlider({ id, label, value, onChange, warning }: CompactStatSliderProps) {
+export function CompactStatSlider({ label, value, onChange, warning }: CompactStatSliderProps) {
   const dots = [1, 2, 3, 4, 5];
 
   const handleDecrement = () => {

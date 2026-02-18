@@ -6,7 +6,7 @@
 
 import type { Model } from '../../types';
 import type { StatLevels, FoundationKeywords } from './types';
-import { DEAD_WORDS, GENDER_CODED, REDUNDANCY_RULES } from './constants';
+import { DEAD_WORDS, GENDER_CODED } from './constants';
 
 /**
  * Select a qualifier from the qualifier list, applying dead word filtering,
@@ -65,7 +65,7 @@ function filterGenderAppropriate(qualifiers: string[], gender: string): string[]
  */
 export function assembleFoundation(
   statLevels: StatLevels,
-  dataCache: Record<string, any>,
+  dataCache: Record<string, unknown>,
   gender: string | null,
   model: Model
 ): FoundationKeywords {
@@ -82,71 +82,76 @@ export function assembleFoundation(
     muscle_def: '',
   };
 
+  const getLevelData = (category: string, level: number) => {
+    const fieldCache = dataCache[category] as Record<string, { qualifiers: string[]; name: string }> | undefined;
+    return fieldCache?.[String(level)];
+  };
+
   // STR (from muscle.json)
-  const muscleData = dataCache['muscle']?.[String(statLevels.muscle)];
+  const muscleData = getLevelData('muscle', statLevels.muscle);
   if (muscleData) {
     const qualifier = selectQualifier(muscleData.qualifiers, gender, model);
     result.strength = qualifier ? `${qualifier} ${muscleData.name}` : muscleData.name;
   }
 
   // DEX (from dexterity.json - NEW file)
-  const dexData = dataCache['dexterity']?.[String(statLevels.dexterity)];
+  const dexData = getLevelData('dexterity', statLevels.dexterity);
   if (dexData) {
     const qualifier = selectQualifier(dexData.qualifiers, gender, model);
     result.dexterity = qualifier ? `${qualifier} ${dexData.name}` : dexData.name;
   }
 
   // CON (from body_fat.json)
-  const fatData = dataCache['body_fat']?.[String(statLevels.body_fat)];
+  const fatData = getLevelData('body_fat', statLevels.body_fat);
   if (fatData) {
     const qualifier = selectQualifier(fatData.qualifiers, gender, model);
     result.constitution = qualifier ? `${qualifier} ${fatData.name}` : fatData.name;
   }
 
   // AGE (from age.json)
-  const ageData = dataCache['age']?.[String(statLevels.age)];
+  const ageData = getLevelData('age', statLevels.age);
   if (ageData) {
     const qualifier = selectQualifier(ageData.qualifiers, gender, model);
     result.age = qualifier ? `${qualifier} ${ageData.name}` : ageData.name;
   }
 
   // INT (from intelligence.json - NEW file)
-  const intData = dataCache['intelligence']?.[String(statLevels.intelligence)];
+  const intData = getLevelData('intelligence', statLevels.intelligence);
   if (intData) {
     const qualifier = selectQualifier(intData.qualifiers, gender, model);
     result.intelligence = qualifier ? `${qualifier} ${intData.name}` : intData.name;
   }
 
   // CHA (from attractiveness.json)
-  const chaData = dataCache['attractiveness']?.[String(statLevels.attractiveness)];
+  const chaData = getLevelData('attractiveness', statLevels.attractiveness);
   if (chaData) {
     const qualifier = selectQualifier(chaData.qualifiers, gender, model);
     result.charisma = qualifier ? `${qualifier} ${chaData.name}` : chaData.name;
   }
 
   // Demeanor (from demeanor.json)
-  const demData = dataCache['demeanor']?.[String(statLevels.demeanor)];
+  const demData = getLevelData('demeanor', statLevels.demeanor);
   if (demData) {
     const qualifier = selectQualifier(demData.qualifiers, gender, model);
     result.demeanor = qualifier ? `${qualifier} ${demData.name}` : demData.name;
   }
 
   // Skin (from skin.json)
-  const skinData = dataCache['skin']?.[String(statLevels.skin)];
+  const skinData = getLevelData('skin', statLevels.skin);
   if (skinData) {
     const qualifier = selectQualifier(skinData.qualifiers, gender, model);
     result.skin = qualifier ? `${qualifier} ${skinData.name}` : skinData.name;
   }
 
   // Grooming (from grooming.json)
-  const groomData = dataCache['grooming']?.[String(statLevels.grooming)];
+  const groomData = getLevelData('grooming', statLevels.grooming);
   if (groomData) {
     const qualifier = selectQualifier(groomData.qualifiers, gender, model);
     result.grooming = qualifier ? `${qualifier}` : '';
   }
 
   // Muscle Definition (from muscle_definition.json)
-  const muscleDefData = dataCache['muscle_definition']?.[String(statLevels.muscle_definition)];
+  const muscleDefData = getLevelData('muscle_definition', statLevels.muscle_definition);
   if (muscleDefData) {
     const qualifier = selectQualifier(muscleDefData.qualifiers, gender, model);
     result.muscle_def = qualifier || '';

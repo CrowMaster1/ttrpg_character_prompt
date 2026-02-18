@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Package, RefreshCw, Check } from 'lucide-react';
 import {
   getAllPresets,
@@ -22,21 +22,12 @@ export function EquipmentPresetManager({
 }: EquipmentPresetManagerProps) {
   const [selectedPresetId, setSelectedPresetId] = useState<string>('');
   const [lastAppliedPreset, setLastAppliedPreset] = useState<string | null>(null);
-  const [previewPreset, setPreviewPreset] = useState<EquipmentPreset | null>(null);
 
   const presets = getAllPresets();
   const activePreset = getCurrentPreset(currentSlots);
   const isModified = lastAppliedPreset !== null && activePreset !== lastAppliedPreset;
 
-  // Update preview when selection changes
-  useEffect(() => {
-    if (selectedPresetId) {
-      const preset = getPresetById(selectedPresetId);
-      setPreviewPreset(preset || null);
-    } else {
-      setPreviewPreset(null);
-    }
-  }, [selectedPresetId]);
+  const previewPreset = selectedPresetId ? getPresetById(selectedPresetId) || null : null;
 
   const handleApplyPreset = () => {
     if (!selectedPresetId) return;

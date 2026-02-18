@@ -5,10 +5,10 @@
 
 import { describe, it, expect, beforeAll } from 'vitest';
 import { PromptEngine } from './index';
-import { assembleFoundation, selectQualifier } from './foundation';
+import { assembleFoundation } from './foundation';
 import { estimateTokens, enforceTokenBudget, createSegment } from './tokenBudget';
 import { generateNegativePrompt } from './negativePrompt';
-import { validateDetails, stripQualityAdjectives, injectGearQuality } from './detailValidation';
+import { stripQualityAdjectives, injectGearQuality } from './detailValidation';
 import { DEAD_WORDS } from './constants';
 import { PriorityTier, TOKEN_LIMITS } from './types';
 import type { Model, Selections, ControlsConfig } from '../../types';
@@ -17,7 +17,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 // Load real data files for testing
-function loadJsonFile(filePath: string): any {
+function loadJsonFile(filePath: string): unknown {
   try {
     const absPath = path.resolve(__dirname, '../../../public/data', filePath);
     const content = fs.readFileSync(absPath, 'utf-8');
@@ -38,8 +38,8 @@ function loadControlsConfig(): ControlsConfig {
 }
 
 // Build a real data cache from the public/data files
-function buildDataCache(): Record<string, any> {
-  const cache: Record<string, any> = {};
+function buildDataCache(): Record<string, unknown> {
+  const cache: Record<string, unknown> = {};
   const dataFiles: Record<string, string> = {
     'muscle': 'muscle.json',
     'body_fat': 'body_fat.json',
@@ -83,7 +83,7 @@ function buildDataCache(): Record<string, any> {
   return cache;
 }
 
-let dataCache: Record<string, any>;
+let dataCache: Record<string, unknown>;
 let controlsConfig: ControlsConfig;
 let engine: PromptEngine;
 
@@ -94,7 +94,7 @@ beforeAll(() => {
 });
 
 // Helper to create selections with stat levels
-function makeSelections(statOverrides: Partial<Record<string, any>> = {}): Selections {
+function makeSelections(statOverrides: Partial<Record<string, unknown>> = {}): Selections {
   const base: Selections = {
     race: 'Human',
     gender: 'Male',
@@ -653,7 +653,7 @@ describe('Model Formatting', () => {
 describe('Data File Fixes Verified', () => {
 
   it('muscle.json Level 3 has no dead words', () => {
-    const data = dataCache['muscle']?.['3'];
+    const data = (dataCache['muscle'] as any)?.['3'];
     expect(data).toBeDefined();
     expect(data.name).toBe('medium build');
     for (const q of data.qualifiers) {
@@ -662,8 +662,8 @@ describe('Data File Fixes Verified', () => {
   });
 
   it('body_fat.json Level 3 fixed - no "soft" qualifier, Level 4 renamed', () => {
-    const l3 = dataCache['body_fat']?.['3'];
-    const l4 = dataCache['body_fat']?.['4'];
+    const l3 = (dataCache['body_fat'] as any)?.['3'];
+    const l4 = (dataCache['body_fat'] as any)?.['4'];
     expect(l3).toBeDefined();
     expect(l4).toBeDefined();
 
@@ -676,7 +676,7 @@ describe('Data File Fixes Verified', () => {
   });
 
   it('attractiveness.json Level 1 prevents monster generation', () => {
-    const l1 = dataCache['attractiveness']?.['1'];
+    const l1 = (dataCache['attractiveness'] as any)?.['1'];
     expect(l1).toBeDefined();
     // Should not have bare "monstrous" (should be "malformed face" or similar)
     expect(l1.qualifiers).not.toContain('monstrous');
@@ -685,20 +685,20 @@ describe('Data File Fixes Verified', () => {
   });
 
   it('attractiveness.json Level 2 - no duplicate "ugly"', () => {
-    const l2 = dataCache['attractiveness']?.['2'];
+    const l2 = (dataCache['attractiveness'] as any)?.['2'];
     expect(l2).toBeDefined();
     expect(l2.qualifiers).not.toContain('ugly');
   });
 
   it('attractiveness.json Level 5 - no gendered "bombshell"', () => {
-    const l5 = dataCache['attractiveness']?.['5'];
+    const l5 = (dataCache['attractiveness'] as any)?.['5'];
     expect(l5).toBeDefined();
     expect(l5.qualifiers).not.toContain('bombshell');
   });
 
   it('demeanor.json is redesigned as social magnetism scale', () => {
-    const l1 = dataCache['demeanor']?.['1'];
-    const l5 = dataCache['demeanor']?.['5'];
+    const l1 = (dataCache['demeanor'] as any)?.['1'];
+    const l5 = (dataCache['demeanor'] as any)?.['5'];
     expect(l1).toBeDefined();
     expect(l5).toBeDefined();
 
@@ -712,15 +712,15 @@ describe('Data File Fixes Verified', () => {
   });
 
   it('skin.json Level 5 - "sultry" replaced with "dewy"', () => {
-    const l5 = dataCache['skin']?.['5'];
+    const l5 = (dataCache['skin'] as any)?.['5'];
     expect(l5).toBeDefined();
     expect(l5.qualifiers).not.toContain('sultry');
     expect(l5.qualifiers).toContain('dewy');
   });
 
   it('age.json - cross-stat contamination removed', () => {
-    const l4 = dataCache['age']?.['4'];
-    const l5 = dataCache['age']?.['5'];
+    const l4 = (dataCache['age'] as any)?.['4'];
+    const l5 = (dataCache['age'] as any)?.['5'];
     expect(l4).toBeDefined();
     expect(l5).toBeDefined();
 
@@ -731,34 +731,35 @@ describe('Data File Fixes Verified', () => {
   });
 
   it('muscle_definition.json has 5 levels', () => {
-    expect(dataCache['muscle_definition']?.['5']).toBeDefined();
-    expect(dataCache['muscle_definition']?.['5']?.name).toBe('extreme vascularity');
+    expect((dataCache['muscle_definition'] as any)?.['5']).toBeDefined();
+    expect((dataCache['muscle_definition'] as any)?.['5']?.name).toBe('extreme vascularity');
   });
 
   it('muscle_definition.json L2 - "athletic but soft" oxymoron fixed', () => {
-    const l2 = dataCache['muscle_definition']?.['2'];
+    const l2 = (dataCache['muscle_definition'] as any)?.['2'];
     expect(l2).toBeDefined();
     expect(l2.qualifiers).not.toContain('athletic but soft');
     expect(l2.qualifiers).toContain('naturally toned');
   });
 
   it('equipment_chest.json - Bare Chest has no hardcoded "muscular"', () => {
-    const bareChest = dataCache['chest']?.find((item: any) => item.name === 'Bare Chest');
+    const chestItems = dataCache['chest'] as Array<{ name: string; description: string }> | undefined;
+    const bareChest = chestItems?.find((item) => item.name === 'Bare Chest');
     expect(bareChest).toBeDefined();
-    expect(bareChest.description).not.toContain('muscular');
+    expect(bareChest?.description).not.toContain('muscular');
   });
 
   it('dexterity.json exists with 5 levels', () => {
     for (let i = 1; i <= 5; i++) {
-      expect(dataCache['dexterity']?.[String(i)]).toBeDefined();
-      expect(dataCache['dexterity']?.[String(i)]?.qualifiers?.length).toBeGreaterThan(0);
+      expect((dataCache['dexterity'] as any)?.[String(i)]).toBeDefined();
+      expect((dataCache['dexterity'] as any)?.[String(i)]?.qualifiers?.length).toBeGreaterThan(0);
     }
   });
 
   it('intelligence.json exists with 5 levels', () => {
     for (let i = 1; i <= 5; i++) {
-      expect(dataCache['intelligence']?.[String(i)]).toBeDefined();
-      expect(dataCache['intelligence']?.[String(i)]?.qualifiers?.length).toBeGreaterThan(0);
+      expect((dataCache['intelligence'] as any)?.[String(i)]).toBeDefined();
+      expect((dataCache['intelligence'] as any)?.[String(i)]?.qualifiers?.length).toBeGreaterThan(0);
     }
   });
 });

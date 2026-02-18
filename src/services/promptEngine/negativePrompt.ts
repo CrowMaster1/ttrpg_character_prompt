@@ -36,7 +36,7 @@ export function generateNegativePrompt(
   selections: Selections,
   model: Model,
   statLevels: StatLevels,
-  nsfwLevel: number
+  _nsfwLevel: number
 ): string {
   const parts: string[] = [];
 

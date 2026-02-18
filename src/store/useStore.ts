@@ -6,6 +6,7 @@ import type { SimpleSelections } from '../services/randomizer';
 interface AppState {
   // Selections
   selections: Selections;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setSelection: (key: string, value: any) => void;
   resetSelections: () => void;
 
@@ -22,7 +23,9 @@ interface AppState {
   setGeneratedPrompt: (prompt: string) => void;
 
   // Data cache
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataCache: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setDataCache: (cache: Record<string, any>) => void;
 
   // Controls config

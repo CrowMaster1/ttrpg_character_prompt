@@ -264,8 +264,8 @@ describe('ContradictionDetector', () => {
       expect(frailAcrobatic).toBeDefined();
       const resolved = resolveContradiction(frailAcrobatic!, selections, sliders);
 
-      expect(resolved.pose).not.toBe('Leaping Through Air');
-      expect(resolved.pose).toBe('Standing Resolutely');
+      expect(resolved.pose as string).not.toBe('Leaping Through Air');
+      expect(resolved.pose as string).toBe('Standing Resolutely');
     });
 
     it('should auto-resolve low strength + high muscle by reducing muscle', () => {
@@ -279,7 +279,7 @@ describe('ContradictionDetector', () => {
 
       const resolved = resolveContradiction(lowStrHighMuscle!, selections, sliders);
 
-      expect(resolved.muscle.level).toBe(2); // Should match strength
+      expect((resolved.muscle as any).level).toBe(2); // Should match strength
     });
 
     it('should auto-resolve young + gray hair by changing hair color', () => {
@@ -294,8 +294,8 @@ describe('ContradictionDetector', () => {
 
       const resolved = resolveContradiction(youngGrayHair!, selections, sliders);
 
-      expect(resolved.hair_color).not.toBe('gray');
-      expect(['black', 'brown', 'blonde', 'red', 'auburn']).toContain(resolved.hair_color);
+      expect(resolved.hair_color as string).not.toBe('gray');
+      expect(['black', 'brown', 'blonde', 'red', 'auburn']).toContain(resolved.hair_color as string);
     });
 
     it('should auto-resolve all errors at once', () => {
@@ -319,20 +319,20 @@ describe('ContradictionDetector', () => {
       expect(resolvedIds.length).toBeGreaterThan(0);
 
       // Muscle should be reduced
-      expect(resolved.muscle.level).toBeLessThan(5);
+      expect((resolved.muscle as any).level).toBeLessThan(5);
 
       // Pose should be changed to something safer
-      expect(resolved.pose).not.toBe('Leaping Through Air');
+      expect(resolved.pose as string).not.toBe('Leaping Through Air');
 
       // Hair color should be age-appropriate
-      expect(resolved.hair_color).not.toBe('white');
+      expect(resolved.hair_color as string).not.toBe('white');
     });
   });
 
   describe('Safe Suggestions', () => {
     it('should suggest muscle level matching strength', () => {
       const sliders = createSliders({ strength: 4 });
-      const suggestion = getSafeSuggestion('strength', 4, sliders);
+      const suggestion = getSafeSuggestion('strength', 4, sliders) as any;
 
       expect(suggestion).toBeDefined();
       expect(suggestion.level).toBe(4);
@@ -340,7 +340,7 @@ describe('ContradictionDetector', () => {
 
     it('should suggest body fat inverse of constitution', () => {
       const sliders = createSliders({ constitution: 5 });
-      const suggestion = getSafeSuggestion('constitution', 5, sliders);
+      const suggestion = getSafeSuggestion('constitution', 5, sliders) as any;
 
       expect(suggestion).toBeDefined();
       expect(suggestion.level).toBe(1); // Inverse: 6 - 5 = 1
@@ -348,7 +348,7 @@ describe('ContradictionDetector', () => {
 
     it('should suggest appropriate pose for dexterity', () => {
       const sliders = createSliders({ dexterity: 1 });
-      const suggestion = getSafeSuggestion('dexterity', 1, sliders);
+      const suggestion = getSafeSuggestion('dexterity', 1, sliders) as any;
 
       expect(suggestion).toBeDefined();
       expect(suggestion).toBe('Sitting Comfortably');
@@ -356,14 +356,14 @@ describe('ContradictionDetector', () => {
 
     it('should suggest facial features for intelligence', () => {
       const sliders = createSliders({ intelligence: 5 });
-      const suggestion = getSafeSuggestion('intelligence', 5, sliders);
+      const suggestion = getSafeSuggestion('intelligence', 5, sliders) as any;
 
       expect(suggestion).toBe('Wise Eyes, Keen Features, Intellectual Bearing');
     });
 
     it('should suggest attractiveness matching charisma', () => {
       const sliders = createSliders({ charisma: 5 });
-      const suggestion = getSafeSuggestion('charisma', 5, sliders);
+      const suggestion = getSafeSuggestion('charisma', 5, sliders) as any;
 
       expect(suggestion).toBeDefined();
       expect(suggestion.level).toBe(5);

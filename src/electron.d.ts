@@ -22,10 +22,10 @@ export interface ElectronAPI {
   fs: {
     readJson: (filePath: string) => Promise<{
       success: boolean;
-      data?: any;
+      data?: unknown;
       error?: string;
     }>;
-    writeJson: (filePath: string, data: any) => Promise<{
+    writeJson: (filePath: string, data: unknown) => Promise<{
       success: boolean;
       error?: string;
     }>;

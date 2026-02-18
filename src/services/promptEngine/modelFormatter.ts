@@ -6,9 +6,8 @@
 
 import type { Model } from '../../types';
 import type { PromptSegment } from './types';
-import { PriorityTier } from './types';
 import { cleanupPrompt, cleanTagPrompt } from '../promptCleaner';
-import { enforceTokenBudget, createSegment, estimateTokens } from './tokenBudget';
+import { enforceTokenBudget } from './tokenBudget';
 
 /**
  * Get CHA enhancement text per model and level.

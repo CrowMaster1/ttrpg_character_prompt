@@ -44,15 +44,18 @@ export async function checkOllamaConnection(host: string = DEFAULT_HOST): Promis
       isConnected: false,
       error: `Ollama responded with HTTP ${response.status}`,
     };
-  } catch (error: any) {
+  } catch (error: unknown) {
     // Network errors indicate Ollama isn't running
-    if (error.name === 'AbortError') {
+    const message = error instanceof Error ? error.message : '';
+    const name = error instanceof Error ? error.name : '';
+
+    if (name === 'AbortError') {
       return {
         isConnected: false,
         error: 'Connection timeout - Ollama may not be running',
       };
     }
-    if (error.message?.includes('fetch')) {
+    if (message.includes('fetch')) {
       return {
         isConnected: false,
         error: 'Cannot connect to Ollama - Please start Ollama Desktop or run "ollama serve"',
@@ -60,7 +63,7 @@ export async function checkOllamaConnection(host: string = DEFAULT_HOST): Promis
     }
     return {
       isConnected: false,
-      error: error.message || 'Unknown connection error',
+      error: message || 'Unknown connection error',
     };
   }
 }
@@ -106,22 +109,24 @@ export async function listModels(host: string = DEFAULT_HOST): Promise<OllamaMod
       throw new Error(`Ollama returned HTTP ${response.status}`);
     }
     const data = await response.json();
-    return data.models.map((model: any) => ({
+    return data.models.map((model: { name: string; size: number; modified_at: string }) => ({
       name: model.name,
       size: formatBytes(model.size),
       modified: new Date(model.modified_at).toLocaleDateString(),
     }));
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.warn('Ollama connection failed:', error);
+    const message = error instanceof Error ? error.message : '';
+    const name = error instanceof Error ? error.name : '';
 
     // User-friendly error messages
-    if (error.name === 'AbortError') {
+    if (name === 'AbortError') {
       throw new Error('⚠️ Connection timeout - Is Ollama running?\n\nStart Ollama Desktop or run "ollama serve" in terminal');
     }
-    if (error.message?.includes('fetch') || error.message?.includes('Failed to fetch')) {
+    if (message.includes('fetch') || message.includes('Failed to fetch')) {
       throw new Error('⚠️ Cannot connect to Ollama\n\nPlease start Ollama:\n• Windows/Mac: Open Ollama Desktop app\n• Linux: Run "ollama serve" in terminal');
     }
-    throw new Error(`⚠️ Ollama error: ${error.message}`);
+    throw new Error(`⚠️ Ollama error: ${message}`);
   }
 }
 
@@ -163,7 +168,7 @@ export async function pullModel(
       for (const line of lines) {
         if (!line.trim()) continue;
         try {
-          const part = JSON.parse(line);
+          const part = JSON.parse(line) as { error?: string; status?: string; completed?: number; total?: number };
           if (part.error) {
             throw new Error(part.error);
           }
@@ -173,22 +178,23 @@ export async function pullModel(
               : part.status;
             onProgress(progress);
           }
-        } catch (e) {
-          console.warn('Failed to parse progress line:', line);
+        } catch (e: unknown) {
+          console.warn('Failed to parse progress line:', line, e);
         }
       }
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.warn('Model download failed:', error);
+    const message = error instanceof Error ? error.message : '';
 
     // User-friendly error messages
-    if (error.message?.includes('fetch') || error.message?.includes('Failed to fetch')) {
+    if (message.includes('fetch') || message.includes('Failed to fetch')) {
       throw new Error(`⚠️ Cannot connect to Ollama to download "${modelName}"\n\nPlease start Ollama first`);
     }
-    if (error.message?.includes('not found')) {
+    if (message.includes('not found')) {
       throw new Error(`⚠️ Model "${modelName}" not found\n\nCheck the model name and try again`);
     }
-    throw new Error(`⚠️ Download failed: ${error.message}`);
+    throw new Error(`⚠️ Download failed: ${message}`);
   }
 }
 
@@ -202,17 +208,18 @@ export async function deleteModel(modelName: string, host: string = DEFAULT_HOST
     });
 
     if (!response.ok) {
-      const errorData = await response.json().catch(() => ({}));
+      const errorData = await response.json().catch(() => ({})) as { error?: string };
       throw new Error(errorData.error || `HTTP ${response.status}`);
     }
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.warn('Model deletion failed:', error);
+    const message = error instanceof Error ? error.message : '';
 
     // User-friendly error messages
-    if (error.message?.includes('fetch') || error.message?.includes('Failed to fetch')) {
+    if (message.includes('fetch') || message.includes('Failed to fetch')) {
       throw new Error(`⚠️ Cannot connect to Ollama\n\nPlease start Ollama to delete models`);
     }
-    throw new Error(`⚠️ Delete failed: ${error.message}`);
+    throw new Error(`⚠️ Delete failed: ${message}`);
   }
 }
 
@@ -328,20 +335,21 @@ Output ONLY the cleaned prompt between <output></output> tags:`;
     }
 
     return cleaned;
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.warn('Prompt cleaning failed:', error);
+    const message = error instanceof Error ? error.message : '';
 
     // User-friendly error messages
-    if (error.message?.includes('fetch') || error.message?.includes('Failed to fetch')) {
+    if (message.includes('fetch') || message.includes('Failed to fetch')) {
       throw new Error('⚠️ Cannot connect to Ollama\n\nPlease start Ollama Desktop or run "ollama serve"');
     }
-    if (error.message?.includes('model') && error.message?.includes('not found')) {
+    if (message.includes('model') && message.includes('not found')) {
       throw new Error(`⚠️ Model not found\n\nPlease download the model first using the Download section`);
     }
-    if (error.message?.includes('HTTP 4')) {
+    if (message.includes('HTTP 4')) {
       throw new Error('⚠️ Invalid request to Ollama\n\nThe selected model may not be available');
     }
-    throw new Error(`⚠️ AI optimization failed: ${error.message}`);
+    throw new Error(`⚠️ AI optimization failed: ${message}`);
   }
 }
 
@@ -380,24 +388,25 @@ Prompt to analyze:`;
       }
     } catch {
       // If not JSON, split by newlines
-      return data.response
+      return (data.response as string)
         .split('\n')
         .filter((line: string) => line.trim())
         .slice(0, 5);
     }
 
     return [];
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.warn('Suggestion generation failed:', error);
+    const message = error instanceof Error ? error.message : '';
 
     // User-friendly error messages
-    if (error.message?.includes('fetch') || error.message?.includes('Failed to fetch')) {
+    if (message.includes('fetch') || message.includes('Failed to fetch')) {
       throw new Error('⚠️ Cannot connect to Ollama\n\nPlease start Ollama to get AI suggestions');
     }
-    if (error.message?.includes('model') && error.message?.includes('not found')) {
+    if (message.includes('model') && message.includes('not found')) {
       throw new Error('⚠️ Model not found\n\nPlease download a model first');
     }
-    throw new Error(`⚠️ Suggestion failed: ${error.message}`);
+    throw new Error(`⚠️ Suggestion failed: ${message}`);
   }
 }
 

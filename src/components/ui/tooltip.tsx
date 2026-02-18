@@ -23,7 +23,7 @@ export function Tooltip({ content, className = '' }: TooltipProps) {
       // Check available space on each side
       const spaceRight = viewportWidth - rect.right;
       const spaceLeft = rect.left;
-      const spaceBelow = viewportHeight - rect.bottom;
+      const _spaceBelow = viewportHeight - rect.bottom;
 
       // Prefer left side to avoid overlapping right column
       if (spaceLeft > tooltipWidth + gap) {

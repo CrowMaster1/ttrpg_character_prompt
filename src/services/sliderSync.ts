@@ -12,6 +12,7 @@ import type { SimpleSelections } from './randomizer';
  */
 export function syncSlidersToControls(
   sliders: SimpleSelections,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataCache: Record<string, any>,
   overrides: Set<string>
 ): Partial<Selections> {
@@ -50,11 +51,11 @@ export function syncSlidersToControls(
 
   // Dexterity → pose (filter by category)
   if (!overrides.has('pose')) {
-    const poses = dataCache.pose || [];
-    if (poses.length > 0 && sliders.dexterity) {
+    const poses = dataCache.pose;
+    if (Array.isArray(poses) && poses.length > 0 && sliders.dexterity) {
       const filteredPoses = filterPosesByDexterity(poses, sliders.dexterity);
       if (filteredPoses.length > 0) {
-        updates.pose = pickRandom(filteredPoses).name;
+        updates.pose = (pickRandom(filteredPoses) as any).name;
       }
     }
   }
@@ -127,6 +128,7 @@ export function syncSlidersToControls(
 /**
  * Filter poses by dexterity level
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function filterPosesByDexterity(poses: any[], dexterity: number): any[] {
   if (dexterity <= 1) {
     // Clumsy - static, seated poses
@@ -162,104 +164,6 @@ function filterPosesByDexterity(poses: any[], dexterity: number): any[] {
       p.name?.toLowerCase().includes('spin') ||
       p.name?.toLowerCase().includes('acrobatic') ||
       ['action', 'combat'].includes(p.category)
-    );
-  }
-}
-
-/**
- * Filter framing by camera slider
- */
-function filterFramingByCamera(framingOptions: any[], camera: number): any[] {
-  if (camera <= 2) {
-    // Close-up shots
-    return framingOptions.filter(f =>
-      ['extreme close-up', 'close-up', 'medium close-up', 'portrait'].some(term =>
-        f.name?.toLowerCase().includes(term)
-      )
-    );
-  } else if (camera === 3) {
-    // Medium shots
-    return framingOptions.filter(f =>
-      ['medium shot', 'waist-up', 'cowboy shot'].some(term =>
-        f.name?.toLowerCase().includes(term)
-      )
-    );
-  } else {
-    // Full body and wide shots
-    return framingOptions.filter(f =>
-      ['full body', 'full-length', 'wide shot', 'establishing'].some(term =>
-        f.name?.toLowerCase().includes(term)
-      )
-    );
-  }
-}
-
-/**
- * Filter aesthetics by style slider
- */
-function filterAestheticByStyle(aesthetics: any[], style: number): any[] {
-  if (style <= 2) {
-    // Gritty/Realistic
-    return aesthetics.filter(a =>
-      ['realistic', 'photorealistic', 'gritty', 'dark', 'noir', 'cinematic'].some(term =>
-        a.name?.toLowerCase().includes(term)
-      )
-    );
-  } else if (style === 3) {
-    // Balanced
-    return aesthetics.filter(a =>
-      ['digital art', 'illustration', 'painted'].some(term =>
-        a.name?.toLowerCase().includes(term)
-      )
-    );
-  } else {
-    // Stylized/Fantasy
-    return aesthetics.filter(a =>
-      ['fantasy', 'anime', 'cel-shaded', 'stylized', 'vibrant', 'surreal'].some(term =>
-        a.name?.toLowerCase().includes(term)
-      )
-    );
-  }
-}
-
-/**
- * Filter expressions by mood (expression slider)
- */
-function filterExpressionsByMood(expressions: any[], mood: number): any[] {
-  if (mood <= 1) {
-    // Angry/Hostile
-    return expressions.filter(e =>
-      ['angry', 'scowling', 'glaring', 'furious', 'hostile'].some(term =>
-        e.name?.toLowerCase().includes(term)
-      )
-    );
-  } else if (mood <= 2) {
-    // Sad/Serious
-    return expressions.filter(e =>
-      ['sad', 'crying', 'serious', 'stern', 'contemplative', 'melancholic'].some(term =>
-        e.name?.toLowerCase().includes(term)
-      )
-    );
-  } else if (mood === 3) {
-    // Neutral
-    return expressions.filter(e =>
-      ['neutral', 'calm', 'serious', 'contemplative', 'focused'].some(term =>
-        e.name?.toLowerCase().includes(term)
-      )
-    );
-  } else if (mood === 4) {
-    // Friendly/Pleasant
-    return expressions.filter(e =>
-      ['smiling', 'smirking', 'pleasant', 'content', 'amused'].some(term =>
-        e.name?.toLowerCase().includes(term)
-      )
-    );
-  } else {
-    // Happy/Joyful
-    return expressions.filter(e =>
-      ['laughing', 'smiling', 'joyful', 'ecstatic', 'beaming', 'grinning'].some(term =>
-        e.name?.toLowerCase().includes(term)
-      )
     );
   }
 }

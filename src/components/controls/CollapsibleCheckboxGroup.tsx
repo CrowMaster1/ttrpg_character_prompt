@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ChevronRight, ChevronDown, Lock } from 'lucide-react';
 
 interface CollapsibleCheckboxGroupProps {
@@ -23,17 +23,11 @@ export function CollapsibleCheckboxGroup({
   expanded,
   maxDisplay = 3,
   showOverride = false,
-  onHoverInfo,
-  onClearInfo
 }: CollapsibleCheckboxGroupProps) {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [localIsExpanded, setLocalIsExpanded] = useState(defaultExpanded);
 
-  // Sync with controlled expansion prop
-  useEffect(() => {
-    if (expanded !== undefined) {
-      setIsExpanded(expanded);
-    }
-  }, [expanded]);
+  // Use controlled expanded prop if provided, otherwise use local state
+  const isExpanded = expanded !== undefined ? expanded : localIsExpanded;
 
   // Ensure value is always an array (handle edge cases)
   const arrayValue = Array.isArray(value) ? value : value ? [value] : [];
@@ -72,7 +66,7 @@ export function CollapsibleCheckboxGroup({
     : `${arrayValue.slice(0, maxDisplay).join(', ')}, +${arrayValue.length - maxDisplay} more`;
 
   const handleHeaderClick = () => {
-    setIsExpanded(!isExpanded);
+    setLocalIsExpanded(!isExpanded);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

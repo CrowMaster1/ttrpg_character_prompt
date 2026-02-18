@@ -29,6 +29,7 @@ export function useDataLoader() {
       }
       setControlsConfig(config);
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const cache: Record<string, any> = {};
       const failedFiles: string[] = [];
 
@@ -50,7 +51,7 @@ export function useDataLoader() {
       }
 
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: unknown) {
       console.error('Failed to load data:', error);
       setError(error instanceof Error ? error : new Error('Unknown error loading data'));
       setIsLoading(false);
@@ -59,7 +60,8 @@ export function useDataLoader() {
 
   useEffect(() => {
     loadData();
-  }, []);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Only run once on mount
 
   return { error, isLoading, retry: loadData };
 }

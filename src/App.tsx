@@ -8,7 +8,7 @@ import { useStore } from './store/useStore';
 import { useDataLoader } from './hooks/useDataLoader';
 import { usePromptGenerator } from './hooks/usePromptGenerator';
 import { detectContradictions } from './services/contradictionDetector';
-import type { SimpleSelections } from './services/randomizer';
+import type { Model } from './types';
 import './styles/global.css';
 import './styles/components.css';
 import './components/controls/compact-stat-slider.css';
@@ -32,7 +32,7 @@ function App() {
   const { error: dataError, isLoading: dataLoading, retry: retryDataLoad } = useDataLoader();
 
   // Generate prompts automatically
-  const { splitPrompt, cleanMetaText } = usePromptGenerator();
+  const { splitPrompt } = usePromptGenerator();
 
   // Get slider warnings from contradiction detection
   const getSliderWarnings = useCallback((): Record<string, string> => {
@@ -154,7 +154,6 @@ function App() {
             onResetAll={resetSelections}
             sliders={sliders}
             onSliderChange={setSlider}
-            sliderWarnings={getSliderWarnings()}
           />
         </div>
 
@@ -173,7 +172,7 @@ function App() {
                   <span>Free Models</span>
                 </button>
               </div>
-              <select value={targetModel} onChange={(e) => setTargetModel(e.target.value as any)}>
+              <select value={targetModel} onChange={(e) => setTargetModel(e.target.value as Model)}>
                 <option value="FLUX">FLUX (Natural Language)</option>
                 <option value="Pony">Pony Diffusion (Tags)</option>
                 <option value="SDXL">SDXL (Weighted)</option>

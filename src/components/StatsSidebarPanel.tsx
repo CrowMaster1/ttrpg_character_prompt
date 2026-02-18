@@ -37,42 +37,36 @@ export function StatsSidebarPanel({ sliders, onChange, warnings = {}, onNavigate
       <div className="stats-section">
         <div className="stats-section-header">Character Stats</div>
         <CompactStatSlider
-          id="strength"
           label="STR"
           value={sliders.strength}
           onChange={(val) => debouncedOnChange('strength', val)}
           warning={warnings.strength}
         />
         <CompactStatSlider
-          id="dexterity"
           label="DEX"
           value={sliders.dexterity}
           onChange={(val) => debouncedOnChange('dexterity', val)}
           warning={warnings.dexterity}
         />
         <CompactStatSlider
-          id="constitution"
           label="CON"
           value={sliders.constitution}
           onChange={(val) => debouncedOnChange('constitution', val)}
           warning={warnings.constitution}
         />
         <CompactStatSlider
-          id="age"
           label="AGE"
           value={sliders.age}
           onChange={(val) => debouncedOnChange('age', val)}
           warning={warnings.age}
         />
         <CompactStatSlider
-          id="intelligence"
           label="INT"
           value={sliders.intelligence}
           onChange={(val) => debouncedOnChange('intelligence', val)}
           warning={warnings.intelligence}
         />
         <CompactStatSlider
-          id="charisma"
           label="CHA"
           value={sliders.charisma}
           onChange={(val) => debouncedOnChange('charisma', val)}

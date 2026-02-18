@@ -20,8 +20,8 @@ import type {
   ValidationWarning,
 } from './types';
 import { PriorityTier } from './types';
-import { assembleFoundation, selectQualifier } from './foundation';
-import { validateDetails, injectGearQuality, stripQualityAdjectives } from './detailValidation';
+import { assembleFoundation } from './foundation';
+import { validateDetails, injectGearQuality } from './detailValidation';
 import { suggestComposition } from './compositionOptimizer';
 import { formatForModel } from './modelFormatter';
 import { generateNegativePrompt } from './negativePrompt';
@@ -31,9 +31,12 @@ import { EQUIPMENT_SLOTS } from './constants';
 
 export class PromptEngine {
   private controlsConfig: ControlsConfig;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private dataCache: Record<string, any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private dataLookups: Map<string, Map<string, any>>;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(controlsConfig: ControlsConfig, dataCache: Record<string, any>) {
     this.controlsConfig = controlsConfig;
     this.dataCache = dataCache;
@@ -42,9 +45,10 @@ export class PromptEngine {
     this.dataLookups = new Map();
     for (const [key, data] of Object.entries(dataCache)) {
       if (Array.isArray(data)) {
-        const lookupMap = new Map();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const lookupMap = new Map<string, any>();
         for (const item of data) {
-          if (item.name) {
+          if (item && typeof item === 'object' && 'name' in item && typeof item.name === 'string') {
             lookupMap.set(item.name, item);
           }
         }
@@ -56,6 +60,7 @@ export class PromptEngine {
   /**
    * Fast O(1) data lookup helper
    */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private lookupData(category: string, name: string): any | undefined {
     return this.dataLookups.get(category)?.get(name);
   }
@@ -453,7 +458,7 @@ export class PromptEngine {
     model: Model,
     nsfwLevel: number = 0
   ): PromptResult {
-    const startTime = performance.now();
+    const _startTime = performance.now();
 
     // Extract stat levels
     const statLevels = this.extractStatLevels(selections);
@@ -483,8 +488,6 @@ export class PromptEngine {
     const negativePrompt = generateNegativePrompt(
       validatedSelections, model, statLevels, nsfwLevel
     );
-
-    const elapsed = performance.now() - startTime;
 
     return {
       prompt,
@@ -543,8 +546,10 @@ export class PromptEngine {
     // Get the name from each stat level
     const statFields = ['muscle', 'body_fat', 'age', 'attractiveness', 'demeanor', 'skin', 'grooming'];
     for (const field of statFields) {
-      if (selections[field]?.level) {
-        const data = this.dataCache[field]?.[String(selections[field].level)];
+      const selection = selections[field] as { level?: number } | undefined;
+      if (selection?.level) {
+        const fieldCache = this.dataCache[field] as Record<string, { name?: string }> | undefined;
+        const data = fieldCache?.[String(selection.level)];
         if (data?.name) {
           keywords.push(data.name);
         }

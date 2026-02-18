@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ChevronRight, ChevronDown, RefreshCw, Lock } from 'lucide-react';
 
 interface CollapsibleComboBoxProps {
@@ -25,17 +25,11 @@ export function CollapsibleComboBox({
   showAutoBadge = false,
   autoBadgeText = 'Auto',
   showOverride = false,
-  onHoverInfo,
-  onClearInfo
 }: CollapsibleComboBoxProps) {
-  const [isExpanded, setIsExpanded] = useState(defaultExpanded);
+  const [localIsExpanded, setLocalIsExpanded] = useState(defaultExpanded);
 
-  // Sync with controlled expansion prop
-  useEffect(() => {
-    if (expanded !== undefined) {
-      setIsExpanded(expanded);
-    }
-  }, [expanded]);
+  // Use controlled expanded prop if provided, otherwise use local state
+  const isExpanded = expanded !== undefined ? expanded : localIsExpanded;
 
   // Check if description adds value (not just repeating the name)
   const isUsefulDescription = (name: string, description: string): boolean => {
@@ -58,7 +52,7 @@ export function CollapsibleComboBox({
   };
 
   const handleHeaderClick = () => {
-    setIsExpanded(!isExpanded);
+    setLocalIsExpanded(!isExpanded);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {

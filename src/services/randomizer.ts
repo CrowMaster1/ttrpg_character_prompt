@@ -32,8 +32,11 @@ function randomInRange(min: number, max: number): number {
 }
 
 // Helper to pick random qualifier from level data
-function pickQualifier(data: any, level: number): string {
-  const levelData = data[level.toString()];
+function pickQualifier(data: unknown, level: number): string {
+  const levelDataMap = data as Record<string, { qualifiers?: string[]; name?: string }> | undefined;
+  if (!levelDataMap) return '';
+
+  const levelData = levelDataMap[level.toString()];
   if (!levelData) return '';
 
   const qualifiers = levelData.qualifiers || [];
@@ -47,6 +50,7 @@ function pickQualifier(data: any, level: number): string {
  */
 export function generateFromSliders(
   simple: SimpleSelections,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   dataCache: Record<string, any>
 ): GenerationResult {
   let selections: Selections = {};
@@ -132,9 +136,11 @@ export function generateFromSliders(
   // Height - random with slight bias toward average for weak, taller for strong
   const heightOptions = dataCache.height || [];
   if (heightOptions.length > 0) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let heightChoice: any;
     if (simple.strength >= 4) {
       // Strong characters tend to be average or taller
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const tallOptions = heightOptions.filter((h: any) =>
         h.name && !h.name.toLowerCase().includes('short')
       );
@@ -148,38 +154,43 @@ export function generateFromSliders(
   // Body Shape - based on STR + CON interaction
   const bodyShapes = dataCache.body_shape || [];
   if (bodyShapes.length > 0) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let shapeOptions: any[];
 
     // High STR + High CON = Athletic/Lean Muscular (gymnast, athlete)
     if (simple.strength >= 4 && simple.constitution >= 4) {
-      shapeOptions = bodyShapes.filter((s: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      shapeOptions = (bodyShapes as any[]).filter((s: any) =>
         ['Athletic', 'Inverted Triangle', 'Lean'].includes(s.name)
       );
     }
     // High STR + Low CON = Strongman/Heavyset (powerlifter, fat + muscle)
     else if (simple.strength >= 4 && simple.constitution <= 2) {
-      shapeOptions = bodyShapes.filter((s: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      shapeOptions = (bodyShapes as any[]).filter((s: any) =>
         ['Strongman', 'Heavyset', 'Stocky'].includes(s.name)
       );
     }
     // Low STR + High CON = Lean/Nimble (runner, dancer, contortionist)
     else if (simple.strength <= 2 && simple.constitution >= 4) {
-      shapeOptions = bodyShapes.filter((s: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      shapeOptions = (bodyShapes as any[]).filter((s: any) =>
         ['Lean', 'Rectangle', 'Petite'].includes(s.name)
       );
     }
     // Low STR + Low CON = Soft/Frail (thin or chubby but weak)
     else if (simple.strength <= 2 && simple.constitution <= 2) {
-      shapeOptions = bodyShapes.filter((s: any) =>
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      shapeOptions = (bodyShapes as any[]).filter((s: any) =>
         ['Pear-Shaped', 'Apple-Shaped', 'Soft'].includes(s.name)
       );
     }
     // Average = broader range
     else {
-      shapeOptions = bodyShapes;
+      shapeOptions = bodyShapes as any[];
     }
 
-    const shape = shapeOptions.length > 0 ? randomPick(shapeOptions) : randomPick(bodyShapes);
+    const shape = shapeOptions.length > 0 ? randomPick(shapeOptions) : randomPick(bodyShapes as any[]);
     selections.body_shape = shape.name;
   }
 
@@ -211,7 +222,8 @@ export function generateFromSliders(
   } else if (Math.random() < 0.2) {
     // 20% chance of random feature at average INT
     const facialFeatures = dataCache.facial_features || [];
-    if (facialFeatures.length > 0) {
+    if (Array.isArray(facialFeatures) && facialFeatures.length > 0) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       selections.facial_features = (randomPick(facialFeatures) as any).name;
     }
   }
@@ -369,7 +381,8 @@ export function generateFromSliders(
 
   const outfitType = randomPick(outfitTypes);
   const outfitData = dataCache[outfitType] || [];
-  if (outfitData.length > 0) {
+  if (Array.isArray(outfitData) && outfitData.length > 0) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     selections[outfitType] = (randomPick(outfitData) as any).name;
   }
 
@@ -423,11 +436,11 @@ export function generateFromSliders(
   // === LIGHTING ===
 
   // Lighting - randomized (no longer controlled by slider)
-  const lightingOptions = dataCache.lighting || [];
-  if (lightingOptions.length > 0 && Array.isArray(lightingOptions)) {
+  const lightingOptions = dataCache.lighting;
+  if (Array.isArray(lightingOptions) && lightingOptions.length > 0) {
     const lighting = randomPick(lightingOptions);
     if (lighting && typeof lighting === 'object' && 'name' in lighting) {
-      selections.lighting = lighting.name;
+      selections.lighting = (lighting as { name: string }).name;
     }
   }
 
@@ -531,18 +544,18 @@ export function generateFromSliders(
   */
 
   // Pose - based on Dexterity slider (agility level)
-  const poses = dataCache.pose || [];
+  const poses = (dataCache.pose as Array<{ name: string; category: string }>) || [];
   if (poses.length > 0) {
-    let poseOptions: any[];
+    let poseOptions: Array<{ name: string; category: string }>;
 
     if (simple.dexterity <= 1) {
       // Clumsy - static, seated poses
-      poseOptions = poses.filter((p: any) =>
+      poseOptions = poses.filter((p) =>
         ['neutral', 'seated', 'relaxed', 'social'].includes(p.category)
       );
     } else if (simple.dexterity === 2) {
       // Stiff - basic combat stances
-      poseOptions = poses.filter((p: any) =>
+      poseOptions = poses.filter((p) =>
         ['neutral', 'combat', 'social'].includes(p.category) &&
         !['Spinning Attack', 'Leaping Through Air', 'Backflip'].some(term =>
           p.name.includes(term)
@@ -550,18 +563,18 @@ export function generateFromSliders(
       );
     } else if (simple.dexterity === 3) {
       // Average - general poses (avoid extremes)
-      poseOptions = poses.filter((p: any) =>
+      poseOptions = poses.filter((p) =>
         ['neutral', 'action', 'social', 'stealth'].includes(p.category) &&
         !['Leaping', 'Backflip', 'Acrobatic'].some(term => p.name.includes(term))
       );
     } else if (simple.dexterity === 4) {
       // Agile - action poses (running, climbing, stealth)
-      poseOptions = poses.filter((p: any) =>
+      poseOptions = poses.filter((p) =>
         ['action', 'stealth', 'combat'].includes(p.category)
       );
     } else {
       // Acrobatic - dynamic, athletic poses
-      poseOptions = poses.filter((p: any) =>
+      poseOptions = poses.filter((p) =>
         p.name.toLowerCase().includes('leap') ||
         p.name.toLowerCase().includes('flip') ||
         p.name.toLowerCase().includes('spin') ||
@@ -594,7 +607,7 @@ export function generateFromSliders(
 /**
  * Randomize everything completely (for "Surprise Me" button)
  */
-export function generateRandomCharacter(dataCache: Record<string, any>): GenerationResult {
+export function generateRandomCharacter(dataCache: Record<string, unknown>): GenerationResult {
   // Generate random D&D-style stat values
   const randomSliders: SimpleSelections = {
     // Physical stats

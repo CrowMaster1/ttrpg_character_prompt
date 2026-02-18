@@ -45,6 +45,7 @@ export interface ControlsConfig {
 
 export type Model = 'FLUX' | 'Pony' | 'SDXL' | 'SD1.5' | 'Illustrious' | 'Juggernaut';
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface Selections {
   [key: string]: any;
 }

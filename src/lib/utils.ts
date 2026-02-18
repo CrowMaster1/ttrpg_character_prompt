@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export async function loadDataFile(fileName: string): Promise<any> {
+export async function loadDataFile(fileName: string): Promise<unknown> {
   try {
     // Use Vite's base URL to support GitHub Pages deployment
     const basePath = import.meta.env.BASE_URL || '/';

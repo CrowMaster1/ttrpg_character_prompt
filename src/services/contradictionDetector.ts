@@ -12,27 +12,31 @@ export interface ContradictionRule {
 
 // Helper functions for checking selections
 function getMuscleLevel(selections: Selections): number | null {
-  if (!selections.muscle || typeof selections.muscle !== 'object') return null;
-  return selections.muscle.level || null;
+  const muscle = selections.muscle as { level?: number } | undefined;
+  if (!muscle || typeof muscle !== 'object') return null;
+  return muscle.level || null;
 }
 
 function getBodyFatLevel(selections: Selections): number | null {
-  if (!selections.body_fat || typeof selections.body_fat !== 'object') return null;
-  return selections.body_fat.level || null;
+  const bodyFat = selections.body_fat as { level?: number } | undefined;
+  if (!bodyFat || typeof bodyFat !== 'object') return null;
+  return bodyFat.level || null;
 }
 
 function getAgeLevel(selections: Selections): number | null {
-  if (!selections.age || typeof selections.age !== 'object') return null;
-  return selections.age.level || null;
+  const age = selections.age as { level?: number } | undefined;
+  if (!age || typeof age !== 'object') return null;
+  return age.level || null;
 }
 
 function getAttractiveness(selections: Selections): number | null {
-  if (!selections.attractiveness || typeof selections.attractiveness !== 'object') return null;
-  return selections.attractiveness.level || null;
+  const attr = selections.attractiveness as { level?: number } | undefined;
+  if (!attr || typeof attr !== 'object') return null;
+  return attr.level || null;
 }
 
 function hasPoseCategory(selections: Selections, categories: string[]): boolean {
-  const poseName = selections.pose;
+  const poseName = selections.pose as string | undefined;
   if (!poseName || typeof poseName !== 'string') return false;
 
   const lowerPose = poseName.toLowerCase();
@@ -54,7 +58,7 @@ function hasPoseCategory(selections: Selections, categories: string[]): boolean 
 }
 
 function hasFacialFeature(selections: Selections, features: string[]): boolean {
-  const facialFeatures = selections.facial_features;
+  const facialFeatures = selections.facial_features as string | undefined;
   if (!facialFeatures || typeof facialFeatures !== 'string') return false;
 
   const lowerFeatures = facialFeatures.toLowerCase();
@@ -62,7 +66,7 @@ function hasFacialFeature(selections: Selections, features: string[]): boolean {
 }
 
 function hasHairColor(selections: Selections, colors: string[]): boolean {
-  const hairColor = selections.hair_color;
+  const hairColor = selections.hair_color as string | undefined;
   if (!hairColor || typeof hairColor !== 'string') return false;
 
   const lowerColor = hairColor.toLowerCase();
@@ -70,7 +74,7 @@ function hasHairColor(selections: Selections, colors: string[]): boolean {
 }
 
 function hasSkinQuality(selections: Selections, qualities: string[]): boolean {
-  const skin = selections.skin;
+  const skin = selections.skin as { qualifier?: string } | undefined;
   if (!skin || typeof skin !== 'object') return false;
 
   const qualifier = skin.qualifier?.toLowerCase() || '';
@@ -92,7 +96,7 @@ const contradictionRules: ContradictionRule[] = [
     },
     message: 'Frail constitution cannot support acrobatic movements',
     suggestion: 'Increase Constitution to 3+ for acrobatic poses, or reduce Dexterity',
-    autoResolve: (selections, sliders) => {
+    autoResolve: (selections, _sliders) => {
       // Remove acrobatic pose, keep frail build
       return { ...selections, pose: 'Standing Resolutely' };
     }
@@ -150,7 +154,7 @@ const contradictionRules: ContradictionRule[] = [
     },
     message: 'Minimal strength cannot have bodybuilder physique',
     suggestion: 'Strength 1 requires minimal muscle mass',
-    autoResolve: (selections, sliders) => {
+    autoResolve: (selections, _sliders) => {
       return {
         ...selections,
         muscle: { level: 1, qualifier: 'slender' }
@@ -206,7 +210,7 @@ const contradictionRules: ContradictionRule[] = [
     },
     message: 'Young characters cannot have gray or white hair',
     suggestion: 'Change age to 4+ for gray hair, or change hair color',
-    autoResolve: (selections, sliders) => {
+    autoResolve: (selections, _sliders) => {
       // Change hair color to age-appropriate
       const colors = ['black', 'brown', 'blonde', 'red', 'auburn'];
       return {
@@ -227,7 +231,7 @@ const contradictionRules: ContradictionRule[] = [
     },
     message: 'Elderly characters cannot have smooth, youthful skin',
     suggestion: 'Elderly age requires weathered or aged skin quality',
-    autoResolve: (selections, sliders) => {
+    autoResolve: (selections, _sliders) => {
       return {
         ...selections,
         skin: { level: 1, qualifier: 'weathered' }
@@ -247,7 +251,7 @@ const contradictionRules: ContradictionRule[] = [
     },
     message: 'Low constitution makes acrobatic poses difficult to maintain',
     suggestion: 'Consider increasing Constitution or choosing less demanding poses',
-    autoResolve: (selections, sliders) => {
+    autoResolve: (selections, _sliders) => {
       // Suggest a neutral pose
       return { ...selections, pose: 'Standing Resolutely' };
     }
@@ -256,16 +260,17 @@ const contradictionRules: ContradictionRule[] = [
   {
     id: 'high-fat-high-muscle-def',
     severity: 'warning',
-    condition: (selections, sliders) => {
+    condition: (selections, _sliders) => {
       // High body fat (4-5) + athletic muscle definition (4-5)
       const bodyFatLevel = getBodyFatLevel(selections);
-      const muscleDefLevel = selections.muscle_definition?.level;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const muscleDefLevel = (selections.muscle_definition as any)?.level;
       return bodyFatLevel !== null && bodyFatLevel >= 4 &&
              muscleDefLevel !== null && muscleDefLevel >= 4;
     },
     message: 'High body fat typically obscures muscle definition',
     suggestion: 'Strongman build (high fat + high muscle) should have lower definition (1-2)',
-    autoResolve: (selections, sliders) => {
+    autoResolve: (selections, _sliders) => {
       // Set muscle definition to match strongman build
       return {
         ...selections,
@@ -279,12 +284,13 @@ const contradictionRules: ContradictionRule[] = [
     severity: 'warning',
     condition: (selections, sliders) => {
       // Low strength (1-2) + heavy weapons/armor
-      const gearQuality = selections.gear_quality?.level;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const gearQuality = (selections.gear_quality as any)?.level;
       return sliders.strength <= 2 && gearQuality !== null && gearQuality >= 4;
     },
     message: 'Low strength may struggle with heavy, high-quality gear',
     suggestion: 'Consider lighter equipment or increasing Strength',
-    autoResolve: (selections, sliders) => {
+    autoResolve: (selections, _sliders) => {
       // Reduce gear quality
       return {
         ...selections,
@@ -298,12 +304,12 @@ const contradictionRules: ContradictionRule[] = [
     severity: 'warning',
     condition: (selections, sliders) => {
       // Frail (low STR + low CON) + any heavy equipment
-      return sliders.strength <= 2 && sliders.constitution <= 2 &&
-             (selections.equipment_back || selections.equipment_chest);
+      return !!(sliders.strength <= 2 && sliders.constitution <= 2 &&
+             (selections.equipment_back || selections.equipment_chest));
     },
     message: 'Frail build may be burdened by heavy equipment',
     suggestion: 'Frail characters work best with minimal or light equipment',
-    autoResolve: (selections, sliders) => {
+    autoResolve: (selections, _sliders) => {
       // Remove heavy equipment
       const updated = { ...selections };
       delete updated.equipment_back;
@@ -317,9 +323,9 @@ const contradictionRules: ContradictionRule[] = [
   {
     id: 'strongman-build',
     severity: 'info',
-    condition: (selections, sliders) => {
+    condition: (_selections, sliders) => {
       // High strength (5) + High body fat (4-5) = Valid strongman build
-      const bodyFatLevel = getBodyFatLevel(selections);
+      const bodyFatLevel = getBodyFatLevel(_selections);
       return sliders.strength === 5 && bodyFatLevel !== null && bodyFatLevel >= 4;
     },
     message: 'Strongman build detected (high strength + high body fat)',
@@ -332,11 +338,12 @@ const contradictionRules: ContradictionRule[] = [
     condition: (selections, sliders) => {
       // Elderly (5) + combat pose = Valid veteran
       const ageLevel = getAgeLevel(selections);
-      return (sliders.age === 5 || (ageLevel !== null && ageLevel === 5)) &&
-             selections.pose &&
-             typeof selections.pose === 'string' &&
-             (selections.pose.toLowerCase().includes('combat') ||
-              selections.pose.toLowerCase().includes('weapon'));
+      const pose = selections.pose as string | undefined;
+      return !!((sliders.age === 5 || (ageLevel !== null && ageLevel === 5)) &&
+             pose &&
+             typeof pose === 'string' &&
+             (pose.toLowerCase().includes('combat') ||
+              pose.toLowerCase().includes('weapon')));
     },
     message: 'Veteran warrior detected (elderly + combat stance)',
     suggestion: 'This is valid! Experienced veterans can be elderly and still formidable.'
@@ -428,16 +435,17 @@ export function getSafeSuggestion(
   sliderKey: keyof SimpleSelections,
   sliderValue: number,
   _allSliders: SimpleSelections
-): any {
+): unknown {
   switch (sliderKey) {
     case 'strength':
       // Muscle level should match strength
       return { level: sliderValue, qualifier: getMuscleQualifier(sliderValue) };
 
-    case 'constitution':
+    case 'constitution': {
       // Body fat is inverse of constitution
       const bodyFat = 6 - sliderValue;
       return { level: bodyFat, qualifier: getBodyFatQualifier(bodyFat) };
+    }
 
     case 'dexterity':
       // Pose based on dexterity

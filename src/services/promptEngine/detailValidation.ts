@@ -63,7 +63,7 @@ export function injectGearQuality(
 export function validateDetails(
   selections: Selections,
   statLevels: StatLevels,
-  dataCache: Record<string, any>
+  dataCache: Record<string, unknown>
 ): {
   validatedSelections: Selections;
   warnings: ValidationWarning[];
@@ -73,7 +73,7 @@ export function validateDetails(
 
   // Equipment weight check
   for (const slotKey of EQUIPMENT_SLOTS) {
-    const equipped = selections[slotKey];
+    const equipped = selections[slotKey] as string | undefined;
     if (!equipped || equipped === 'None') continue;
 
     const weightClass = EQUIPMENT_WEIGHT_CLASSES[equipped] || 'none';
@@ -96,7 +96,8 @@ export function validateDetails(
 
   // Pose agility check
   if (selections.pose && typeof selections.pose === 'string') {
-    const poseData = dataCache['pose']?.find((p: any) => p.name === selections.pose);
+    const poses = dataCache['pose'] as Array<{ name: string; category: string }> | undefined;
+    const poseData = poses?.find((p) => p.name === selections.pose);
     if (poseData) {
       const isAcrobatic = poseData.category === 'action' || poseData.category === 'stealth';
       const poseName = selections.pose.toLowerCase();
