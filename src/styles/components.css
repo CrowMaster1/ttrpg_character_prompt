@@ -1724,6 +1724,40 @@
   border: 1px solid #d0d0d0;
   border-radius: 4px;
   cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.btn-combined-copy {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px;
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(to bottom, #3b82f6, #2563eb);
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+}
+
+.btn-combined-copy:hover {
+  background: linear-gradient(to bottom, #2563eb, #1d4ed8);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(37, 99, 235, 0.3);
+}
+
+.btn-combined-copy:active {
+  transform: translateY(0);
+}
+
+.btn-combined-copy.copied {
+  background: linear-gradient(to bottom, #10b981, #059669);
+  box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
 }
 
 .model-section select:focus {

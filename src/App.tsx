@@ -16,6 +16,7 @@ import './components/controls/compact-stat-slider.css';
 function App() {
   const [copiedPositive, setCopiedPositive] = useState(false);
   const [copiedNegative, setCopiedNegative] = useState(false);
+  const [copiedCombined, setCopiedCombined] = useState(false);
   const [showFreeModelGuide, setShowFreeModelGuide] = useState(false);
   const tweakPanelRef = useRef<TweakPanelHandle>(null);
 
@@ -56,14 +57,17 @@ function App() {
 
   const { positive, negative } = splitPrompt();
 
-  const handleCopy = useCallback((text: string, type: 'positive' | 'negative') => {
+  const handleCopy = useCallback((text: string, type: 'positive' | 'negative' | 'combined') => {
     navigator.clipboard.writeText(text);
     if (type === 'positive') {
       setCopiedPositive(true);
       setTimeout(() => setCopiedPositive(false), 2000);
-    } else {
+    } else if (type === 'negative') {
       setCopiedNegative(true);
       setTimeout(() => setCopiedNegative(false), 2000);
+    } else {
+      setCopiedCombined(true);
+      setTimeout(() => setCopiedCombined(false), 2000);
     }
   }, []);
 
@@ -180,6 +184,16 @@ function App() {
                 <option value="Illustrious">Illustrious (Booru)</option>
                 <option value="Juggernaut">Juggernaut (SDXL-based)</option>
               </select>
+
+              {/* Combined Copy Button */}
+              <button
+                onClick={() => handleCopy(useStore.getState().generatedPrompt, 'combined')}
+                className={`btn-combined-copy ${copiedCombined ? 'copied' : ''}`}
+                title="Copy both positive and negative prompts for single-input generators"
+              >
+                <Copy size={16} />
+                {copiedCombined ? 'Prompts Copied!' : 'Copy Both (Combined)'}
+              </button>
 
               {/* Free Model Guide - Collapsible */}
               {showFreeModelGuide && (

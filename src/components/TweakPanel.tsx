@@ -88,11 +88,19 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
     }
   }), []);
 
+  // Detect contradictions whenever selections or sliders change
   useEffect(() => {
     const detected = detectContradictions(selections, sliders);
-    setContradictions(detected);
+
+    // Only update if the contradictions have actually changed (simple length and ID check)
+    const currentIds = contradictions.map(c => c.id).join(',');
+    const newIds = detected.map(c => c.id).join(',');
+
+    if (currentIds !== newIds) {
+      setContradictions(detected);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selections, sliders]); // Don't include setContradictions - it's stable from Zustand
+  }, [selections, sliders]); // Don't include contradictions or setContradictions
 
   // Handle slider changes (forwarded from parent via sidebar)
   useEffect(() => {
@@ -105,20 +113,27 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
     // Apply suggestions (only for non-overridden controls)
     Object.entries(suggestions).forEach(([key, val]) => {
       if (!overrides.has(key)) {
-        const hadNoValue = !selections[key] || selections[key] === '';
-        onSelectionChange(key, val);
+        // Only update if the value is actually different
+        const currentValue = selections[key];
+        const isDifferent = JSON.stringify(currentValue) !== JSON.stringify(val);
 
-        // Auto-highlight stat-dependent controls when they first get a value
-        if (hadNoValue && val && statDependentControls.includes(key)) {
-          setAutoHighlightedControl(key);
-          // Clear after animation completes (2s pulse × 3 = 6s)
-          setTimeout(() => {
-            setAutoHighlightedControl(null);
-          }, 6000);
+        if (isDifferent) {
+          const hadNoValue = !currentValue || currentValue === '';
+          onSelectionChange(key, val);
+
+          // Auto-highlight stat-dependent controls when they first get a value
+          if (hadNoValue && val && statDependentControls.includes(key)) {
+            setAutoHighlightedControl(key);
+            // Clear after animation completes (2s pulse × 3 = 6s)
+            setTimeout(() => {
+              setAutoHighlightedControl(null);
+            }, 6000);
+          }
         }
       }
     });
-  }, [sliders, dataCache, overrides, selections, onSelectionChange]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sliders, dataCache, overrides, onSelectionChange]); // REMOVED selections from dependencies to break loop
 
   // Handle manual control changes (mark as override)
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -317,8 +332,8 @@ export const TweakPanel = React.forwardRef<TweakPanelHandle, TweakPanelProps>(({
     },
     {
       id: 'camera_composition',
-      label: 'Camera',
-      controls: ['camera_angle', 'camera_position', 'framing', 'lighting', 'depth_of_field', 'aesthetic', 'genre_style', 'rendering_style', 'mood', 'color_grading']
+      label: 'Visuals & Style',
+      controls: ['aesthetic', 'genre_style', 'rendering_style', 'camera_angle', 'camera_position', 'framing', 'lighting', 'depth_of_field', 'mood', 'color_grading']
     },
     {
       id: 'expression_demeanor',

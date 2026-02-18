@@ -88,6 +88,13 @@ export class PromptEngine {
   /**
    * Build prompt segments from selections.
    * Each segment has a priority tier for token budget management.
+   *
+   * CRITICAL ORDER for keyword weight:
+   * 1. Art style FIRST (fantasy art, medieval, illustration style)
+   * 2. Extreme stats EARLY (very weak/very strong have more impact than average)
+   * 3. Identity (race + gender)
+   * 4. Normal stats
+   * 5. Equipment with fantasy context
    */
   private buildSegments(
     foundation: FoundationKeywords,
@@ -97,7 +104,28 @@ export class PromptEngine {
   ): PromptSegment[] {
     const segments: PromptSegment[] = [];
 
-    // Tier 1: Identity (race + gender)
+    // ========================================
+    // TIER 0: ART STYLE - ABSOLUTE FIRST
+    // ========================================
+    // Art style defines the entire aesthetic and prevents photorealistic interpretation
+    // Provides smart suggestions when user hasn't selected style options
+    const styleSegments = this.buildStyleSegments(selections, statLevels);
+    segments.push(...styleSegments);
+
+    // Add fantasy genre context if detected (prevents modern interpretation)
+    if (this.detectFantasyContext(selections)) {
+      segments.push(createSegment(
+        PriorityTier.MANDATORY,
+        'genre_context',
+        model === 'FLUX'
+          ? 'fantasy setting, medieval fantasy world'
+          : 'fantasy, medieval'
+      ));
+    }
+
+    // ========================================
+    // TIER 1: IDENTITY
+    // ========================================
     const race = selections.race || '';
     const gender = selections.gender || '';
     if (race || gender) {
@@ -111,53 +139,36 @@ export class PromptEngine {
       ));
     }
 
-    // Tier 2: Foundation stats (STR, CON, AGE - physical foundation)
-    if (foundation.strength) {
-      segments.push(createSegment(PriorityTier.FOUNDATION, 'strength', foundation.strength));
-    }
-    if (foundation.constitution) {
-      segments.push(createSegment(PriorityTier.FOUNDATION, 'constitution', foundation.constitution));
-    }
-    if (foundation.age) {
-      segments.push(createSegment(PriorityTier.FOUNDATION, 'age', foundation.age));
-    }
-    if (foundation.muscle_def) {
-      segments.push(createSegment(PriorityTier.FOUNDATION, 'muscle_def', foundation.muscle_def));
-    }
+    // ========================================
+    // TIER 2: EXTREME STATS (level 1 or 5)
+    // ========================================
+    // Extreme values define the character more than average values
+    // STR=1 (very weak) or STR=5 (very strong) should appear EARLY for emphasis
+    const extremeStats = this.extractExtremeStats(foundation, statLevels);
+    segments.push(...extremeStats);
 
-    // Tier 3: Presence stats (CHA, INT, DEX - mental/social)
-    if (foundation.charisma) {
-      segments.push(createSegment(PriorityTier.PRESENCE, 'charisma', foundation.charisma));
-    }
-    if (foundation.demeanor) {
-      segments.push(createSegment(PriorityTier.PRESENCE, 'demeanor', foundation.demeanor));
-    }
-    if (foundation.dexterity) {
-      segments.push(createSegment(PriorityTier.PRESENCE, 'dexterity', foundation.dexterity));
-    }
-    if (foundation.intelligence) {
-      segments.push(createSegment(PriorityTier.PRESENCE, 'intelligence', foundation.intelligence));
-    }
-    if (foundation.skin) {
-      segments.push(createSegment(PriorityTier.PRESENCE, 'skin', foundation.skin));
-    }
-    if (foundation.grooming) {
-      segments.push(createSegment(PriorityTier.PRESENCE, 'grooming', foundation.grooming));
-    }
+    // ========================================
+    // TIER 2-3: NORMAL FOUNDATION & PRESENCE
+    // ========================================
+    // Only non-extreme stats (level 2, 3, 4)
+    const normalStats = this.extractNormalStats(foundation, statLevels);
+    segments.push(...normalStats);
 
-    // Tier 0: Style (sets the artistic frame - placed early in Pony priority)
-    const styleSegments = this.buildStyleSegments(selections);
-    segments.push(...styleSegments);
-
-    // Tier 4: Equipment/Outfits
+    // ========================================
+    // TIER 4: EQUIPMENT/OUTFITS (with fantasy context)
+    // ========================================
     const equipmentSegments = this.buildEquipmentSegments(selections, statLevels, model);
     segments.push(...equipmentSegments);
 
-    // Tier 5: Facial features, expression, special traits
+    // ========================================
+    // TIER 5: FACIAL FEATURES, EXPRESSION, SPECIAL TRAITS
+    // ========================================
     const featureSegments = this.buildFeatureSegments(selections);
     segments.push(...featureSegments);
 
-    // Tier 6: Pose/Action, Scene
+    // ========================================
+    // TIER 6: POSE/ACTION, SCENE
+    // ========================================
     if (selections.pose && typeof selections.pose === 'string' && selections.pose !== 'None') {
       const poseData = this.lookupData('pose', selections.pose);
       const poseDesc = poseData?.description || selections.pose;
@@ -171,11 +182,15 @@ export class PromptEngine {
       ));
     }
 
-    // Tier 7: Camera/Lighting/Composition
+    // ========================================
+    // TIER 7: CAMERA/LIGHTING/COMPOSITION
+    // ========================================
     const compSegments = this.buildCompositionSegments(selections, statLevels);
     segments.push(...compSegments);
 
-    // Tier 8: Mood/Weather/Atmosphere
+    // ========================================
+    // TIER 8: MOOD/WEATHER/ATMOSPHERE
+    // ========================================
     if (selections.mood && typeof selections.mood === 'string') {
       const moodData = this.lookupData('mood', selections.mood);
       const moodQualifier = moodData?.qualifiers
@@ -187,7 +202,9 @@ export class PromptEngine {
       segments.push(createSegment(PriorityTier.ATMOSPHERE, 'weather', selections.weather));
     }
 
-    // Free text at the end
+    // ========================================
+    // TIER 9: FREE TEXT (user additions)
+    // ========================================
     if (selections.free_text && typeof selections.free_text === 'string') {
       segments.push(createSegment(PriorityTier.ENHANCE, 'free_text', selections.free_text));
     }
@@ -196,28 +213,152 @@ export class PromptEngine {
   }
 
   /**
-   * Build style/aesthetic segments
+   * Detect if this is a fantasy-themed character.
+   * Returns true if fantasy elements are present to add genre context early.
    */
-  private buildStyleSegments(selections: Selections): PromptSegment[] {
+  private detectFantasyContext(selections: Selections): boolean {
+    // Check for fantasy races
+    const fantasyRaces = ['elf', 'dwarf', 'halfling', 'gnome', 'orc', 'goblin', 'dragonborn', 'tiefling'];
+    const race = selections.race?.toLowerCase() || '';
+    if (fantasyRaces.some(fr => race.includes(fr))) return true;
+
+    // Check for medieval/fantasy genres
+    const genre = selections.genre_style?.toLowerCase() || '';
+    if (genre.includes('fantasy') || genre.includes('medieval')) return true;
+
+    // Check for fantasy aesthetics
+    const aesthetic = selections.aesthetic?.toLowerCase() || '';
+    if (aesthetic.includes('fantasy') || aesthetic.includes('medieval')) return true;
+
+    return false;
+  }
+
+  /**
+   * Extract extreme stat segments (level 1 or 5).
+   * These define the character more strongly than average stats.
+   */
+  private extractExtremeStats(foundation: FoundationKeywords, statLevels: StatLevels): PromptSegment[] {
+    const extremeSegments: PromptSegment[] = [];
+
+    // Check each stat for extreme values
+    const statChecks = [
+      { level: statLevels.muscle, keyword: foundation.strength, category: 'strength' },
+      { level: statLevels.body_fat, keyword: foundation.constitution, category: 'constitution' },
+      { level: statLevels.age, keyword: foundation.age, category: 'age' },
+      { level: statLevels.attractiveness, keyword: foundation.charisma, category: 'charisma' },
+      { level: statLevels.demeanor, keyword: foundation.demeanor, category: 'demeanor' },
+      { level: statLevels.dexterity, keyword: foundation.dexterity, category: 'dexterity' },
+      { level: statLevels.intelligence, keyword: foundation.intelligence, category: 'intelligence' },
+    ];
+
+    for (const { level, keyword, category } of statChecks) {
+      if ((level === 1 || level === 5) && keyword) {
+        // Extreme stats use FOUNDATION tier for high priority
+        extremeSegments.push(createSegment(PriorityTier.FOUNDATION, category, keyword));
+      }
+    }
+
+    // Muscle definition if extreme
+    if ((statLevels.muscle_definition === 1 || statLevels.muscle_definition === 5) && foundation.muscle_def) {
+      extremeSegments.push(createSegment(PriorityTier.FOUNDATION, 'muscle_def', foundation.muscle_def));
+    }
+
+    return extremeSegments;
+  }
+
+  /**
+   * Extract normal stat segments (level 2, 3, 4).
+   * These are placed after extreme stats for proper weighting.
+   */
+  private extractNormalStats(foundation: FoundationKeywords, statLevels: StatLevels): PromptSegment[] {
+    const normalSegments: PromptSegment[] = [];
+
+    // Foundation stats (only if not extreme)
+    if (statLevels.muscle !== 1 && statLevels.muscle !== 5 && foundation.strength) {
+      normalSegments.push(createSegment(PriorityTier.FOUNDATION, 'strength', foundation.strength));
+    }
+    if (statLevels.body_fat !== 1 && statLevels.body_fat !== 5 && foundation.constitution) {
+      normalSegments.push(createSegment(PriorityTier.FOUNDATION, 'constitution', foundation.constitution));
+    }
+    if (statLevels.age !== 1 && statLevels.age !== 5 && foundation.age) {
+      normalSegments.push(createSegment(PriorityTier.FOUNDATION, 'age', foundation.age));
+    }
+    if (statLevels.muscle_definition !== 1 && statLevels.muscle_definition !== 5 && foundation.muscle_def) {
+      normalSegments.push(createSegment(PriorityTier.FOUNDATION, 'muscle_def', foundation.muscle_def));
+    }
+
+    // Presence stats (only if not extreme)
+    if (statLevels.attractiveness !== 1 && statLevels.attractiveness !== 5 && foundation.charisma) {
+      normalSegments.push(createSegment(PriorityTier.PRESENCE, 'charisma', foundation.charisma));
+    }
+    if (statLevels.demeanor !== 1 && statLevels.demeanor !== 5 && foundation.demeanor) {
+      normalSegments.push(createSegment(PriorityTier.PRESENCE, 'demeanor', foundation.demeanor));
+    }
+    if (statLevels.dexterity !== 1 && statLevels.dexterity !== 5 && foundation.dexterity) {
+      normalSegments.push(createSegment(PriorityTier.PRESENCE, 'dexterity', foundation.dexterity));
+    }
+    if (statLevels.intelligence !== 1 && statLevels.intelligence !== 5 && foundation.intelligence) {
+      normalSegments.push(createSegment(PriorityTier.PRESENCE, 'intelligence', foundation.intelligence));
+    }
+
+    // Secondary presence stats
+    if (foundation.skin) {
+      normalSegments.push(createSegment(PriorityTier.PRESENCE, 'skin', foundation.skin));
+    }
+    if (foundation.grooming) {
+      normalSegments.push(createSegment(PriorityTier.PRESENCE, 'grooming', foundation.grooming));
+    }
+
+    return normalSegments;
+  }
+
+  /**
+   * Build style/aesthetic segments with smart suggestions.
+   * Provides helpful nudges when user hasn't made selections, based on character stats.
+   */
+  private buildStyleSegments(selections: Selections, statLevels: StatLevels): PromptSegment[] {
     const segments: PromptSegment[] = [];
 
+    // Get smart suggestions based on character stats
+    const suggestions = suggestComposition(statLevels);
+
+    // Aesthetic: User selection OR suggestion
     if (selections.aesthetic && typeof selections.aesthetic === 'string' && selections.aesthetic !== 'None') {
       const data = this.lookupData('aesthetic', selections.aesthetic);
       const fragment = data?.prompt_fragment || selections.aesthetic;
       segments.push(createSegment(PriorityTier.MANDATORY, 'style', fragment));
+    } else if (suggestions.aesthetic) {
+      // Smart suggestion as nudge
+      const data = this.lookupData('aesthetic', suggestions.aesthetic);
+      const fragment = data?.prompt_fragment || suggestions.aesthetic;
+      segments.push(createSegment(PriorityTier.MANDATORY, 'style', fragment));
     }
 
+    // Genre Style: User selection OR suggestion
     if (selections.genre_style && typeof selections.genre_style === 'string' && selections.genre_style !== 'None') {
       const data = this.lookupData('genre_style', selections.genre_style);
       const fragment = data?.prompt_fragment || selections.genre_style;
       segments.push(createSegment(PriorityTier.MANDATORY, 'genre', fragment));
+    } else if (suggestions.genreStyle) {
+      // Smart suggestion as nudge
+      const data = this.lookupData('genre_style', suggestions.genreStyle);
+      const fragment = data?.prompt_fragment || suggestions.genreStyle;
+      segments.push(createSegment(PriorityTier.MANDATORY, 'genre', fragment));
     }
 
+    // Rendering Style: User selection OR suggestion
     if (selections.rendering_style && typeof selections.rendering_style === 'string' && selections.rendering_style !== 'None') {
       const data = this.lookupData('rendering_style', selections.rendering_style);
       const qualifier = data?.qualifiers
         ? data.qualifiers[Math.floor(Math.random() * data.qualifiers.length)]
         : selections.rendering_style;
+      segments.push(createSegment(PriorityTier.MANDATORY, 'rendering', qualifier));
+    } else if (suggestions.renderingStyle) {
+      // Smart suggestion as nudge
+      const data = this.lookupData('rendering_style', suggestions.renderingStyle);
+      const qualifier = data?.qualifiers
+        ? data.qualifiers[Math.floor(Math.random() * data.qualifiers.length)]
+        : suggestions.renderingStyle;
       segments.push(createSegment(PriorityTier.MANDATORY, 'rendering', qualifier));
     }
 
@@ -225,7 +366,8 @@ export class PromptEngine {
   }
 
   /**
-   * Build equipment/outfit segments with gear quality injection
+   * Build equipment/outfit segments with gear quality injection and fantasy context.
+   * Adds medieval/fantasy keywords to prevent modern clothing interpretation.
    */
   private buildEquipmentSegments(
     selections: Selections,
@@ -233,6 +375,7 @@ export class PromptEngine {
     model: Model
   ): PromptSegment[] {
     const segments: PromptSegment[] = [];
+    const isFantasy = this.detectFantasyContext(selections);
 
     // Check if any outfit is selected
     const outfitKeys = Object.keys(selections).filter(
@@ -249,11 +392,15 @@ export class PromptEngine {
         }
       }
       if (outfitParts.length > 0) {
-        const prefix = model === 'FLUX' ? 'wearing ' : '';
+        // Add fantasy context for clothing to prevent modern interpretation
+        const fantasyPrefix = isFantasy && model !== 'FLUX' ? 'medieval, ' : '';
+        const fluxPrefix = model === 'FLUX' ? 'wearing ' : '';
+        const contextualPrefix = isFantasy && model === 'FLUX' ? 'wearing medieval fantasy ' : fluxPrefix;
+
         segments.push(createSegment(
           PriorityTier.DETAILS,
           'outfit',
-          prefix + outfitParts.join(', '),
+          fantasyPrefix + contextualPrefix + outfitParts.join(', '),
           true // can be summarized
         ));
       }
@@ -281,11 +428,15 @@ export class PromptEngine {
       }
 
       if (equipParts.length > 0) {
-        const prefix = model === 'FLUX' ? 'clad in ' : '';
+        // Add fantasy context for equipment to prevent modern interpretation
+        const fantasyPrefix = isFantasy && model !== 'FLUX' ? 'medieval, ' : '';
+        const fluxPrefix = model === 'FLUX' ? 'clad in ' : '';
+        const contextualPrefix = isFantasy && model === 'FLUX' ? 'clad in medieval fantasy ' : fluxPrefix;
+
         segments.push(createSegment(
           PriorityTier.DETAILS,
           'equipment',
-          prefix + equipParts.join(', '),
+          fantasyPrefix + contextualPrefix + equipParts.join(', '),
           true // can be summarized
         ));
       }
@@ -392,8 +543,8 @@ export class PromptEngine {
       segments.push(createSegment(PriorityTier.COMPOSITION, 'camera_position', selections.camera_position));
     }
 
-    // Framing
-    const framing = selections.framing || '';
+    // Framing: user choice > auto-suggestion
+    const framing = selections.framing || suggestions.framing || '';
     if (framing) {
       const data = this.lookupData('framing', framing);
       const qualifier = data?.qualifiers
