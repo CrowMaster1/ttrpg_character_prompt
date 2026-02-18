@@ -24,7 +24,6 @@ export function OllamaPanel({ prompt, onPromptCleaned, targetModel }: OllamaPane
     'FLUX': 256,
     'Pony': 77,
     'SDXL': 77,
-    'SD1.5': 77,
     'Illustrious': 248,
     'Juggernaut': 77,
   };
@@ -58,7 +57,15 @@ export function OllamaPanel({ prompt, onPromptCleaned, targetModel }: OllamaPane
       setSuccess('Models loaded successfully');
       setTimeout(() => setSuccess(''), 3000);
     } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : 'Failed to connect to Ollama';
+      const isHttps = window.location.protocol === 'https:';
+      const isLocalhost = hostUrl.includes('localhost') || hostUrl.includes('127.0.0.1');
+      
+      let message = err instanceof Error ? err.message : 'Failed to connect to Ollama';
+      
+      if (isHttps && isLocalhost && message.includes('Failed to fetch')) {
+        message = 'HTTPS Blocked: GitHub Pages (HTTPS) cannot connect to local Ollama (HTTP) due to browser security. Use the Electron Desktop App for full AI support.';
+      }
+      
       setError(message);
     } finally {
       setLoading(false);

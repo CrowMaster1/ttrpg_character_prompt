@@ -10,11 +10,22 @@ import { estimateTokens, enforceTokenBudget, createSegment } from './tokenBudget
 import { generateNegativePrompt } from './negativePrompt';
 import { stripQualityAdjectives, injectGearQuality } from './detailValidation';
 import { DEAD_WORDS } from './constants';
-import { PriorityTier, TOKEN_LIMITS } from './types';
-import type { Model, Selections, ControlsConfig } from '../../types';
+import { PriorityTier } from './types';
+import type { Selections, ControlsConfig } from '../../types';
 import type { StatLevels } from './types';
 import * as fs from 'fs';
 import * as path from 'path';
+
+// Define local Model type to match refactored version
+type Model = 'FLUX' | 'Pony' | 'SDXL' | 'Illustrious' | 'Juggernaut';
+
+const TOKEN_LIMITS: Record<Model, number> = {
+  'FLUX': 256,
+  'Pony': 77,
+  'SDXL': 77,
+  'Illustrious': 248,
+  'Juggernaut': 77,
+};
 
 // Load real data files for testing
 function loadJsonFile(filePath: string): unknown {
@@ -274,24 +285,7 @@ describe('Category 2: Token Limit Stress Tests', () => {
     expect(result.prompt.length).toBeGreaterThan(100);
   });
 
-  it('TEST 2.4: Bare Minimum (SD1.5, 77 tokens)', () => {
-    const selections: Selections = {
-      race: 'Human',
-      gender: 'Female',
-    };
-
-    const result = engine.generate(selections, 'SD1.5');
-
-    // Must stay under 77 tokens
-    expect(result.tokenCount).toBeLessThanOrEqual(77);
-    // Should have quality tags
-    expect(result.prompt.toLowerCase()).toContain('masterpiece');
-    // No empty segments or orphaned commas
-    expect(result.prompt).not.toMatch(/,,/);
-    expect(result.prompt).not.toMatch(/^\s*,/);
-  });
-
-  it('All 6 models respect their token limits with full selections', () => {
+  it('All 5 models respect their token limits with full selections', () => {
     const selections = makeSelections({
       chest: 'Steel Breastplate',
       main_hand: 'Greatsword',
@@ -301,7 +295,7 @@ describe('Category 2: Token Limit Stress Tests', () => {
       lighting: 'Dramatic Lighting',
     });
 
-    const models: Model[] = ['FLUX', 'Pony', 'SDXL', 'SD1.5', 'Illustrious', 'Juggernaut'];
+    const models: Model[] = ['FLUX', 'Pony', 'SDXL', 'Illustrious', 'Juggernaut'];
     for (const model of models) {
       const result = engine.generate(selections, model);
       expect(result.tokenCount).toBeLessThanOrEqual(TOKEN_LIMITS[model]);
@@ -631,16 +625,16 @@ describe('Model Formatting', () => {
     const selections = makeSelections();
     const result = engine.generate(selections, 'SDXL');
 
-    // SDXL should have masterpiece with weight
-    expect(result.prompt).toContain('(masterpiece:1.08)');
+    // SDXL should have quality boosters
+    expect(result.prompt).toContain('8k, highly detailed');
   });
 
-  it('Illustrious uses curly brace emphasis', () => {
+  it('Illustrious uses mandatory quality prefix', () => {
     const selections = makeSelections();
     const result = engine.generate(selections, 'Illustrious');
 
-    // Illustrious should have curly brace emphasis
-    expect(result.prompt).toContain('{masterpiece}');
+    // Illustrious should have quality prefix
+    expect(result.prompt).toContain('masterpiece, best quality');
     // Should have metadata suffix
     expect(result.prompt.toLowerCase()).toContain('newest');
   });

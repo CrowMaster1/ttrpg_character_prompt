@@ -71,21 +71,21 @@ export const TOKEN_LIMITS: Record<Model, number> = {
   'FLUX': 256,
   'Pony': 77,
   'SDXL': 77,
-  'SD1.5': 77,
   'Illustrious': 248,
   'Juggernaut': 77,
 };
 
 /** Priority tier definitions */
 export enum PriorityTier {
-  MANDATORY = 0,     // Quality tags, meta tags
-  IDENTITY = 1,      // Race, gender
-  FOUNDATION = 2,    // STR, CON, AGE keywords
-  PRESENCE = 3,      // CHA, INT, DEX keywords
-  DETAILS = 4,       // Equipment, outfits
-  FEATURES = 5,      // Facial features, expression
-  ACTION = 6,        // Pose, scene
-  COMPOSITION = 7,   // Camera, lighting
-  ATMOSPHERE = 8,    // Mood, weather
-  ENHANCE = 9,       // Extra quality tags
+  STYLE = 0,         // Overall aesthetic, setting, genre (User wants STYLE FIRST)
+  MANDATORY = 1,     // Quality tags, meta tags (Prepend logic in formatter will handle these)
+  IDENTITY = 2,      // Race, gender
+  FOUNDATION = 3,    // STR, CON, AGE keywords
+  PRESENCE = 4,      // CHA, INT, DEX keywords
+  DETAILS = 5,       // Equipment, outfits
+  FEATURES = 6,      // Facial features, expression
+  ACTION = 7,        // Pose, scene
+  COMPOSITION = 8,   // Camera, lighting
+  ATMOSPHERE = 9,    // Mood, weather
+  ENHANCE = 10,      // Extra quality tags
 }

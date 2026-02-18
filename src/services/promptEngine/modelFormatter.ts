@@ -64,17 +64,11 @@ function getChaEnhancement(level: number, model: Model): string {
 }
 
 /**
- * Detect character meta tags for Danbooru-based models (Pony, Illustrious)
+ * Helper to apply weight to a segment if the model supports it.
  */
-function getCharacterMeta(gender: string | null): string {
-  if (!gender) return '1other, solo';
-  const g = gender.toLowerCase();
-  if (g.includes('female') || g.includes('woman') || g.includes('girl')) {
-    return '1girl, solo';
-  } else if (g.includes('male') || g.includes('man') || g.includes('boy')) {
-    return '1boy, solo';
-  }
-  return '1other, solo';
+function withWeight(text: string, weight: number = 1.2): string {
+  if (!text) return '';
+  return `(${text}:${weight})`;
 }
 
 /**
@@ -96,6 +90,10 @@ function convertToBooru(text: string): string {
   result = result.replace(/^\s*,\s*/, '');
   result = result.replace(/,\s*$/, '');
 
+  // Convert spaces to underscores for booru compatibility
+  // (Optional, many UIs handle spaces fine, but underscores are more "standard")
+  // result = result.replace(/\s+/g, '_');
+
   return result.trim();
 }
 
@@ -108,35 +106,12 @@ function buildFluxPrompt(
   chaLevel: number,
   isPortrait: boolean
 ): string {
-  // Separate style/genre segments (Tier 0) from character segments
-  const styleSegments: string[] = [];
-  const characterSegments: string[] = [];
+  const parts: string[] = [];
 
   for (const seg of segments) {
     if (seg.text.length === 0) continue;
-
-    // Style, genre, rendering go FIRST
-    if (seg.category === 'style' || seg.category === 'genre' ||
-        seg.category === 'rendering' || seg.category === 'genre_context') {
-      styleSegments.push(seg.text);
-    } else {
-      characterSegments.push(seg.text);
-    }
+    parts.push(seg.text);
   }
-
-  // Build prompt: STYLE FIRST, then character
-  const parts: string[] = [];
-
-  // 1. Style segments at the very beginning
-  if (styleSegments.length > 0) {
-    parts.push(...styleSegments);
-  } else {
-    // Fallback if no style selected: add generic fantasy art style
-    parts.push('fantasy illustration');
-  }
-
-  // 2. Character description
-  parts.push(...characterSegments);
 
   let sentence = parts.join(', ');
 
@@ -148,18 +123,15 @@ function buildFluxPrompt(
     sentence += ', face focus, detailed facial features, portrait composition';
   }
 
-  // Quality suffix (only if no style was provided)
-  if (styleSegments.length === 0) {
-    sentence += ', highly detailed';
-  }
+  // Quality suffix
+  sentence += ', highly detailed fantasy illustration';
 
   return cleanupPrompt(sentence);
 }
 
 /**
  * Build a Pony-style tag prompt from segments.
- * CRITICAL: In Pony, order = weight. Earlier tags have more influence.
- * Optimal order: quality tags → style → meta → extreme stats → character
+ * Follows rules from instructions_image.md: mandatory score chain, tags, rating_safe.
  */
 function buildPonyPrompt(
   segments: PromptSegment[],
@@ -169,42 +141,30 @@ function buildPonyPrompt(
 ): string {
   const tags: string[] = [];
 
-  // 1. Quality tags FIRST (required by Pony)
-  tags.push('score_9', 'score_8_up', 'score_7_up');
+  // 1. Mandatory Quality Chain (training mistake fix)
+  tags.push('score_9, score_8_up, score_7_up, score_6_up, score_5_up, score_4_up');
 
-  // 2. Style/genre tags SECOND (sets artistic frame)
-  const styleSegments: string[] = [];
-  const characterSegments: string[] = [];
-
+  // 3. Character description converted to booru tags
   for (const seg of segments) {
     if (seg.text.length === 0) continue;
+    const booruTag = convertToBooru(seg.text);
 
-    // Style, genre, rendering, fantasy context go early
-    if (seg.category === 'style' || seg.category === 'genre' ||
-        seg.category === 'rendering' || seg.category === 'genre_context') {
-      styleSegments.push(convertToBooru(seg.text));
+    // Apply weight to Identity, Physical Foundation, and Charisma only
+    if (seg.category === 'identity' || seg.category === 'strength' ||
+        seg.category === 'constitution' || seg.category === 'age' ||
+        seg.category === 'charisma') {
+      tags.push(withWeight(booruTag, 1.2));
     } else {
-      characterSegments.push(convertToBooru(seg.text));
+      tags.push(booruTag);
     }
   }
 
-  // Add style tags right after quality tags
-  if (styleSegments.length > 0) {
-    tags.push(...styleSegments);
-  } else {
-    // Fallback: generic fantasy style
-    tags.push('fantasy', 'illustration');
-  }
-
-  // 3. Character meta tags
-  tags.push(getCharacterMeta(gender));
-
-  // 4. Character description (extreme stats will be early in this list due to tier sorting)
-  tags.push(...characterSegments);
-
-  // 5. CHA enhancement
+  // 4. CHA enhancement
   const chaEnh = getChaEnhancement(chaLevel, 'Pony');
   if (chaEnh) tags.push(chaEnh.replace(/^,\s*/, ''));
+
+  // 5. Source tags (Rating removed per 'no guard rails' request)
+  tags.push('source_anime');
 
   // 6. Portrait enhancement
   if (isPortrait) {
@@ -215,130 +175,95 @@ function buildPonyPrompt(
 }
 
 /**
- * Build an SDXL/Juggernaut-style weighted keyword prompt from segments.
- * Style segments should appear early for proper AI interpretation.
+ * Build a Juggernaut-style prompt.
+ * Photorealistic triggers, natural language foundation sentence.
  */
-function buildSDXLPrompt(
-  segments: PromptSegment[],
-  chaLevel: number,
-  isPortrait: boolean,
-  model: Model
-): string {
-  const parts: string[] = [];
-
-  // 1. Quality with subtle emphasis
-  parts.push('(masterpiece:1.08), (best quality:1.08)');
-
-  // 2. Separate style from character segments
-  const styleSegments: string[] = [];
-  const characterSegments: string[] = [];
-
-  for (const seg of segments) {
-    if (seg.text.length === 0) continue;
-
-    // Style, genre, rendering, fantasy context go early
-    if (seg.category === 'style' || seg.category === 'genre' ||
-        seg.category === 'rendering' || seg.category === 'genre_context') {
-      // Apply emphasis to style for SDXL
-      styleSegments.push(`(${seg.text}:1.1)`);
-    } else {
-      // Apply emphasis to facial traits only
-      if (seg.category === 'features' || seg.category === 'expression') {
-        const hasFacial = /eyes|face|nose|lips|jaw|cheek|expression/i.test(seg.text);
-        if (hasFacial) {
-          characterSegments.push(`(${seg.text}:1.08)`);
-        } else {
-          characterSegments.push(seg.text);
-        }
-      } else {
-        characterSegments.push(seg.text);
-      }
-    }
-  }
-
-  // 3. Add style segments right after quality
-  if (styleSegments.length > 0) {
-    parts.push(...styleSegments);
-  } else {
-    parts.push('(fantasy illustration:1.1)');
-  }
-
-  // 4. Character description
-  parts.push(...characterSegments);
-
-  // 5. CHA enhancement
-  const chaEnh = getChaEnhancement(chaLevel, model);
-  if (chaEnh) parts.push(chaEnh.replace(/^,\s*/, ''));
-
-  // 6. Portrait enhancement
-  if (isPortrait) {
-    parts.push('(face focus:1.1), (detailed facial features:1.08), portrait composition');
-  }
-
-  // 7. Quality suffix (only if no style provided)
-  if (styleSegments.length === 0) {
-    parts.push('highly detailed');
-  }
-
-  return cleanupPrompt(parts.join(', '));
-}
-
-/**
- * Build an SD1.5-style simple keyword prompt from segments.
- * Style keywords should appear early for proper weighting.
- */
-function buildSD15Prompt(
+function buildJuggernautPrompt(
   segments: PromptSegment[],
   chaLevel: number,
   isPortrait: boolean
 ): string {
-  const tags = ['masterpiece', 'best quality'];
+  const parts: string[] = [];
 
-  // Separate style from character segments
-  const styleSegments: string[] = [];
-  const characterSegments: string[] = [];
+  // Quality triggers
+  parts.push('High Resolution, Cinematic, Skin Textures, photorealistic, photo');
 
+  // Content segments
   for (const seg of segments) {
     if (seg.text.length === 0) continue;
 
-    if (seg.category === 'style' || seg.category === 'genre' ||
-        seg.category === 'rendering' || seg.category === 'genre_context') {
-      styleSegments.push(seg.text);
+    // Apply weight to core physical segments and charisma
+    if (seg.category === 'identity' || seg.category === 'strength' ||
+        seg.category === 'constitution' || seg.category === 'age' ||
+        seg.category === 'charisma') {
+      parts.push(withWeight(seg.text, 1.2));
     } else {
-      characterSegments.push(seg.text);
+      parts.push(seg.text);
     }
   }
 
-  // Add style right after quality tags
-  if (styleSegments.length > 0) {
-    tags.push(...styleSegments);
-  } else {
-    tags.push('fantasy illustration');
-  }
-
-  // Add character description
-  tags.push(...characterSegments);
+  let sentence = parts.join(', ');
 
   // CHA enhancement
-  const chaEnh = getChaEnhancement(chaLevel, 'SD1.5');
-  if (chaEnh) tags.push(chaEnh.replace(/^,\s*/, ''));
+  const chaEnh = getChaEnhancement(chaLevel, 'Juggernaut');
+  if (chaEnh) {
+    sentence += `, ${chaEnh.replace(/^,\s*/, '')}`;
+  }
 
   // Portrait enhancement
   if (isPortrait) {
-    tags.push('face focus', 'detailed facial features', 'portrait');
+    parts.push('(face focus:1.1), (detailed facial features:1.08), portrait composition');
   }
 
-  // Quality suffix (only if no style provided)
-  if (styleSegments.length === 0) {
-    tags.push('highly detailed');
+  return cleanupPrompt(sentence);
+}
+
+/**
+ * Build an SDXL-style weighted keyword prompt.
+ */
+function buildSDXLPrompt(
+  segments: PromptSegment[],
+  chaLevel: number,
+  isPortrait: boolean
+): string {
+  const parts: string[] = [];
+
+  // Quality boosters
+  parts.push('8k, highly detailed, sharp focus, professional photography');
+
+  // Content segments
+  for (const seg of segments) {
+    if (seg.text.length === 0) continue;
+
+    // Apply weight to core physical segments and charisma
+    if (seg.category === 'identity' || seg.category === 'strength' ||
+        seg.category === 'constitution' || seg.category === 'age' ||
+        seg.category === 'charisma') {
+      parts.push(withWeight(seg.text, 1.2));
+    } else {
+      parts.push(seg.text);
+    }
   }
 
-  return cleanTagPrompt(tags.join(', '));
+  let sentence = parts.join(', ');
+
+  // CHA enhancement
+  const chaEnh = getChaEnhancement(chaLevel, 'SDXL');
+  if (chaEnh) {
+    sentence += `, ${chaEnh.replace(/^,\s*/, '')}`;
+  }
+
+  // Portrait enhancement
+  if (isPortrait) {
+    sentence += ', face focus, detailed facial features, portrait composition';
+  }
+
+  return cleanupPrompt(sentence);
 }
 
 /**
  * Build an Illustrious-style curly-brace emphasis prompt from segments.
- * Style should appear early for proper booru-style tagging.
+ * Hybrid style: tags + hybrid phrases.
  */
 function buildIllustriousPrompt(
   segments: PromptSegment[],
@@ -348,56 +273,34 @@ function buildIllustriousPrompt(
 ): string {
   const tags: string[] = [];
 
-  // 1. Core quality with selective emphasis
-  tags.push('{masterpiece}', 'best quality', 'very aesthetic');
+  // 1. Mandatory Quality prefix
+  tags.push('masterpiece, best quality, amazing quality, very aesthetic, newest');
 
-  // 2. Separate style from character segments
-  const styleSegments: string[] = [];
-  const characterSegments: string[] = [];
-
+  // 3. Content segments
   for (const seg of segments) {
     if (seg.text.length === 0) continue;
+    const content = convertToBooru(seg.text);
 
-    if (seg.category === 'style' || seg.category === 'genre' ||
-        seg.category === 'rendering' || seg.category === 'genre_context') {
-      // Emphasize style with curly braces
-      styleSegments.push(`{${convertToBooru(seg.text)}}`);
-    } else if (seg.category === 'features' || seg.category === 'expression') {
-      const isFacial = /eyes|face|hair|expression|nose|lips|jaw/i.test(seg.text);
-      if (isFacial) {
-        characterSegments.push(`{${seg.text}}`);
-      } else {
-        characterSegments.push(seg.text);
-      }
+    // Apply weight to core physical segments and charisma
+    if (seg.category === 'identity' || seg.category === 'strength' ||
+        seg.category === 'constitution' || seg.category === 'age' ||
+        seg.category === 'charisma') {
+      tags.push(withWeight(content, 1.2));
     } else {
-      characterSegments.push(convertToBooru(seg.text));
+      tags.push(content);
     }
   }
 
-  // 3. Add style right after quality
-  if (styleSegments.length > 0) {
-    tags.push(...styleSegments);
-  } else {
-    tags.push('{fantasy}', 'illustration');
-  }
+  // 4. Rating tag removed per 'no guard rails' request
 
-  // 4. Character meta tags
-  tags.push(getCharacterMeta(gender));
-
-  // 5. Character description
-  tags.push(...characterSegments);
-
-  // 6. CHA enhancement
+  // 5. CHA enhancement
   const chaEnh = getChaEnhancement(chaLevel, 'Illustrious');
   if (chaEnh) tags.push(chaEnh.replace(/^,\s*/, ''));
 
-  // 7. Portrait enhancement
+  // 6. Portrait enhancement
   if (isPortrait) {
     tags.push('{face_focus}', '{detailed_face}', 'portrait');
   }
-
-  // 8. Metadata suffix
-  tags.push('newest', 'ai-generated');
 
   return cleanTagPrompt(tags.join(', '));
 }
@@ -424,11 +327,10 @@ export function formatForModel(
       return buildPonyPrompt(budgetedSegments, gender, chaLevel, isPortrait);
 
     case 'SDXL':
-    case 'Juggernaut':
-      return buildSDXLPrompt(budgetedSegments, chaLevel, isPortrait, model);
+      return buildSDXLPrompt(budgetedSegments, chaLevel, isPortrait);
 
-    case 'SD1.5':
-      return buildSD15Prompt(budgetedSegments, chaLevel, isPortrait);
+    case 'Juggernaut':
+      return buildJuggernautPrompt(budgetedSegments, chaLevel, isPortrait);
 
     case 'Illustrious':
       return buildIllustriousPrompt(budgetedSegments, gender, chaLevel, isPortrait);

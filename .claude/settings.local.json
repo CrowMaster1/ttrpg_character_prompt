@@ -10,7 +10,10 @@
       "Bash(\"src/styles/components.css\":*)",
       "Bash(npm run lint:*)",
       "Bash(npm run test:run:*)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(taskkill:*)",
+      "Bash(xargs kill:*)",
+      "Bash(git push:*)"
     ]
   }
 }

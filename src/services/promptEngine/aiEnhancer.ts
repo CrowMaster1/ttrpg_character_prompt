@@ -27,17 +27,16 @@ Rewrite the following character description as a single flowing paragraph. Rules
   'TAG': `You are a Danbooru tag optimization expert. Given the following
 comma-separated tags, optimize them:
 - Remove redundant tags that overlap in meaning
-- Replace multi-word tags with equivalent single-word tags
+- Use (tag:1.2) weights for the most important character features
 - Ensure the most important visual concepts are first
 - Do NOT add new tags not implied by the input
 - Output ONLY the optimized tag list, nothing else`,
 
   'SDXL': `You are an SDXL prompt optimization expert. Given the following
 weighted prompt, optimize the weights:
-- Critical character features: weight 1.08-1.12
+- Critical character features: weight 1.1-1.3
 - Supporting details: weight 1.0 (no parentheses)
-- Remove weights below 1.05 (not worth the token cost)
-- Never set any weight above 1.15
+- Never set any weight above 1.4
 - Output ONLY the optimized prompt, nothing else`,
 };
 

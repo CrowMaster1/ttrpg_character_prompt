@@ -45,6 +45,9 @@ export async function checkOllamaConnection(host: string = DEFAULT_HOST): Promis
       error: `Ollama responded with HTTP ${response.status}`,
     };
   } catch (error: unknown) {
+    const isHttps = window.location.protocol === 'https:';
+    const isLocalhost = host.includes('localhost') || host.includes('127.0.0.1');
+    
     // Network errors indicate Ollama isn't running
     const message = error instanceof Error ? error.message : '';
     const name = error instanceof Error ? error.name : '';
@@ -55,6 +58,14 @@ export async function checkOllamaConnection(host: string = DEFAULT_HOST): Promis
         error: 'Connection timeout - Ollama may not be running',
       };
     }
+
+    if (isHttps && isLocalhost) {
+      return {
+        isConnected: false,
+        error: 'HTTPS Block: Your browser is likely blocking the connection to local Ollama (Mixed Content). Use the Desktop app or a secure tunnel.',
+      };
+    }
+
     if (message.includes('fetch')) {
       return {
         isConnected: false,
@@ -233,7 +244,7 @@ const MODEL_GUIDANCE: Record<string, { tokenLimit: number; style: string; tips: 
   'Pony': {
     tokenLimit: 77,
     style: 'Danbooru-style tags, comma-separated, order-based priority',
-    tips: '⚠️ CRITICAL: NEVER use (word:1.2) weights for Pony! Order = priority. Most important tags first. Remove articles. Use underscores for multi-word.',
+    tips: 'Order = priority. Use (tag:1.2) weights for critical traits. Keep total under 77 tokens. Most important tags first.',
   },
   'SDXL': {
     tokenLimit: 77,
@@ -244,11 +255,6 @@ const MODEL_GUIDANCE: Record<string, { tokenLimit: number; style: string; tips: 
     tokenLimit: 77,
     style: 'SDXL-style weighted keywords',
     tips: 'Same as SDXL. Use (keyword:1.2) for emphasis. Keep concise.',
-  },
-  'SD1.5': {
-    tokenLimit: 77,
-    style: 'Simple comma-separated tags',
-    tips: 'Clear, direct keywords. No special syntax needed.',
   },
   'Illustrious': {
     tokenLimit: 248,

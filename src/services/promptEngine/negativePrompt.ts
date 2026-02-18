@@ -11,11 +11,10 @@ import { cleanupPrompt, cleanTagPrompt } from '../promptCleaner';
 /** Base negative prompts per model (always included) */
 const MODEL_BASE_NEGATIVES: Record<string, string> = {
   'FLUX': 'blurry, low quality, watermark, signature, text',
-  'Pony': 'score_4, score_5, score_6, worst quality, low quality, blurry, watermark, signature, text',
-  'SDXL': '(worst quality:1.2), (low quality:1.2), watermark, signature, username, text, error, cropped',
-  'Juggernaut': '(worst quality:1.2), (low quality:1.2), watermark, signature, username, text, error, cropped',
-  'SD1.5': 'worst quality, low quality, text, error, cropped, jpeg artifacts, signature, watermark, username, blurry',
-  'Illustrious': 'worst quality, low quality, blurry, lowres, displeasing, very displeasing, jpeg artifacts, signature, watermark, username, text',
+  'Pony': 'score_4, score_5, score_6, worst quality, low quality',
+  'SDXL': 'worst quality, low quality, blurry, watermark, signature',
+  'Juggernaut': '(worst quality, low quality, normal quality, lowres:1.4), (watermark, signature, text:1.2), blur, morbid, ugly, bad anatomy, bad hands, cgi, 3D, digital art, anime, airbrushed, cartoon',
+  'Illustrious': 'lowres, bad anatomy, bad hands, extra digits, worst quality, jpeg artifacts, low quality, watermark, unfinished, displeasing, oldest, early, sketch, monochrome, blurry',
 };
 
 /** Anatomy negatives per model (only added when not using uncharming/monstrous traits) */
@@ -24,7 +23,6 @@ const MODEL_ANATOMY_NEGATIVES: Record<string, string> = {
   'Pony': 'bad anatomy, bad hands, missing fingers, extra fingers',
   'SDXL': 'bad anatomy, bad hands',
   'Juggernaut': 'bad anatomy, bad hands',
-  'SD1.5': 'bad anatomy, bad hands, missing fingers, extra digit, fewer digits',
   'Illustrious': 'bad anatomy, bad hands, missing fingers, extra fingers',
 };
 

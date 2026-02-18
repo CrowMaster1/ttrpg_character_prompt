@@ -83,7 +83,7 @@ function summarizeSegment(segment: PromptSegment): PromptSegment {
 
 /**
  * Enforce token budget on a set of prompt segments.
- * Removes/summarizes lowest-priority segments first, never touching T0-T2.
+ * Removes/summarizes lowest-priority segments first, never touching T0-T3.
  *
  * Returns the final assembled prompt text.
  */
@@ -91,10 +91,34 @@ export function enforceTokenBudget(
   segments: PromptSegment[],
   model: Model
 ): PromptSegment[] {
-  const tokenLimit = getTokenLimit(model);
-  const workingSegments = segments.map(s => ({ ...s }));
+  let tokenLimit = getTokenLimit(model);
 
-  let totalTokens = workingSegments.reduce((sum, s) => sum + s.tokens, 0);
+  // Account for model-specific overhead added during formatting
+  if (model === 'Pony') {
+    tokenLimit -= 15; // Mandatory score chain (~10) + rating/source tags (~5)
+  } else if (model === 'Illustrious') {
+    tokenLimit -= 12; // Mandatory quality prefix (~8) + newest/ai-gen (~4)
+  } else if (model === 'SDXL' || model === 'Juggernaut') {
+    tokenLimit -= 8; // Quality boosters
+  }
+
+  // Weight syntax (word:1.2) adds ~3 tokens per segment (chars: ( :1.2))
+  // We apply this to Identity (T2), Foundation (T3), Presence (T4), Features (T6)
+  const weightedTiers = [
+    PriorityTier.IDENTITY,
+    PriorityTier.FOUNDATION,
+    PriorityTier.PRESENCE,
+    PriorityTier.FEATURES
+  ];
+
+  const workingSegments = segments.map(s => {
+    const isWeighted = weightedTiers.includes(s.tier as any);
+    // Rough penalty for weighting overhead if not FLUX
+    const overhead = isWeighted && model !== 'FLUX' ? 3 : 0;
+    return { ...s, effectiveTokens: s.tokens + overhead };
+  });
+
+  let totalTokens = workingSegments.reduce((sum, s) => sum + (s as any).effectiveTokens, 0);
 
   if (totalTokens <= tokenLimit) {
     return workingSegments;
@@ -108,26 +132,32 @@ export function enforceTokenBudget(
   for (const { seg } of sortedByPriority) {
     if (totalTokens <= tokenLimit) break;
 
-    // NEVER remove T0-T2 (mandatory, identity, foundation)
-    if (seg.tier <= PriorityTier.FOUNDATION) continue;
+    // NEVER remove T0-T4 (Style, Mandatory, Identity, Foundation, Presence)
+    if (seg.tier <= PriorityTier.PRESENCE) continue;
 
     if (seg.canSummarize && seg.text.length > 0) {
       // Try to shorten first
-      const original = seg.tokens;
+      const original = (seg as any).effectiveTokens;
       const shortened = summarizeSegment(seg);
-      if (shortened.tokens < original) {
+      // Recalculate effective tokens for shortened version
+      const isWeighted = weightedTiers.includes(seg.tier as any);
+      const newEffectiveTokens = isWeighted && model !== 'FLUX' ? shortened.tokens + 3 : shortened.tokens;
+
+      if (newEffectiveTokens < original) {
         seg.text = shortened.text;
         seg.tokens = shortened.tokens;
-        totalTokens -= (original - shortened.tokens);
+        (seg as any).effectiveTokens = newEffectiveTokens;
+        totalTokens -= (original - newEffectiveTokens);
         continue;
       }
     }
 
     // Remove entirely
     if (seg.text.length > 0) {
-      totalTokens -= seg.tokens;
+      totalTokens -= (seg as any).effectiveTokens;
       seg.text = '';
       seg.tokens = 0;
+      (seg as any).effectiveTokens = 0;
     }
   }
 

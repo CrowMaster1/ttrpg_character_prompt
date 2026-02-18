@@ -86,13 +86,10 @@ export function OllamaInfoBanner() {
           <strong>Ollama AI Features Unavailable</strong>
           {isWebVersion ? (
             <span>
-              To use AI features in the web version: (1) Install Ollama from{' '}
-              <a href="https://ollama.com" target="_blank" rel="noopener noreferrer">
-                ollama.com
-              </a>
-              , (2) Start with CORS enabled: <code>OLLAMA_ORIGINS="*" ollama serve</code>
-              {' '}(Windows: <code>$env:OLLAMA_ORIGINS="*"; ollama serve</code>).
-              Or download the desktop app for zero-configuration Ollama support.
+              <strong>Running on HTTPS (GitHub Pages)?</strong> Browsers often block local connections for security. 
+              To fix: (1) Use the <strong>Electron Desktop App</strong> (recommended), 
+              (2) Use a secure tunnel like <code>ngrok</code>, or 
+              (3) Start with CORS: <code>$env:OLLAMA_ORIGINS="*"; ollama serve</code>.
             </span>
           ) : (
             <span>

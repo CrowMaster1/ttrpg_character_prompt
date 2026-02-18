@@ -43,7 +43,7 @@ export interface ControlsConfig {
   controls: Record<string, ControlConfig>;
 }
 
-export type Model = 'FLUX' | 'Pony' | 'SDXL' | 'SD1.5' | 'Illustrious' | 'Juggernaut';
+export type Model = 'FLUX' | 'Pony' | 'SDXL' | 'Illustrious' | 'Juggernaut';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface Selections {
