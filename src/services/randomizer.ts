@@ -407,7 +407,7 @@ export function generateFromSliders(
     } else if (simple.camera === 3) {
       // Medium shots
       const medOptions = framingOptions.filter((f: any) =>
-        ['medium shot', 'waist-up', 'cowboy shot'].some(term =>
+        ['medium shot', 'waist-up', 'thigh-up shot'].some(term =>
           f.name?.toLowerCase().includes(term)
         )
       );

@@ -156,9 +156,9 @@ export function suggestComposition(statLevels: StatLevels): CompositionSuggestio
     suggestion.framing = 'Portrait Shot';
     reasons.push('showcase attractive features');
   }
-  // Muscular → cowboy shot (show physique)
+  // Muscular → thigh-up shot (show physique)
   else if (statLevels.muscle >= 4) {
-    suggestion.framing = 'Cowboy Shot';
+    suggestion.framing = 'Thigh-up Shot';
     reasons.push('show powerful build');
   }
   // Dextrous → full body (show stance)

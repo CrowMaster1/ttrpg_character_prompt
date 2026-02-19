@@ -5,5 +5,5 @@
     {"name": "full beard", "qualifiers": ["thick", "bushy", "well-groomed", "wild", "long", "short"]},
     {"name": "goatee", "qualifiers": ["neatly trimmed", "braided", "long", "short", "pointed"]},
     {"name": "Van Dyke", "qualifiers": ["classic", "stylish", "well-maintained", "dapper"]},
-    {"name": "mutton chops", "qualifiers": ["friendly", "thick", "long", "bushy", "connected to mustache"]}
+    {"name": "mutton chops facial hair", "qualifiers": ["friendly", "thick", "long", "bushy", "connected to mustache"]}
 ]

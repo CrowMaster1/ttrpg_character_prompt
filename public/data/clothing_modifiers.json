@@ -15,7 +15,7 @@
     "qualifiers": ["low-cut neckline", "plunging neckline", "deep V-neck", "revealing chest", "cleavage display"]
   },
   {
-    "name": "High Slit",
+    "name": "High Leg Slit",
     "description": "Side slit revealing leg",
     "qualifiers": ["thigh-high slit", "leg slit", "revealing slit", "split skirt", "exposed leg"]
   },
@@ -45,7 +45,7 @@
     "qualifiers": ["latex clothing", "rubber outfit", "glossy latex", "tight rubber", "shiny material"]
   },
   {
-    "name": "Fishnets",
+    "name": "Fishnet Pattern",
     "description": "Fishnet stockings or bodysuit",
     "qualifiers": ["fishnet stockings", "fishnet bodysuit", "mesh stockings", "net pattern", "fishnet tights"]
   },

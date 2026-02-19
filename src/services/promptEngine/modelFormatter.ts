@@ -124,7 +124,12 @@ function buildFluxPrompt(
   }
 
   // Quality suffix
-  sentence += ', highly detailed fantasy illustration';
+  if (!sentence.toLowerCase().includes('highly detailed')) {
+    sentence += ', highly detailed';
+  }
+  if (!sentence.toLowerCase().includes('fantasy illustration')) {
+    sentence += ' fantasy illustration';
+  }
 
   return cleanupPrompt(sentence);
 }
@@ -184,9 +189,14 @@ function buildJuggernautPrompt(
   isPortrait: boolean
 ): string {
   const parts: string[] = [];
+  const fullText = segments.map(s => s.text.toLowerCase()).join(' ');
 
-  // Quality triggers
-  parts.push('High Resolution, Cinematic, Skin Textures, photorealistic, photo');
+  // Quality triggers - only add if not already present
+  const triggers = ['High Resolution', 'Cinematic', 'Skin Textures', 'photorealistic', 'photo'];
+  const filteredTriggers = triggers.filter(t => !fullText.includes(t.toLowerCase()));
+  if (filteredTriggers.length > 0) {
+    parts.push(filteredTriggers.join(', '));
+  }
 
   // Content segments
   for (const seg of segments) {
@@ -227,9 +237,14 @@ function buildSDXLPrompt(
   isPortrait: boolean
 ): string {
   const parts: string[] = [];
+  const fullText = segments.map(s => s.text.toLowerCase()).join(' ');
 
-  // Quality boosters
-  parts.push('8k, highly detailed, sharp focus, professional photography');
+  // Quality boosters - only add if not already present
+  const boosters = ['8k', 'highly detailed', 'sharp focus', 'professional photography'];
+  const filteredBoosters = boosters.filter(b => !fullText.includes(b.toLowerCase()));
+  if (filteredBoosters.length > 0) {
+    parts.push(filteredBoosters.join(', '));
+  }
 
   // Content segments
   for (const seg of segments) {
@@ -272,9 +287,14 @@ function buildIllustriousPrompt(
   isPortrait: boolean
 ): string {
   const tags: string[] = [];
+  const fullText = segments.map(s => s.text.toLowerCase()).join(' ');
 
-  // 1. Mandatory Quality prefix
-  tags.push('masterpiece, best quality, amazing quality, very aesthetic, newest');
+  // 1. Mandatory Quality prefix - only add if not already present
+  const prefixes = ['masterpiece', 'best quality', 'amazing quality', 'very aesthetic', 'newest'];
+  const filteredPrefixes = prefixes.filter(p => !fullText.includes(p.toLowerCase()));
+  if (filteredPrefixes.length > 0) {
+    tags.push(filteredPrefixes.join(', '));
+  }
 
   // 3. Content segments
   for (const seg of segments) {

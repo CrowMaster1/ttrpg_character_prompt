@@ -110,8 +110,11 @@ export class PromptEngine {
     const styleSegments = this.buildStyleSegments(selections, statLevels);
     segments.push(...styleSegments);
 
-    // Add explicit fantasy context early if detected
-    if (this.detectFantasyContext(selections)) {
+    // Add explicit fantasy context ONLY if not already covered by style/genre
+    const styleText = styleSegments.map(s => s.text.toLowerCase()).join(' ');
+    const hasFantasyKeywords = styleText.includes('fantasy') || styleText.includes('medieval');
+
+    if (this.detectFantasyContext(selections) && !hasFantasyKeywords) {
       segments.push(createSegment(
         PriorityTier.STYLE,
         'genre_context',

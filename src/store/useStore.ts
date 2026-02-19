@@ -43,12 +43,12 @@ interface AppState {
   clearOverrides: () => void;
 }
 
-// Default base character: Male Human in neutral stance with cowboy shot framing
+// Default base character: Male Human in neutral stance with thigh-up shot framing
 const DEFAULT_SELECTIONS: Selections = {
   gender: 'Male',
   race: 'Human',
   pose: 'Standing Resolutely',
-  camera_position: 'Cowboy shot (mid-thigh up)',
+  camera_position: 'Thigh-up shot (mid-thigh up)',
   setting: 'High Fantasy',
 };
 

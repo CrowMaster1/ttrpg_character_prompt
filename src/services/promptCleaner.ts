@@ -65,34 +65,86 @@ export function cleanPrompt(text: string): string {
 }
 
 /**
- * Remove duplicate phrases/words that appear consecutively
+ * Remove duplicate phrases/words that appear in the prompt
+ * Parentheses-aware to avoid breaking weighted syntax
  */
 export function removeDuplicates(text: string): string {
-  const parts = text.split(/,\s*/);
-  const seen = new Set<string>();
-  const unique: string[] = [];
+  if (!text) return '';
 
-  for (const part of parts) {
-    const normalized = part.trim().toLowerCase();
-    if (normalized && !seen.has(normalized)) {
-      seen.add(normalized);
-      unique.push(part.trim());
+  // Step 1: Extract all segments, keeping weighted groups together
+  // This regex matches either a weighted group (parentheses) or a plain comma-separated segment
+  const segments: string[] = [];
+  let current = '';
+  let parenDepth = 0;
+
+  for (let i = 0; i < text.length; i++) {
+    const char = text[i];
+    if (char === '(') parenDepth++;
+    if (char === ')') parenDepth--;
+
+    if (char === ',' && parenDepth === 0) {
+      segments.push(current.trim());
+      current = '';
+    } else {
+      current += char;
     }
   }
+  if (current.trim()) segments.push(current.trim());
 
-  return unique.join(', ');
+  const seenPhrases = new Set<string>();
+  const seenSignificantWords = new Set<string>();
+  const uniqueSegments: string[] = [];
+
+  // Common filler words to ignore during word-level deduplication
+  const fillerWords = new Set([
+    'a', 'an', 'the', 'with', 'and', 'in', 'on', 'of', 'for', 'to', 'at', 'by', 
+    'is', 'are', 'was', 'were', 'been', 'has', 'have', 'had',
+    'wearing', 'clad', 'clothed', 'dressed', 'garbed', 'attired',
+    'build', 'appearance', 'bearing', 'look', 'features', 'style', 'setting',
+    'background', 'foreground', 'shot', 'view', 'angle', 'perspective', 'focus'
+  ]);
+
+  for (const segment of segments) {
+    const normalized = segment.toLowerCase().replace(/[():0-9.]/g, '').trim();
+    if (!normalized) {
+      if (segment.length > 0) uniqueSegments.push(segment);
+      continue;
+    }
+
+    // Exact phrase match check (normalized)
+    if (seenPhrases.has(normalized)) continue;
+    seenPhrases.add(normalized);
+
+    // Word-level redundancy check
+    const words = normalized.split(/[\s-]+/).filter(w => w.length > 3 && !fillerWords.has(w));
+    
+    if (words.length > 0) {
+      // If every significant word in this segment has already been seen in a PREVIOUS segment, 
+      // it's likely redundant (e.g., "leather armor" after "wearing fine leather armor")
+      const allWordsSeen = words.every(w => seenSignificantWords.has(w));
+      if (allWordsSeen) continue;
+
+      // Add new words to seen set
+      words.forEach(w => seenSignificantWords.add(w));
+    }
+
+    uniqueSegments.push(segment);
+  }
+
+  return uniqueSegments.join(', ');
 }
 
 /**
  * Comprehensive prompt cleanup
  */
 export function cleanupPrompt(text: string): string {
+  if (!text) return '';
   let result = text;
 
   // First pass: clean punctuation
   result = cleanPrompt(result);
 
-  // Second pass: remove duplicates
+  // Second pass: remove duplicates (now smarter and parentheses-aware)
   result = removeDuplicates(result);
 
   // Third pass: final punctuation cleanup
@@ -103,12 +155,13 @@ export function cleanupPrompt(text: string): string {
 
 /**
  * Clean up tag-based prompts (Pony, Illustrious)
- * More aggressive comma/space normalization
+ * Aggressive deduplication and normalization
  */
 export function cleanTagPrompt(text: string): string {
   if (!text) return '';
 
-  let cleaned = text;
+  // Use the parentheses-aware duplicate remover first
+  let cleaned = removeDuplicates(text);
 
   // Normalize all whitespace to single spaces
   cleaned = cleaned.replace(/\s+/g, ' ');
@@ -116,21 +169,8 @@ export function cleanTagPrompt(text: string): string {
   // Fix comma spacing
   cleaned = cleaned.replace(/\s*,\s*/g, ', ');
 
-  // Remove excessive commas
-  cleaned = cleaned.replace(/,{2,}/g, ',');
+  // Standard punctuation cleanup
+  cleaned = cleanPrompt(cleaned);
 
-  // Remove leading/trailing commas
-  cleaned = cleaned.replace(/^,\s*/, '');
-  cleaned = cleaned.replace(/,\s*$/, '');
-
-  // Remove empty tags (tags with no content between commas)
-  cleaned = cleaned.replace(/,\s*,/g, ',');
-
-  // Split into tags and remove empty/whitespace-only tags
-  const tags = cleaned.split(',').map(t => t.trim()).filter(t => t.length > 0);
-
-  // Remove duplicate tags
-  const uniqueTags = [...new Set(tags)];
-
-  return uniqueTags.join(', ');
+  return cleaned;
 }

@@ -21,5 +21,5 @@
   {"name": "Freckles", "description": "scattered freckles across face", "qualifiers": ["sun-kissed", "covering face", "cute", "natural", "scattered"]},
   {"name": "Piercing Eyes", "description": "intense, penetrating gaze", "qualifiers": ["intense", "sharp", "hawk-like", "focused", "piercing"]},
   {"name": "Tired Eyes", "description": "weary eyes with dark circles", "qualifiers": ["weary", "bags under eyes", "bloodshot", "exhausted", "dark circles"]},
-  {"name": "Crow's Feet", "description": "wrinkles at eye corners", "qualifiers": ["laugh lines", "weathered", "aged", "experienced", "lived-in"]}
+  {"name": "Crow's Feet wrinkles", "description": "wrinkles at eye corners", "qualifiers": ["laugh lines", "weathered", "aged", "experienced", "lived-in"]}
 ]
